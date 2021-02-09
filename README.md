@@ -1,14 +1,55 @@
-# Project
+# Microsoft Application Insights JavaScript SDK - Angular Plugin
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+[![Build Status](https://travis-ci.org/microsoft/ApplicationInsights-JS.svg?branch=master)](https://travis-ci.org/microsoft/ApplicationInsights-JS)
+[![npm version](https://badge.fury.io/js/%40microsoft%2Fapplicationinsights-analytics-js.svg)]()
 
-As the maintainer of this project, please make a few updates:
+Angular Plugin for the Application Insights Javascript SDK, enables the following:
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+> ***Note:*** Angular plugin is NOT es3 compatible
+
+- Tracking of router changes
+
+Angular Plugin for the Application Insights Javascript SDK
+
+## Getting Started
+
+Install npm package:
+
+```bash
+npm install @microsoft/applicationinsights-angularplugin-js
+```
+
+## Basic Usage
+
+Set up an instance of Application Insights in the entry component in your app:
+
+```js
+import { Component } from '@angular/core';
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+    constructor(
+        private router: Router
+    ){
+        var angularPlugin = new AngularPlugin();
+        const appInsights = new ApplicationInsights({ config: {
+        instrumentationKey: 'YOUR_INSTRUMENTATION_KEY_GOES_HERE',
+        extensions: [angularPlugin],
+        extensionConfig: {
+            [angularPlugin.identifier]: { router: this.router }
+        }
+        } });
+        appInsights.loadAppInsights();
+    }
+}
+```
 
 ## Contributing
 
@@ -26,8 +67,23 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ## Trademarks
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft
+trademarks or logos is subject to and must follow
 [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
 Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
 Any use of third-party trademarks or logos are subject to those third-party's policies.
+
+### Note
+
+Angular plugin is using newer version of typescript, make sure to build and test before you create a pull request.
+Navigate to the root folder of Angular plugin, under /applicationinsights-angularplugin-js:
+
+```js
+npm install
+npm run build
+npm run test
+```
+
+## License
+
+[MIT](LICENSE)
