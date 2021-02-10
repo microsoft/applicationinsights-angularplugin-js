@@ -11,10 +11,6 @@ on:
 
 jobs:
   build:
-    defaults:
-      run:
-        shell: bash
-        working-directory: /applicationinsights-angularplugin-js
 
     runs-on: ubuntu-latest
 
