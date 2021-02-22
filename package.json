@@ -5,6 +5,7 @@
   "main": "dist/bundles/microsoft-applicationinsights-angularplugin-js.umd.js",
   "module": "dist/fesm2015/microsoft-applicationinsights-angularplugin-js.js",
   "types": "dist/microsoft-applicationinsights-angularplugin-js.d.ts",
+  "metadata": "dist/microsoft-applicationinsights-angularplugin-js.metadata.json",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/ApplicationInsights-JS/tree/master/extensions/applicationinsights-angularplugin-js"
