@@ -17,7 +17,6 @@
     "test": "ng test",
     "lint": "ng lint"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~11.0.6",
     "@angular/common": "~11.0.6",
