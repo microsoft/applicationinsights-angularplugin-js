@@ -10,6 +10,7 @@ import {
 import { Router } from '@angular/router';
 // For types only
 import * as properties from '@microsoft/applicationinsights-properties-js';
+import { ApplicationinsightsAngularpluginErrorService } from './applicationinsights-angularplugin-error.service';
 
 interface IAngularExtensionConfig {
   /**
@@ -41,6 +42,9 @@ export class AngularPlugin extends BaseTelemetryPlugin {
         const identifier = (ext as ITelemetryPlugin).identifier;
         if (identifier === 'ApplicationInsightsAnalytics') {
             this.analyticsPlugin = (ext as any) as IAppInsights;
+            if (ApplicationinsightsAngularpluginErrorService.instance !== null) {
+              ApplicationinsightsAngularpluginErrorService.instance.plugin = this.analyticsPlugin;
+            }
         }
         if (identifier === PropertiesPluginIdentifier) {
             this.propertiesPlugin = (ext as any) as properties.PropertiesPlugin;
