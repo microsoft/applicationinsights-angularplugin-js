@@ -8,6 +8,7 @@ Angular Plugin for the Application Insights Javascript SDK, enables the followin
 > ***Note:*** Angular plugin is NOT es3 compatible
 
 - Tracking of router changes
+- Tracking uncaught exceptions
 
 Angular Plugin for the Application Insights Javascript SDK
 
@@ -48,7 +49,7 @@ export class AppComponent {
         } });
         appInsights.loadAppInsights();
     }
-}
+} 
 ```
 
 ## Contributing
