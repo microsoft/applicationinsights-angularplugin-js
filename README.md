@@ -49,7 +49,7 @@ export class AppComponent {
         } });
         appInsights.loadAppInsights();
     }
-}
+} 
 ```
 
 ## Contributing
