@@ -17,7 +17,7 @@
     ],
     "paths": {
       "@microsoft/applicationinsights-angularplugin-js": [
-        "dist"
+        "dist/applicationinsights-angularplugin-js"
       ]
     }
   }
