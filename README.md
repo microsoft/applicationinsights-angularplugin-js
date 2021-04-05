@@ -1,7 +1,7 @@
 # Microsoft Application Insights JavaScript SDK - Angular Plugin
 
-[![Build Status](https://travis-ci.org/microsoft/ApplicationInsights-JS.svg?branch=master)](https://travis-ci.org/microsoft/ApplicationInsights-JS)
-[![npm version](https://badge.fury.io/js/%40microsoft%2Fapplicationinsights-analytics-js.svg)]()
+[![Angular CI](https://github.com/microsoft/applicationinsights-angularplugin-js/actions/workflows/angular.yml/badge.svg?branch=main)](https://github.com/microsoft/applicationinsights-angularplugin-js/actions/workflows/angular.yml)
+[![npm version](https://badge.fury.io/js/%40microsoft%2Fapplicationinsights-angularplugin-js.svg)]()
 
 Angular Plugin for the Application Insights Javascript SDK, enables the following:
 
@@ -50,6 +50,24 @@ export class AppComponent {
         appInsights.loadAppInsights();
     }
 }
+```
+
+To track uncaught exceptions, setup ErrorService in `app.module.ts`:
+
+```js
+import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
+
+@NgModule({
+  ...
+  providers: [
+    {
+      provide: ErrorHandler,
+      useClass: ApplicationinsightsAngularpluginErrorService
+    }
+  ]
+  ...
+})
+export class AppModule { }
 ```
 
 ## Contributing

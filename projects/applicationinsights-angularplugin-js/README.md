@@ -1,24 +1,108 @@
-# ApplicationinsightsAngularpluginJs
+# Microsoft Application Insights JavaScript SDK - Angular Plugin
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.6.
+[![Angular CI](https://github.com/microsoft/applicationinsights-angularplugin-js/actions/workflows/angular.yml/badge.svg?branch=main)](https://github.com/microsoft/applicationinsights-angularplugin-js/actions/workflows/angular.yml)
+[![npm version](https://badge.fury.io/js/%40microsoft%2Fapplicationinsights-angularplugin-js.svg)]()
 
-## Code scaffolding
+Angular Plugin for the Application Insights Javascript SDK, enables the following:
 
-Run `ng generate component component-name --project applicationinsights-angularplugin-js` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project applicationinsights-angularplugin-js`.
-> Note: Don't forget to add `--project applicationinsights-angularplugin-js` or else it will be added to the default project in your `angular.json` file. 
+> ***Note:*** Angular plugin is NOT es3 compatible
 
-## Build
+- Tracking of router changes
+- Tracking uncaught exceptions
 
-Run `ng build applicationinsights-angularplugin-js` to build the project. The build artifacts will be stored in the `dist/` directory.
+Angular Plugin for the Application Insights Javascript SDK
 
-## Publishing
+## Getting Started
 
-After building your library with `ng build applicationinsights-angularplugin-js`, go to the dist folder `cd dist/applicationinsights-angularplugin-js` and run `npm publish`.
+Install npm package:
 
-## Running unit tests
+```bash
+npm install @microsoft/applicationinsights-angularplugin-js
+```
 
-Run `ng test applicationinsights-angularplugin-js` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Basic Usage
 
-## Further help
+Set up an instance of Application Insights in the entry component in your app:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```js
+import { Component } from '@angular/core';
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+    constructor(
+        private router: Router
+    ){
+        var angularPlugin = new AngularPlugin();
+        const appInsights = new ApplicationInsights({ config: {
+        instrumentationKey: 'YOUR_INSTRUMENTATION_KEY_GOES_HERE',
+        extensions: [angularPlugin],
+        extensionConfig: {
+            [angularPlugin.identifier]: { router: this.router }
+        }
+        } });
+        appInsights.loadAppInsights();
+    }
+}
+```
+
+To track uncaught exceptions, setup ErrorService in `app.module.ts`:
+
+```js
+import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
+
+@NgModule({
+  ...
+  providers: [
+    {
+      provide: ErrorHandler,
+      useClass: ApplicationinsightsAngularpluginErrorService
+    }
+  ]
+  ...
+})
+export class AppModule { }
+```
+
+## Contributing
+
+This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+
+When you submit a pull request, a CLA bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Trademarks
+
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft
+trademarks or logos is subject to and must follow
+[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
+Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
+Any use of third-party trademarks or logos are subject to those third-party's policies.
+
+### Note
+
+Angular plugin is using newer version of typescript, make sure to build and test before you create a pull request.
+Navigate to the root folder of Angular plugin, under /applicationinsights-angularplugin-js:
+
+```js
+npm install
+npm run build
+npm run test
+```
+
+## License
+
+[MIT](LICENSE)
