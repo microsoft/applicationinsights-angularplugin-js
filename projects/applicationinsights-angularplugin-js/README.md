@@ -52,7 +52,7 @@ export class AppComponent {
 }
 ```
 
-To track uncaught exceptions, setup ErrorService in `app.module.ts`:
+To track uncaught exceptions, setup ApplicationinsightsAngularpluginErrorService in `app.module.ts`:
 
 ```js
 import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
@@ -68,6 +68,29 @@ import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applica
   ...
 })
 export class AppModule { }
+```
+
+To chain more custom error handlers, create custom error handlers that implement IErrorService:
+
+```js
+import { IErrorService } from '@microsoft/applicationinsights-angularplugin-js';
+
+export class CustomErrorHandler implements IErrorService {
+    handleError(error: any) {
+        ...
+    }
+}
+```
+
+And pass errorServices array through extensionConfig:
+
+```js
+extensionConfig: {
+        [angularPlugin.identifier]: {
+          router: this.router,
+          errorServices: [new CustomErrorHandler()]
+        }
+      }
 ```
 
 ## Contributing

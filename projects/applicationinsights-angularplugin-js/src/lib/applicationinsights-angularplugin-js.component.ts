@@ -4,19 +4,25 @@ import {
 } from '@microsoft/applicationinsights-common';
 import {
   IPlugin, IConfiguration, IAppInsightsCore,
-  ITelemetryPlugin, BaseTelemetryPlugin, CoreUtils, ITelemetryItem, ITelemetryPluginChain,
+  ITelemetryPlugin, BaseTelemetryPlugin, arrForEach, ITelemetryItem, ITelemetryPluginChain,
   IProcessTelemetryContext, _InternalMessageId, LoggingSeverity, getLocation
 } from '@microsoft/applicationinsights-core-js';
 import { Router } from '@angular/router';
 // For types only
 import * as properties from '@microsoft/applicationinsights-properties-js';
 import { ApplicationinsightsAngularpluginErrorService } from './applicationinsights-angularplugin-error.service';
+import { IErrorService } from './IErrorService';
 
 interface IAngularExtensionConfig {
   /**
    * Angular router for enabling Application Insights PageView tracking.
    */
   router?: Router;
+
+  /**
+   * Custom error service for global error handling.
+   */
+  errorServices?: IErrorService[];
 }
 
 const NAVIGATIONEND = 'NavigationEnd';
@@ -37,13 +43,16 @@ export class AngularPlugin extends BaseTelemetryPlugin {
   initialize(config: IConfiguration & IConfig, core: IAppInsightsCore, extensions: IPlugin[], pluginChain?: ITelemetryPluginChain) {
     super.initialize(config, core, extensions, pluginChain);
     const ctx = this._getTelCtx();
-    const extConfig = ctx.getExtCfg<IAngularExtensionConfig>(this.identifier, { router: null });
-    CoreUtils.arrForEach(extensions, ext => {
+    const extConfig = ctx.getExtCfg<IAngularExtensionConfig>(this.identifier, { router: null, errorServices: null});
+    arrForEach(extensions, ext => {
         const identifier = (ext as ITelemetryPlugin).identifier;
         if (identifier === 'ApplicationInsightsAnalytics') {
             this.analyticsPlugin = (ext as any) as IAppInsights;
             if (ApplicationinsightsAngularpluginErrorService.instance !== null) {
               ApplicationinsightsAngularpluginErrorService.instance.plugin = this.analyticsPlugin;
+              if (extConfig.errorServices) {
+                ApplicationinsightsAngularpluginErrorService.instance.errorHandlers = extConfig.errorServices;
+              }
             }
         }
         if (identifier === PropertiesPluginIdentifier) {
