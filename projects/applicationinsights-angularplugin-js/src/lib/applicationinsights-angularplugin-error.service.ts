@@ -9,14 +9,14 @@ import { IErrorService } from './IErrorService';
 export class ApplicationinsightsAngularpluginErrorService implements IErrorService {
   public static instance: ApplicationinsightsAngularpluginErrorService = null;
   private analyticsPlugin: IAppInsights;
-  private errorServices: IErrorService[];
+  private errorServices: IErrorService[] = [];
 
   public set plugin(analyticsPlugin: IAppInsights) {
     this.analyticsPlugin = analyticsPlugin;
   }
 
-  public set errorHandlers(errorServices: IErrorService[]) {
-    this.errorServices = errorServices;
+  public addErrorHandler(errorService: IErrorService): void {
+    this.errorServices.push(errorService);
   }
 
   constructor() {
@@ -30,7 +30,7 @@ export class ApplicationinsightsAngularpluginErrorService implements IErrorServi
       this.analyticsPlugin.trackException({ exception: error });
     }
 
-    if (this.errorServices) {
+    if (this.errorServices && this.errorServices.length > 0) {
       arrForEach(this.errorServices, errorService => {
         if (errorService.handleError && typeof errorService.handleError === 'function') {
           errorService.handleError(error);

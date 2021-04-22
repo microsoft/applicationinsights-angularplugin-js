@@ -50,8 +50,10 @@ export class AngularPlugin extends BaseTelemetryPlugin {
             this.analyticsPlugin = (ext as any) as IAppInsights;
             if (ApplicationinsightsAngularpluginErrorService.instance !== null) {
               ApplicationinsightsAngularpluginErrorService.instance.plugin = this.analyticsPlugin;
-              if (extConfig.errorServices) {
-                ApplicationinsightsAngularpluginErrorService.instance.errorHandlers = extConfig.errorServices;
+              if (extConfig.errorServices && Array.isArray(extConfig.errorServices)) {
+                arrForEach(extConfig.errorServices, (errorService: IErrorService) => {
+                  ApplicationinsightsAngularpluginErrorService.instance.addErrorHandler(errorService);
+                });
               }
             }
         }
