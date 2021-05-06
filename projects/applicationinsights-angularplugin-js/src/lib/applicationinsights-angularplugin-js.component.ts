@@ -65,7 +65,8 @@ export class AngularPlugin extends BaseTelemetryPlugin {
         let isPageInitialLoad = true;
         if (isPageInitialLoad) {
             const pageViewTelemetry: IPageViewTelemetry = {
-                uri: extConfig.router.url
+                uri: extConfig.router.url,
+                properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
             };
             this.trackPageView(pageViewTelemetry);
         }
@@ -76,7 +77,10 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                     isPageInitialLoad = false;
                     return;
                 }
-                const pageViewTelemetry: IPageViewTelemetry = { uri: extConfig.router.url };
+                const pageViewTelemetry: IPageViewTelemetry = {
+                  uri: extConfig.router.url,
+                  properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
+                };
                 this.trackPageView(pageViewTelemetry);
             }
         });
