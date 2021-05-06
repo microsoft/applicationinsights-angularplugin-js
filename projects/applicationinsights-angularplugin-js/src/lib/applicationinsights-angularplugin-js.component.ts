@@ -65,8 +65,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
         let isPageInitialLoad = true;
         if (isPageInitialLoad) {
             const pageViewTelemetry: IPageViewTelemetry = {
-                uri: extConfig.router.url,
-                properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
+                uri: extConfig.router.url
             };
             this.trackPageView(pageViewTelemetry);
         }
