@@ -7,7 +7,7 @@ import {
   ITelemetryPlugin, BaseTelemetryPlugin, arrForEach, ITelemetryItem, ITelemetryPluginChain,
   IProcessTelemetryContext, _InternalMessageId, LoggingSeverity, getLocation
 } from '@microsoft/applicationinsights-core-js';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 // For types only
 import * as properties from '@microsoft/applicationinsights-properties-js';
 import { ApplicationinsightsAngularpluginErrorService } from './applicationinsights-angularplugin-error.service';
@@ -24,8 +24,6 @@ interface IAngularExtensionConfig {
    */
   errorServices?: IErrorService[];
 }
-
-const NAVIGATIONEND = 'NavigationEnd';
 
 @Component({
   selector: 'lib-applicationinsights-angularplugin-js',
@@ -70,7 +68,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
             this.trackPageView(pageViewTelemetry);
         }
         extConfig.router.events.subscribe(event => {
-            if (event.constructor.name === NAVIGATIONEND) {
+            if (event instanceof NavigationEnd) {
                 // for page initial load, do not call trackPageView twice
                 if (isPageInitialLoad) {
                     isPageInitialLoad = false;
