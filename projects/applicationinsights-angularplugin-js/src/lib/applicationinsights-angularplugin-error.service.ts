@@ -11,18 +11,18 @@ export class ApplicationinsightsAngularpluginErrorService implements IErrorServi
   private analyticsPlugin: IAppInsights;
   private errorServices: IErrorService[] = [];
 
+  constructor() {
+    if (ApplicationinsightsAngularpluginErrorService.instance === null) {
+      ApplicationinsightsAngularpluginErrorService.instance = this;
+    }
+  }
+
   public set plugin(analyticsPlugin: IAppInsights) {
     this.analyticsPlugin = analyticsPlugin;
   }
 
   public addErrorHandler(errorService: IErrorService): void {
     this.errorServices.push(errorService);
-  }
-
-  constructor() {
-    if (ApplicationinsightsAngularpluginErrorService.instance === null) {
-      ApplicationinsightsAngularpluginErrorService.instance = this;
-    }
   }
 
   handleError(error: any): void {

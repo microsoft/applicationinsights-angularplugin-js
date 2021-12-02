@@ -48,13 +48,13 @@ describe('ApplicationinsightsAngularpluginErrorService', () => {
   });
 
   it('should assign analytics plugin to service plugin property', () => {
-    // tslint:disable-next-line:no-string-literal
+    // eslint-disable-next-line @typescript-eslint/dot-notation
     expect(service['analyticsPlugin']).toBeTruthy();
   });
 
   // this is not testing if handleError is called - Angular does that already
   it('should capture uncaught exception and send exception telemetry', () => {
-    // tslint:disable-next-line:no-string-literal
+    // eslint-disable-next-line @typescript-eslint/dot-notation
     const spy = spyOn(service['analyticsPlugin'], 'trackException');
     const error: Error = new Error('ERROR');
     service.handleError(error);
@@ -102,7 +102,7 @@ class ChannelPlugin implements IPlugin {
   }
 
   public initialize = (config: IConfiguration) => {
-  }
+  };
 
   private _processTelemetry(env: ITelemetryItem): void {
   }
