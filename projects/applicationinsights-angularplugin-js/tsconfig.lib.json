@@ -8,7 +8,6 @@
     "sourceMap": true,
     "declarationMap": true,
     "inlineSources": true,
-    "emitDecoratorMetadata": true,
     "types": [],
     "lib": [
       "dom",

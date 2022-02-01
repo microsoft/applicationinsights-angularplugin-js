@@ -30,19 +30,19 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/applicationinsights-angularplugin-js/tsconfig.lib.json",
-              "projects/applicationinsights-angularplugin-js/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/applicationinsights-angularplugin-js/**/*.ts",
+              "projects/applicationinsights-angularplugin-js/**/*.html"
             ]
           }
         }
       }
     }
   },
-  "defaultProject": "applicationinsights-angularplugin-js"
+  "defaultProject": "applicationinsights-angularplugin-js",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

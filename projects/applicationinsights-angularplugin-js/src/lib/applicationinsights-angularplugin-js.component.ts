@@ -30,7 +30,7 @@ interface IAngularExtensionConfig {
     template: ``,
     styles: []
 })
-// tslint:disable-next-line:component-class-suffix
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class AngularPlugin extends BaseTelemetryPlugin {
     public priority = 186;
     public identifier = 'AngularPlugin';
@@ -74,11 +74,11 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                         isPageInitialLoad = false;
                         return;
                     }
-                    const pageViewTelemetry: IPageViewTelemetry = {
+                    const pvt: IPageViewTelemetry = {
                         uri: extConfig.router.url,
                         properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
                     };
-                    self.trackPageView(pageViewTelemetry);
+                    self.trackPageView(pvt);
                 }
             });
         }
@@ -86,6 +86,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
 
     /**
      * Add Part A fields to the event
+     *
      * @param event The event that needs to be processed
      */
     processTelemetry(event: ITelemetryItem, itemCtx?: IProcessTelemetryContext) {
@@ -104,7 +105,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
             self.analyticsPlugin.trackPageView(pageView);
         } else {
             self.diagLog().throwInternal(
-                // tslint:disable-next-line:max-line-length
+                // eslint-disable-next-line max-len
                 LoggingSeverity.CRITICAL, _InternalMessageId.TelemetryInitializerFailed, 'Analytics plugin is not available, Angular plugin telemetry will not be sent: ');
         }
     }

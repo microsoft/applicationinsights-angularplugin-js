@@ -5,7 +5,7 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "whitelistedNonPeerDependencies": [
+  "allowedNonPeerDependencies": [
     "@microsoft/applicationinsights-common",
     "@microsoft/applicationinsights-core-js",
     "@microsoft/applicationinsights-properties-js",
