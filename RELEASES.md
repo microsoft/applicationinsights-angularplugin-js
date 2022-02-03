@@ -4,7 +4,7 @@
 
 ### Changelog
 
-* Update to Application Insights v2.7.1
+* Update to Application Insights v2.7.3
 * #28 Add support for Angular v13
   * Update to Angular v13 (from v11)
 
