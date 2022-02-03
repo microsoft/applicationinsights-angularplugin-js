@@ -1,6 +1,6 @@
 {
   "name": "@microsoft/applicationinsights-angularplugin-js",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "description": "Microsoft Application Insights Angular plugin",
   "main": "dist/bundles/microsoft-applicationinsights-angularplugin-js.umd.js",
   "module": "dist/fesm2015/microsoft-applicationinsights-angularplugin-js.js",
@@ -18,7 +18,7 @@
     "lint": "ng lint"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~13.0.4",
+    "@angular-devkit/build-angular": "^13.2.2",
     "@angular-eslint/builder": "13.0.1",
     "@angular-eslint/eslint-plugin": "13.0.1",
     "@angular-eslint/eslint-plugin-template": "13.0.1",
