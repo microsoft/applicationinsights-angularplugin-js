@@ -1,5 +1,12 @@
 # Releases
 
+## 2.8.1 (Apr 19th, 2022)
+
+### Changelog
+
+* Update and change dependency to Application Insights ~2.7.4
+* #1807 [BUG] Angular project doesn't build after install latest version v.2.8.0
+
 ## 2.8.0 (Feb 3rd, 2022)
 
 ### Changelog
