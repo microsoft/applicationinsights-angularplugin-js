@@ -17,8 +17,10 @@ This release adds support from the base SDK to
 
 ### Changelog
 
-* Update to Application Insights v2.8.0
-* [#1807](https://github.com/microsoft/ApplicationInsights-JS/issues/1807) [BUG] Angular project doesn't build after install latest version v.2.8.0
+* Update to Application Insights v2.8.1
+ - [#1807](https://github.com/microsoft/ApplicationInsights-JS/issues/1807) [BUG] Angular project doesn't build after install latest version v.2.8.0
+ - [#1810](https://github.com/microsoft/ApplicationInsights-JS/issues/1810) v2.8.0 has incompatible TypeScript 3.x type declaration
+ - [#1812](https://github.com/microsoft/ApplicationInsights-JS/issues/1812) [BUG] Browser exceptions are no longer automatically tracked after 2.8.0
 
 ## 2.8.1 (Apr 19th, 2022)
 
