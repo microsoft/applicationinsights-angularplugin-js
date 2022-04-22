@@ -5,9 +5,9 @@ name: Angular CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, Angular11 ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, Angular11 ]
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [10.x, 12.x, 14.x]
 
     steps:
     - uses: actions/checkout@v2
