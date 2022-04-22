@@ -37,6 +37,8 @@ export class ApplicationinsightsAngularpluginErrorService implements IErrorServi
     }
 
     handleError(error: any): void {
+        console.error(error);
+
         if (this.analyticsPlugin) {
             this.analyticsPlugin.trackException({ exception: error });
         }
