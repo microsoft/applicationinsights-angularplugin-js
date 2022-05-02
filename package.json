@@ -1,6 +1,6 @@
 {
   "name": "@microsoft/applicationinsights-angularplugin-js",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "Microsoft Application Insights Angular 11 plugin",
   "keywords": [
     "angular",
@@ -27,10 +27,10 @@
     "fullCleanBuild": "npm run fullClean && npm run build"
   },
   "dependencies": {
-    "@microsoft/applicationinsights-analytics-js": "~2.7.4",
-    "@microsoft/applicationinsights-common": "~2.7.4",
-    "@microsoft/applicationinsights-core-js": "~2.7.4",
-    "@microsoft/applicationinsights-properties-js": "~2.7.4"
+    "@microsoft/applicationinsights-analytics-js": "~2.7.5",
+    "@microsoft/applicationinsights-common": "~2.7.5",
+    "@microsoft/applicationinsights-core-js": "~2.7.5",
+    "@microsoft/applicationinsights-properties-js": "~2.7.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.19",
