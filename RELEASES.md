@@ -1,5 +1,14 @@
 # Releases
 
+## 2.9.1 (May 2nd, 2022)
+
+### Changelog
+
+- #59 [IE8] Support for IE8 and ES3 support was broken a while ago
+* Updates to Application Insights v2.8.2
+ - [#1823 [BUG] IE8 Support was broken by several components](https://github.com/microsoft/ApplicationInsights-JS/issues/1823)
+ - [#47 [IE8] The _checkPrototype always fails on IE in IE8 mode](https://github.com/microsoft/DynamicProto-JS/issues/47)
+
 ## 2.9.0 (Apr 19th, 2022)
 
 ### Significant changes
