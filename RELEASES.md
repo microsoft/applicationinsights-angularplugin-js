@@ -1,5 +1,13 @@
 # Releases
 
+## 2.9.2 (July 27th, 2022)
+
+This will likely be the last release from the `main` branch targeting Angular 13, once `main` targets a newer version a branch will be created to support any necessary security patches.
+### Changelog
+
+- Update to [ApplicationInsights to ^2.8.5 from ~2.8.2](https://github.com/microsoft/ApplicationInsights-JS/blob/master/RELEASES.md)
+- #65 Update and add legal compliance notices and license terms
+
 ## 2.9.1 (May 2nd, 2022)
 
 ### Changelog
