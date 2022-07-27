@@ -1,6 +1,6 @@
 {
   "name": "@microsoft/applicationinsights-angularplugin-js",
-  "version": "2.9.1",
+  "version": "2.9.2",
   "peerDependencies": {
     "@angular/common": "^13.0.3",
     "@angular/core": "^13.0.3"
