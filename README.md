@@ -118,6 +118,12 @@ npm run build
 npm run test
 ```
 
+### Testing
+
+`npm run test` will run the tests once and exit
+
+`npm run watch` will run the tests and watch for changes
+
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
