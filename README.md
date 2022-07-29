@@ -97,13 +97,13 @@ extensionConfig: {
 
 | Version |  Application Insights | Angular              | Branch
 |---------|-----------------------|----------------------|-----------
-| 2.9.2   | ^2.8.5                | peer: ^13.0.3        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
+| 2.9.2   | ^2.8.5                | peer: ^13.0.3        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js) (Angular v13 support archived to [Angular13](https://github.com/microsoft/applicationinsights-angularplugin-js/tree/Angular13) branch)
 | 2.9.1   | ~2.8.2                | peer: ^13.0.3        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
 | 2.9.0   | ~2.8.1                | peer: ^13.0.3        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
 | 2.8.1   | ~2.7.4                | peer: ^13.0.3        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
 | 2.8.0   | ^2.7.3                | peer: ^13.0.3        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
-| 2.7.2   | ~2.7.5                | peer: ^11.0.6        | [Angular11](https://github.com/microsoft/applicationinsights-angularplugin-js/commits/Angular11)
-| 2.7.1   | ~2.7.4                | peer: ^11.0.6        | [Angular11](https://github.com/microsoft/applicationinsights-angularplugin-js/commits/Angular11)
+| 2.7.2   | ~2.7.5                | peer: ^11.0.6        | [Angular11](https://github.com/microsoft/applicationinsights-angularplugin-js/tree/Angular11)
+| 2.7.1   | ~2.7.4                | peer: ^11.0.6        | [Angular11](https://github.com/microsoft/applicationinsights-angularplugin-js/tree/Angular11)
 
 Previous releases where from the [ApplicationInsights-JS repo with archived angularplugin-legacy Branch](https://github.com/microsoft/ApplicationInsights-JS/tree/angularplugin-legacy) and previous [Release Notes](https://github.com/microsoft/ApplicationInsights-JS/blob/angularplugin-legacy/RELEASES.md)
 

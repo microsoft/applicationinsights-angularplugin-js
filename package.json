@@ -14,9 +14,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration production",
-    "test": "ng test --watch=false  --browsers=ChromeHeadless --codeCoverage=true",
+    "test": "ng test --watch=false  --browsers=ChromeHeadless --code-coverage=true",
     "watch": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "clean": "git clean -xdf"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.0.3",
