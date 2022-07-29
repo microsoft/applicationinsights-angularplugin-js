@@ -35,9 +35,6 @@
     "@angular/platform-browser-dynamic": "^14.0.3",
     "@angular/router": "^14.0.3",
     "@microsoft/applicationinsights-analytics-js": "^2.8.5",
-    "@microsoft/applicationinsights-common": "^2.8.5",
-    "@microsoft/applicationinsights-core-js": "^2.8.5",
-    "@microsoft/applicationinsights-properties-js": "^2.8.5",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
@@ -59,5 +56,16 @@
     "tslib": "^2.0.0",
     "typescript": "~4.7.4",
     "zone.js": "~0.11.4"
+  },
+  "dependencies": {
+    "@microsoft/applicationinsights-common": "^2.8.5",
+    "@microsoft/applicationinsights-core-js": "^2.8.5",
+    "@microsoft/applicationinsights-properties-js": "^2.8.5",
+    "@microsoft/applicationinsights-shims": "^2.0.1",
+    "tslib": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@angular/common": ">= 13.0.3",
+    "@angular/core": ">= 13.0.3"
   }
 }
