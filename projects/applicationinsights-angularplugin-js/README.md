@@ -30,6 +30,13 @@ import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
 import { Router } from '@angular/router';
 
+//-------------------------------------------------------------------------
+// Special Note: If you also want to use the ErrorService you MUST include
+// either the '@microsoft/applicationinsights-web' or include the
+// `@microsoft/applicationinsights-analytics-js' extension, if you don't
+// then unhandled errors caught by the error service will not be sent
+//-------------------------------------------------------------------------
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -54,8 +61,18 @@ export class AppComponent {
 
 To track uncaught exceptions, setup ApplicationinsightsAngularpluginErrorService in `app.module.ts`:
 
+> Note: When using the ErrorService there is an implicit dependency on the ```@microsoft/applicationinsights-analytics-js``` extension which is also include in the that your MUST include the ```@microsoft/applicationinsights-web``` Sku, so for uncaught exceptions to be tracked your project MUST be initialized to include the analytics package otherwise unhandled errors caught by the error service will not be sent
+
 ```js
 import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
+
+//-------------------------------------------------------------------------
+// Special Note: The Errorservice has an implicit dependency on the
+// `@microsoft/applicationinsights-analytics-js' extension, which is included
+// with the '@microsoft/applicationinsights-web' module, if the analytics 
+// extension is not included during initialization of the SDK this Error Service
+// will not be able to send any caught unhandled errors.
+//-------------------------------------------------------------------------
 
 @NgModule({
   ...
@@ -106,6 +123,12 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Data Collection
+
+As this SDK is designed to enable applications to perform data collection which is sent to the Microsoft collection endpoints the following is required to identify our privacy statement.
+
+The software may collect information about you and your use of the software and send it to Microsoft. Microsoft may use this information to provide services and improve our products and services. You may turn off the telemetry as described in the repository. There are also some features in the software that may enable you and Microsoft to collect data from users of your applications. If you use these features, you must comply with applicable law, including providing appropriate notices to users of your applications together with a copy of Microsoft's privacy statement. Our privacy statement is located at https://go.microsoft.com/fwlink/?LinkID=824704. You can learn more about data collection and use in the help documentation and our privacy statement. Your use of the software operates as your consent to these practices.
 
 ## Trademarks
 
