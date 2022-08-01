@@ -30,6 +30,13 @@ import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
 import { Router } from '@angular/router';
 
+//-------------------------------------------------------------------------
+// Special Note: If you also want to use the ErrorService you MUST include
+// either the '@microsoft/applicationinsights-web' or include the
+// `@microsoft/applicationinsights-analytics-js' extension, if you don't
+// then unhandled errors caught by the error service will not be sent
+//-------------------------------------------------------------------------
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -54,8 +61,18 @@ export class AppComponent {
 
 To track uncaught exceptions, setup ApplicationinsightsAngularpluginErrorService in `app.module.ts`:
 
+> Note: When using the ErrorService there is an implicit dependency on the ```@microsoft/applicationinsights-analytics-js``` extension which is also include in the that your MUST include the ```@microsoft/applicationinsights-web``` Sku, so for uncaught exceptions to be tracked your project MUST be initialized to include the analytics package otherwise unhandled errors caught by the error service will not be sent
+
 ```js
 import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
+
+//-------------------------------------------------------------------------
+// Special Note: The Errorservice has an implicit dependency on the
+// `@microsoft/applicationinsights-analytics-js' extension, which is included
+// with the '@microsoft/applicationinsights-web' module, if the analytics 
+// extension is not included during initialization of the SDK this Error Service
+// will not be able to send any caught unhandled errors.
+//-------------------------------------------------------------------------
 
 @NgModule({
   ...
