@@ -14,8 +14,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration production",
-    "test": "ng test",
-    "lint": "ng lint"
+    "test": "ng test --watch=false  --browsers=ChromeHeadless --code-coverage=true",
+    "watch": "ng test",
+    "lint": "ng lint",
+    "clean": "git clean -xdf"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.0.3",
@@ -49,6 +51,8 @@
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
+    "chromium": "^3.0.3",
+    "puppeteer": "^15.5.0",
     "ng-packagr": "^14.0.2",
     "protractor": "~7.0.0",
     "rxjs": "~6.6.0",

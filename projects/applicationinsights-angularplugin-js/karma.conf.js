@@ -24,10 +24,11 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, '../../coverage/applicationinsights-angularplugin-js'),
+      dir: require('path').join(__dirname, '../../coverage'),
       subdir: '.',
       reporters: [
-        { type: 'text-summary' }
+        { type: 'text' },
+        { type: 'html-spa' }
       ]
     },
     reporters: ['progress'],
