@@ -1,5 +1,15 @@
 # Releases
 
+## 3.0.0 (Aug 2nd, 2022)
+
+### Changelog
+
+- #54 Create a compatibility table for the versions of the AngularPlugin -> ApplicationInsights versions
+- #55 The root package.json has the ApplicationInsights components listed as devDependencies they should be dependencies
+- #62 Missing Dependency either in package.json or documentation
+- #68 [Testing] Re-enable test validation during PR validation on github
+- #63 Angular 14 support
+
 ## 2.9.2 (July 27th, 2022)
 
 This will likely be the last release from the `main` branch targeting Angular 13, once `main` targets a newer version a branch will be created to support any necessary security patches.
