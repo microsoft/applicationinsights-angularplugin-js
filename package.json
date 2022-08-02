@@ -1,6 +1,6 @@
 {
   "name": "@microsoft/applicationinsights-angularplugin-js",
-  "version": "2.9.2",
+  "version": "3.0.0",
   "description": "Microsoft Application Insights Angular plugin",
   "main": "dist/bundles/microsoft-applicationinsights-angularplugin-js.umd.js",
   "module": "dist/fesm2015/microsoft-applicationinsights-angularplugin-js.js",
@@ -13,6 +13,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "rebuild": "npm run build && npm run test",
     "build": "ng build --configuration production",
     "test": "ng test --watch=false  --browsers=ChromeHeadless --code-coverage=true",
     "watch": "ng test",
@@ -69,7 +70,8 @@
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/common": ">= 13.0.3",
-    "@angular/core": ">= 13.0.3"
+    "@microsoft/applicationinsights-analytics-js": "^2.8.5",
+    "@angular/common": ">= 14.0.3",
+    "@angular/core": ">= 14.0.3"
   }
 }
