@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ResolveEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
 import { ApplicationInsights, ICustomProperties, IDependencyTelemetry, IEventTelemetry, IExceptionTelemetry, IMetricTelemetry, IPageViewTelemetry, ITraceTelemetry } from '@microsoft/applicationinsights-web';
-import { filter } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
