@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import {
-    IConfig, IPageViewTelemetry, IAppInsights, PropertiesPluginIdentifier, Util, AnalyticsPluginIdentifier
+    IConfig, IPageViewTelemetry, IAppInsights, PropertiesPluginIdentifier, AnalyticsPluginIdentifier
 } from '@microsoft/applicationinsights-common';
 import {
     IPlugin, IConfiguration, IAppInsightsCore,
     BaseTelemetryPlugin, arrForEach, ITelemetryItem, ITelemetryPluginChain,
-    IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext, ITelemetryUnloadState
+    IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext, ITelemetryUnloadState, generateW3CId
 } from '@microsoft/applicationinsights-core-js';
 import { NavigationEnd, Router } from '@angular/router';
 // For types only
@@ -129,7 +129,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
         if (self.analyticsPlugin) {
             const location = getLocation();
             if (self.propertiesPlugin && self.propertiesPlugin.context && self.propertiesPlugin.context.telemetryTrace) {
-                self.propertiesPlugin.context.telemetryTrace.traceID = Util.generateW3CId();
+                self.propertiesPlugin.context.telemetryTrace.traceID = generateW3CId();
                 self.propertiesPlugin.context.telemetryTrace.name = location && location.pathname || '_unknown_';
             }
             self.analyticsPlugin.trackPageView(pageView);
