@@ -1,5 +1,25 @@
 # Releases
 
+## 3.0.1 (Feb 7th, 2023)
+
+### Changelog
+
+- #76 Types incompatibility with @microsoft/applicationinsights-web
+- #75 [Task]14057227: Add Angular Plugin Sample
+- #78 Add license to package.json
+- #94 update to ApplicationInsights v2.8.10
+- #88 Bump json5 from 2.2.1 to 2.2.3 in /sample/applicationinsights-angularplugin-sample
+- #91 Bump ua-parser-js from 0.7.31 to 0.7.33 in /sample/applicationinsights-angularplugin-sample
+- #93 Bump http-cache-semantics from 4.1.0 to 4.1.1 in /sample/applicationinsights-angularplugin-sample
+- #89 Add code owners
+- #87 Bump json5 from 1.0.1 to 1.0.2
+- #85 Bump engine.io from 6.2.0 to 6.2.1 in /sample/applicationinsights-angularplugin-sample
+- #84 Bump engine.io from 6.2.0 to 6.2.1
+- #86 Bump decode-uri-component from 0.2.0 to 0.2.2
+- #79 Add license to the package.json here as well
+- #83 Bump loader-utils from 2.0.2 to 2.0.4 in /sample/applicationinsights-angularplugin-sample
+- #82 Bump loader-utils from 2.0.2 to 2.0.4
+
 ## 3.0.0 (Aug 2nd, 2022)
 
 ### Changelog
