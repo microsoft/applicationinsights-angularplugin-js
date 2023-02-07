@@ -1,6 +1,6 @@
 {
   "name": "@microsoft/applicationinsights-angularplugin-js",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "dependencies": {
     "@microsoft/applicationinsights-shims": "^2.0.2",
     "@microsoft/applicationinsights-common": "^2.8.10",
