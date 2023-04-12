@@ -1,5 +1,12 @@
 # Releases
 
+## 3.0.2 (Apr, 12th, 2023)
+
+### Changelog
+
+- #99 Update to ApplicationInsights v2.8.12
+- #96 Internal Task 17133116: Add Policheck exclusion file
+
 ## 3.0.1 (Feb 7th, 2023)
 
 ### Changelog
