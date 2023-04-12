@@ -4,6 +4,7 @@
 
 ### Changelog
 
+- #98 Repository URL pointing to stale page in another repo
 - #99 Update to ApplicationInsights v2.8.12
 - #96 Internal Task 17133116: Add Policheck exclusion file
 
