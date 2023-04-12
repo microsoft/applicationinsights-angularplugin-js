@@ -114,6 +114,7 @@ extensionConfig: {
 
 | Version |  Application Insights | Angular              | Branch
 |---------|-----------------------|----------------------|-----------
+| 3.0.2   | ^2.8.12               | peer: ^14.0.3        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
 | 3.0.1   | ^2.8.10               | peer: ^14.0.3        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
 | 3.0.0   | ^2.8.5                | peer: ^14.0.3        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
 | 2.9.2   | ^2.8.5                | peer: ^13.0.3        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js) (Angular v13 support archived to [Angular13](https://github.com/microsoft/applicationinsights-angularplugin-js/tree/Angular13) branch)
