@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin } from '@microsoft/applicationinsights-core-js';
 import { AnalyticsPlugin } from '@microsoft/applicationinsights-analytics-js';
 import { IConfig } from '@microsoft/applicationinsights-common';
@@ -7,20 +7,15 @@ import { AngularPlugin } from '../lib/applicationinsights-angularplugin-js.compo
 
 describe('ApplicationinsightsAngularpluginErrorService', () => {
     let service: ApplicationinsightsAngularpluginErrorService;
-    let fixture: ComponentFixture<AngularPlugin>;
-    let component: AngularPlugin;
+    let plugin: AngularPlugin;
     let appInsights: AnalyticsPlugin;
     let core: AppInsightsCore;
     let channel: ChannelPlugin;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [AngularPlugin]
-        });
+        TestBed.configureTestingModule({});
         service = TestBed.inject(ApplicationinsightsAngularpluginErrorService);
-        fixture = TestBed.createComponent(AngularPlugin);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+        plugin = new AngularPlugin(TestBed);
 
         // Setup
         appInsights = new AnalyticsPlugin();
@@ -31,20 +26,18 @@ describe('ApplicationinsightsAngularpluginErrorService', () => {
         core.initialize({
             instrumentationKey: '',
             enableAutoRouteTracking: true,
-            extensions: [component],
+            extensions: [plugin],
         } as IConfig & IConfiguration, [appInsights, channel]);
     });
 
     afterEach(() => {
         // Unload and remove any previous resources
-        core.unload(false);
+        core.isInitialized() && core.unload(false);
 
         // clean up
         appInsights = undefined;
         core = undefined;
         channel = undefined;
-        ApplicationinsightsAngularpluginErrorService.instance = null; // reset the singleton instance to null for re-assignment
-
     });
 
     it('should be created', () => {
@@ -63,6 +56,14 @@ describe('ApplicationinsightsAngularpluginErrorService', () => {
         const error: Error = new Error('ERROR');
         service.handleError(error);
         expect(spy).toHaveBeenCalledWith({ exception: error });
+    });
+
+    it('shold unload the plugin when the SDK is unloaded', () => {
+        expect(plugin['analyticsPlugin']).toBeDefined();
+        const spy = spyOn(plugin, 'teardown').and.callThrough();
+        core.unload(false);
+        expect(spy).toHaveBeenCalled();
+        expect(plugin['analyticsPlugin']).toEqual(null);
     });
 });
 

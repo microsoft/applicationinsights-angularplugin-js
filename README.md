@@ -24,7 +24,7 @@ npm install @microsoft/applicationinsights-angularplugin-js
 
 Set up an instance of Application Insights in the entry component in your app:
 
-```js
+```ts
 import { Component } from '@angular/core';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
@@ -38,22 +38,22 @@ import { Router } from '@angular/router';
 //-------------------------------------------------------------------------
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-    constructor(
-        private router: Router
-    ){
-        var angularPlugin = new AngularPlugin();
-        const appInsights = new ApplicationInsights({ config: {
-        instrumentationKey: 'YOUR_INSTRUMENTATION_KEY_GOES_HERE',
-        extensions: [angularPlugin],
-        extensionConfig: {
-            [angularPlugin.identifier]: { router: this.router }
-        }
-        } });
+    constructor(private router: Router, injector: Injector) {
+        const angularPlugin = new AngularPlugin(injector);
+        const appInsights = new ApplicationInsights({
+            config: {
+                instrumentationKey: 'YOUR_INSTRUMENTATION_KEY_GOES_HERE',
+                extensions: [angularPlugin],
+                extensionConfig: {
+                    [angularPlugin.identifier]: { router: this.router },
+                },
+            },
+        });
         appInsights.loadAppInsights();
     }
 }
@@ -63,7 +63,7 @@ To track uncaught exceptions, setup ApplicationinsightsAngularpluginErrorService
 
 > Note: When using the ErrorService there is an implicit dependency on the ```@microsoft/applicationinsights-analytics-js``` extension which is also include in the that your MUST include the ```@microsoft/applicationinsights-web``` Sku, so for uncaught exceptions to be tracked your project MUST be initialized to include the analytics package otherwise unhandled errors caught by the error service will not be sent
 
-```js
+```ts
 import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
 
 //-------------------------------------------------------------------------
@@ -79,7 +79,11 @@ import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applica
   providers: [
     {
       provide: ErrorHandler,
-      useClass: ApplicationinsightsAngularpluginErrorService
+      //--------------------------------------------------------------------------------
+      // Special Note: it must be `useExisting` and not `useClass` since we want
+      // to re-use the existing instance for the `AngularPlugin` and the `ErrorHandler`.
+      //--------------------------------------------------------------------------------
+      useExisting: ApplicationinsightsAngularpluginErrorService
     }
   ]
   ...

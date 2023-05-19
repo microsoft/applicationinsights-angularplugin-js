@@ -16,8 +16,7 @@
     "@microsoft/applicationinsights-shims": "^2.0.2",
     "@microsoft/applicationinsights-common": "^2.8.12",
     "@microsoft/applicationinsights-core-js": "^2.8.12",
-    "@microsoft/applicationinsights-properties-js": "^2.8.12",
-    "tslib": "^2.0.0"
+    "@microsoft/applicationinsights-properties-js": "^2.8.12"
   },
   "devDependencies": {
     "@microsoft/applicationinsights-analytics-js": "^2.8.12"

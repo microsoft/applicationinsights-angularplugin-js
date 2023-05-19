@@ -1,11 +1,26 @@
-import { Component } from '@angular/core';
+import { Injector } from '@angular/core';
 import {
-    IConfig, IPageViewTelemetry, IAppInsights, PropertiesPluginIdentifier, AnalyticsPluginIdentifier
+    IConfig,
+    IPageViewTelemetry,
+    PropertiesPluginIdentifier,
+    AnalyticsPluginIdentifier,
 } from '@microsoft/applicationinsights-common';
 import {
-    IPlugin, IConfiguration, IAppInsightsCore,
-    BaseTelemetryPlugin, arrForEach, ITelemetryItem, ITelemetryPluginChain,
-    IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext, ITelemetryUnloadState, generateW3CId
+    IPlugin,
+    IConfiguration,
+    IAppInsightsCore,
+    BaseTelemetryPlugin,
+    arrForEach,
+    ITelemetryItem,
+    ITelemetryPluginChain,
+    IProcessTelemetryContext,
+    getLocation,
+    _throwInternal,
+    eLoggingSeverity,
+    _eInternalMessageId,
+    IProcessTelemetryUnloadContext,
+    ITelemetryUnloadState,
+    generateW3CId,
 } from '@microsoft/applicationinsights-core-js';
 import { NavigationEnd, Router } from '@angular/router';
 // For types only
@@ -27,12 +42,23 @@ interface IAngularExtensionConfig {
     errorServices?: IErrorService[];
 }
 
-@Component({
-    selector: 'lib-applicationinsights-angularplugin-js',
-    template: ``,
-    styles: []
-})
-// eslint-disable-next-line @angular-eslint/component-class-suffix
+/**
+ * Note: the `AngularPlugin` is not an injection unit but requires injector to be
+ * provided when being constructed. We might have marked this class as `{ providedIn: 'root' }`,
+ * but this would force an instance to be a singleton.
+ * Marking the class as `@Injectable()` also requires it to be declared explicitly in the list
+ * of providers to be able to inject it. If we'd like this class to be 're-injectable', we'd need
+ * to force consumers to create injectors explicitly to retrieve new instances of the plugin:
+ * ```ts
+ * const injector = Injector.create({
+ *   providers: [{ provide: AngularPlugin, useClass: AngularPlugin }],
+ *   parent: parentInjector
+ * });
+ * const angularPlugin = injector.get(AngularPlugin);
+ * ```
+ * The plugin should be 're-injectable' because the AppInsights SDK may be unloaded and re-initialized
+ * again, expecting new `AngularPlugin` instance to be passed in.
+ */
 export class AngularPlugin extends BaseTelemetryPlugin {
     public priority = 186;
     public identifier = 'AngularPlugin';
@@ -42,32 +68,36 @@ export class AngularPlugin extends BaseTelemetryPlugin {
     private _angularCfg: IAngularExtensionConfig = null;
     private _eventSubscription: Subscription = null;
 
+    private _angularPluginErrorService = this._injector.get(ApplicationinsightsAngularpluginErrorService);
 
-    constructor() {
+    constructor(private _injector: Injector) {
         super();
-        let self = this;
 
-        self._doTeardown = (unloadCtx?: IProcessTelemetryUnloadContext, unloadState?: ITelemetryUnloadState, asyncCallback?: () => void): void | boolean => {
-            if (this.analyticsPlugin && ApplicationinsightsAngularpluginErrorService.instance !== null) {
-                ApplicationinsightsAngularpluginErrorService.instance.plugin = null;
-                if (self._angularCfg) {
-                    if (self._angularCfg.errorServices && Array.isArray(self._angularCfg.errorServices)) {
-                        arrForEach(self._angularCfg.errorServices, (errorService: IErrorService) => {
-                            ApplicationinsightsAngularpluginErrorService.instance.removeErrorHandler(errorService);
-                        });
+        this._doTeardown = (
+            unloadCtx?: IProcessTelemetryUnloadContext,
+            unloadState?: ITelemetryUnloadState,
+            asyncCallback?: () => void
+        ): void | boolean => {
+            if (
+                this.analyticsPlugin &&
+                Array.isArray(this._angularCfg?.errorServices)
+            ) {
+                arrForEach(
+                    this._angularCfg.errorServices,
+                    (errorService: IErrorService) => {
+                        this._angularPluginErrorService.removeErrorHandler(
+                            errorService
+                        );
                     }
-                }
+                );
             }
 
-            if (self._eventSubscription) {
-                self._eventSubscription.unsubscribe();
-                self._eventSubscription = null;
-            }
-
-            self.analyticsPlugin = null;
-            self.propertiesPlugin = null;
-            self._angularCfg = null;
-        }
+            this._eventSubscription?.unsubscribe();
+            this._eventSubscription = null;
+            this.analyticsPlugin = null;
+            this.propertiesPlugin = null;
+            this._angularCfg = null;
+        };
     }
 
     initialize(config: IConfiguration & IConfig, core: IAppInsightsCore, extensions: IPlugin[], pluginChain?: ITelemetryPluginChain) {
@@ -79,13 +109,11 @@ export class AngularPlugin extends BaseTelemetryPlugin {
         self.propertiesPlugin = core.getPlugin<properties.PropertiesPlugin>(PropertiesPluginIdentifier)?.plugin;
         self.analyticsPlugin = core.getPlugin<AnalyticsPlugin>(AnalyticsPluginIdentifier)?.plugin;
         if (self.analyticsPlugin) {
-            if (ApplicationinsightsAngularpluginErrorService.instance !== null) {
-                ApplicationinsightsAngularpluginErrorService.instance.plugin = self.analyticsPlugin;
-                if (extConfig.errorServices && Array.isArray(extConfig.errorServices)) {
-                    arrForEach(extConfig.errorServices, (errorService: IErrorService) => {
-                        ApplicationinsightsAngularpluginErrorService.instance.addErrorHandler(errorService);
-                    });
-                }
+            self._angularPluginErrorService.plugin = self.analyticsPlugin;
+            if (extConfig.errorServices && Array.isArray(extConfig.errorServices)) {
+                arrForEach(extConfig.errorServices, (errorService: IErrorService) => {
+                    self._angularPluginErrorService.addErrorHandler(errorService);
+                });
             }
         }
 
@@ -96,19 +124,17 @@ export class AngularPlugin extends BaseTelemetryPlugin {
             };
             self.trackPageView(pageViewTelemetry);
             self._eventSubscription = extConfig.router.events.subscribe(event => {
-                if (self.isInitialized()) {
-                    if (event instanceof NavigationEnd) {
-                        // for page initial load, do not call trackPageView twice
-                        if (isPageInitialLoad) {
-                            isPageInitialLoad = false;
-                            return;
-                        }
-                        const pvt: IPageViewTelemetry = {
-                            uri: extConfig.router.url,
-                            properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
-                        };
-                        self.trackPageView(pvt);
+                if (self.isInitialized() && event instanceof NavigationEnd) {
+                    // for page initial load, do not call trackPageView twice
+                    if (isPageInitialLoad) {
+                        isPageInitialLoad = false;
+                        return;
                     }
+                    const pvt: IPageViewTelemetry = {
+                        uri: extConfig.router.url,
+                        properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
+                    };
+                    self.trackPageView(pvt);
                 }
             });
         }
