@@ -112,8 +112,14 @@ extensionConfig: {
 
 ## Compatibility Matrix
 
+As part of updating to support [ApplicationInsights 3.x](https://github.com/microsoft/ApplicationInsights-JS/blob/main/RELEASES.md) we will be bumping the major version
+number of this extension to match the major version of the supported Angular version (which will be v14.x for the first release).
+
+Additionally, as part of this change the existing v3.x extension has been moved into the [release3.x branch](https://github.com/microsoft/applicationinsights-angularplugin-js/tree/release3.x)
+
 | Version |  Application Insights | Angular              | Branch
 |---------|-----------------------|----------------------|-----------
+| 14.0.0  | TBD (^3.x)            | peer: ^14.0.3        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
 | 3.0.3   | ^2.8.14               | peer: ^14.0.3        | [release3.x](https://github.com/microsoft/applicationinsights-angularplugin-js/tree/release3.x)
 | 3.0.2   | ^2.8.12               | peer: ^14.0.3        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
 | 3.0.1   | ^2.8.10               | peer: ^14.0.3        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
