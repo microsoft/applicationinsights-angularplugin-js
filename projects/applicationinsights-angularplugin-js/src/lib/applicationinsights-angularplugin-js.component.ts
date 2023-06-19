@@ -29,9 +29,11 @@ interface IAngularExtensionConfig {
     errorServices?: IErrorService[];
 }
 
+let undefValue = undefined;
+
 const defaultAngularExtensionConfig: IConfigDefaults<IAngularExtensionConfig> = objDeepFreeze({
-    router: null,
-    errorServices: null
+    router: undefValue,
+    errorServices: { blkVal: true, v: undefValue}
 });
 
 @Component({
@@ -50,6 +52,8 @@ export class AngularPlugin extends BaseTelemetryPlugin {
         let _propertiesPlugin: properties.PropertiesPlugin;
         let _angularCfg: IAngularExtensionConfig;
         let _eventSubscription: Subscription;
+        let _isPageInitialLoad: boolean;
+        let _prevRouter: Router;
 
         dynamicProto(AngularPlugin, this, (_self, _base) => {
             _initDefaults();
@@ -60,13 +64,16 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                 _self._addHook(onConfigChange(config, (details) => {
                     let ctx = _self._getTelCtx();
                     _angularCfg = ctx.getExtCfg<IAngularExtensionConfig>(_self.identifier, defaultAngularExtensionConfig);
-                    _propertiesPlugin = core.getPlugin<properties.PropertiesPlugin>(PropertiesPluginIdentifier)?.plugin;
-                    _analyticsPlugin = core.getPlugin<AnalyticsPlugin>(AnalyticsPluginIdentifier)?.plugin;
-                    
+                    _propertiesPlugin = core.getPlugin<properties.PropertiesPlugin>(PropertiesPluginIdentifier)?.plugin as properties.PropertiesPlugin;
+                    _analyticsPlugin = core.getPlugin<AnalyticsPlugin>(AnalyticsPluginIdentifier)?.plugin as AnalyticsPlugin;
+
                     if (_analyticsPlugin) {
                         if (ApplicationinsightsAngularpluginErrorService.instance !== null) {
                             ApplicationinsightsAngularpluginErrorService.instance.plugin = _analyticsPlugin;
                             if (_angularCfg.errorServices && Array.isArray(_angularCfg.errorServices)) {
+                                ApplicationinsightsAngularpluginErrorService.instance.clearErrorHandlers();
+                                // another method would be use blkVal, and compare the two array value to decide  
+                                // whether clear it or not, but it will cause more performance issue.
                                 arrForEach(_angularCfg.errorServices, (errorService: IErrorService) => {
                                     ApplicationinsightsAngularpluginErrorService.instance.addErrorHandler(errorService);
                                 });
@@ -74,28 +81,40 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                         }
                     }
             
-                    if (_angularCfg.router) {
-                        let isPageInitialLoad = true;
-                        const pageViewTelemetry: IPageViewTelemetry = {
-                            uri: _angularCfg.router.url
-                        };
-                        _self.trackPageView(pageViewTelemetry);
-                        _eventSubscription = _angularCfg.router.events.subscribe(event => {
-                            if (_self.isInitialized()) {
-                                if (event instanceof NavigationEnd) {
-                                    // for page initial load, do not call trackPageView twice
-                                    if (isPageInitialLoad) {
-                                        isPageInitialLoad = false;
-                                        return;
+                    if (_angularCfg.router !== _prevRouter) {
+                        // router is changed, or has not been initialized yet
+
+                        // unsubscribe previous router events
+                        if (_eventSubscription) {
+                            _eventSubscription.unsubscribe();
+                        }
+
+                        if (_angularCfg.router){
+                            // subscribe to new router events
+                            const pageViewTelemetry: IPageViewTelemetry = {
+                                uri: _angularCfg.router.url
+                            };
+                            _self.trackPageView(pageViewTelemetry);
+                            _isPageInitialLoad = true; // for this router, it is the initial load
+    
+                            _eventSubscription = _angularCfg.router.events.subscribe(event => {
+                                if (_self.isInitialized()) {
+                                    if (event instanceof NavigationEnd) {
+                                        // for page initial load, do not call trackPageView twice
+                                        if (_isPageInitialLoad) {
+                                            _isPageInitialLoad = false;
+                                            return;
+                                        }
+                                        const pvt: IPageViewTelemetry = {
+                                            uri: _angularCfg.router.url,
+                                            properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
+                                        };
+                                        _self.trackPageView(pvt);
                                     }
-                                    const pvt: IPageViewTelemetry = {
-                                        uri: _angularCfg.router.url,
-                                        properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
-                                    };
-                                    _self.trackPageView(pvt);
                                 }
-                            }
-                        });
+                            });
+                        }     
+                        _prevRouter = _angularCfg.router;
                     }
                 }));
             }
@@ -123,9 +142,11 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                     ApplicationinsightsAngularpluginErrorService.instance.plugin = null;
                     if (_angularCfg) {
                         if (_angularCfg.errorServices && Array.isArray(_angularCfg.errorServices)) {
-                            arrForEach(_angularCfg.errorServices, (errorService: IErrorService) => {
-                                ApplicationinsightsAngularpluginErrorService.instance.removeErrorHandler(errorService);
-                            });
+                            // arrForEach(_angularCfg.errorServices, (errorService: IErrorService) => {
+                            //     ApplicationinsightsAngularpluginErrorService.instance.removeErrorHandler(errorService);
+                            // });
+                            ApplicationinsightsAngularpluginErrorService.instance.clearErrorHandlers();
+             
                         }
                     }
                 }
@@ -142,6 +163,8 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                 _propertiesPlugin = null;
                 _angularCfg = null;
                 _eventSubscription = null;
+                _isPageInitialLoad = false;
+                _prevRouter = null;
             }
 
         });

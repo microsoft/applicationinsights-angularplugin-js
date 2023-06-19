@@ -8,6 +8,8 @@ import { IErrorService } from './IErrorService';
 })
 export class ApplicationinsightsAngularpluginErrorService implements IErrorService {
     public static instance: ApplicationinsightsAngularpluginErrorService = null;
+    // What's the purpose of making this the only instance for the class?
+    // Is this for shriking the size of the bundle? 
     private analyticsPlugin: IAppInsights;
     private errorServices: IErrorService[] = [];
 
@@ -19,6 +21,10 @@ export class ApplicationinsightsAngularpluginErrorService implements IErrorServi
 
     public set plugin(analyticsPlugin: IAppInsights) {
         this.analyticsPlugin = analyticsPlugin;
+    }
+
+    public clearErrorHandlers() {
+       this.errorServices = [];
     }
 
     public addErrorHandler(errorService: IErrorService): void {
