@@ -9,13 +9,12 @@ import {
 } from '@microsoft/applicationinsights-core-js';
 import dynamicProto from "@microsoft/dynamicproto-js";
 import { NavigationEnd, Router } from '@angular/router';
-// For types only
-import * as properties from '@microsoft/applicationinsights-properties-js';
 import { ApplicationinsightsAngularpluginErrorService } from './applicationinsights-angularplugin-error.service';
 import { IErrorService } from './IErrorService';
 import { Subscription } from 'rxjs';
 import { AnalyticsPlugin } from '@microsoft/applicationinsights-analytics-js';
 import {objDeepFreeze} from "@nevware21/ts-utils";
+import { PropertiesPlugin } from '@microsoft/applicationinsights-properties-js';
 
 interface IAngularExtensionConfig {
     /**
@@ -32,7 +31,7 @@ interface IAngularExtensionConfig {
 let undefValue = undefined;
 
 const defaultAngularExtensionConfig: IConfigDefaults<IAngularExtensionConfig> = objDeepFreeze({
-    router: undefValue,
+    router: { blkVal: true, v: undefValue},
     errorServices: { blkVal: true, v: undefValue}
 });
 
@@ -49,7 +48,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
     constructor() {
         super();
         let _analyticsPlugin: AnalyticsPlugin;
-        let _propertiesPlugin: properties.PropertiesPlugin;
+        let _propertiesPlugin: PropertiesPlugin;
         let _angularCfg: IAngularExtensionConfig;
         let _eventSubscription: Subscription;
         let _isPageInitialLoad: boolean;
@@ -64,7 +63,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                 _self._addHook(onConfigChange(config, (details) => {
                     let ctx = _self._getTelCtx();
                     _angularCfg = ctx.getExtCfg<IAngularExtensionConfig>(_self.identifier, defaultAngularExtensionConfig);
-                    _propertiesPlugin = core.getPlugin<properties.PropertiesPlugin>(PropertiesPluginIdentifier)?.plugin as properties.PropertiesPlugin;
+                    _propertiesPlugin = core.getPlugin<PropertiesPlugin>(PropertiesPluginIdentifier)?.plugin as PropertiesPlugin;
                     _analyticsPlugin = core.getPlugin<AnalyticsPlugin>(AnalyticsPluginIdentifier)?.plugin as AnalyticsPlugin;
 
                     if (_analyticsPlugin) {
@@ -90,13 +89,16 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                         }
 
                         if (_angularCfg.router){
+                            
+                            // only track page view if it is the initial page load for this plugin
+                            if (_isPageInitialLoad){
+                                const pageViewTelemetry: IPageViewTelemetry = {
+                                    uri: _angularCfg.router.url
+                                };
+                                _self.trackPageView(pageViewTelemetry);
+                            }
+                            
                             // subscribe to new router events
-                            const pageViewTelemetry: IPageViewTelemetry = {
-                                uri: _angularCfg.router.url
-                            };
-                            _self.trackPageView(pageViewTelemetry);
-                            _isPageInitialLoad = true; // for this router, it is the initial load
-    
                             _eventSubscription = _angularCfg.router.events.subscribe(event => {
                                 if (_self.isInitialized()) {
                                     if (event instanceof NavigationEnd) {
@@ -163,7 +165,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                 _propertiesPlugin = null;
                 _angularCfg = null;
                 _eventSubscription = null;
-                _isPageInitialLoad = false;
+                _isPageInitialLoad = true;
                 _prevRouter = null;
             }
 
