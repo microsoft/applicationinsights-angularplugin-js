@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import {
-    IConfig, IPageViewTelemetry, IAppInsights, PropertiesPluginIdentifier, AnalyticsPluginIdentifier
+    IConfig, IPageViewTelemetry, PropertiesPluginIdentifier, AnalyticsPluginIdentifier
 } from '@microsoft/applicationinsights-common';
 import {
     IPlugin, IConfiguration, IAppInsightsCore,
     BaseTelemetryPlugin, arrForEach, ITelemetryItem, ITelemetryPluginChain,
-    IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext, ITelemetryUnloadState, generateW3CId, onConfigChange, IConfigDefaults
+    IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext, ITelemetryUnloadState, generateW3CId, onConfigChange, IConfigDefaults, proxyFunctions
 } from '@microsoft/applicationinsights-core-js';
 import dynamicProto from "@microsoft/dynamicproto-js";
 import { NavigationEnd, Router } from '@angular/router';
@@ -79,7 +79,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                             }
                         }
                     }
-            
+                    
                     if (_angularCfg.router !== _prevRouter) {
                         // router is changed, or has not been initialized yet
 
@@ -88,8 +88,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                             _eventSubscription.unsubscribe();
                         }
 
-                        if (_angularCfg.router){
-                            
+                        if (_angularCfg.router){                            
                             // only track page view if it is the initial page load for this plugin
                             if (_isPageInitialLoad){
                                 const pageViewTelemetry: IPageViewTelemetry = {
@@ -107,10 +106,14 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                                             _isPageInitialLoad = false;
                                             return;
                                         }
+                                        // question: when navigate from "home" to page "about", as NavigationEnd is the first time 
+                                        // to be triggered, so _isPageInitialLoad is true, so trackpageview will only be triggered
+                                        // at the third page
                                         const pvt: IPageViewTelemetry = {
                                             uri: _angularCfg.router.url,
                                             properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
                                         };
+                                        // question : router.url never changed even navigate to another page
                                         _self.trackPageView(pvt);
                                     }
                                 }
@@ -119,11 +122,14 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                         _prevRouter = _angularCfg.router;
                     }
                 }));
+
+                // for test purpose only
+                _self["_getDbgPlgTargets"] = () => {
+                    return _angularCfg;
+                };   
             }
 
             _self.trackPageView = (pageView: IPageViewTelemetry) => {
-                const self = this;
-        
                 if (_analyticsPlugin) {
                     const location = getLocation();
                     if (_propertiesPlugin && _propertiesPlugin.context && _propertiesPlugin.context.telemetryTrace) {
@@ -132,7 +138,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                     }
                     _analyticsPlugin.trackPageView(pageView);
                 } else {
-                    _throwInternal(self.diagLog(),
+                    _throwInternal(_self.diagLog(),
                         // eslint-disable-next-line max-len
                         eLoggingSeverity.CRITICAL, _eInternalMessageId.TelemetryInitializerFailed, 'Analytics plugin is not available, Angular plugin telemetry will not be sent: ');
                 }
@@ -166,15 +172,12 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                 _angularCfg = null;
                 _eventSubscription = null;
                 _isPageInitialLoad = true;
-                _prevRouter = null;
+                _prevRouter = undefValue;
             }
 
         });
 
     }
-
-   
-
     /**
      * Add Part A fields to the event
      *
