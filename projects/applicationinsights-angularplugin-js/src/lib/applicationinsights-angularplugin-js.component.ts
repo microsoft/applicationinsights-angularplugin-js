@@ -5,7 +5,7 @@ import {
 import {
     IPlugin, IConfiguration, IAppInsightsCore,
     BaseTelemetryPlugin, arrForEach, ITelemetryItem, ITelemetryPluginChain,
-    IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext, ITelemetryUnloadState, generateW3CId, onConfigChange, IConfigDefaults, proxyFunctions
+    IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext, ITelemetryUnloadState, generateW3CId, onConfigChange, IConfigDefaults, isArray
 } from '@microsoft/applicationinsights-core-js';
 import dynamicProto from "@microsoft/dynamicproto-js";
 import { NavigationEnd, Router } from '@angular/router';
@@ -53,6 +53,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
         let _eventSubscription: Subscription;
         let _isPageInitialLoad: boolean;
         let _prevRouter: Router;
+        let _errorServiceInstance: ApplicationinsightsAngularpluginErrorService;
 
         dynamicProto(AngularPlugin, this, (_self, _base) => {
             _initDefaults();
@@ -66,13 +67,15 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                     _propertiesPlugin = core.getPlugin<PropertiesPlugin>(PropertiesPluginIdentifier)?.plugin as PropertiesPlugin;
                     _analyticsPlugin = core.getPlugin<AnalyticsPlugin>(AnalyticsPluginIdentifier)?.plugin as AnalyticsPlugin;
 
+                    _errorServiceInstance = ApplicationinsightsAngularpluginErrorService.instance;
+
                     if (_analyticsPlugin) {
-                        if (ApplicationinsightsAngularpluginErrorService.instance !== null) {
-                            ApplicationinsightsAngularpluginErrorService.instance.plugin = _analyticsPlugin;
-                            if (_angularCfg.errorServices && Array.isArray(_angularCfg.errorServices)) {
-                                ApplicationinsightsAngularpluginErrorService.instance.clearErrorHandlers();
+                        if (_errorServiceInstance !== null) {
+                            _errorServiceInstance.plugin = _analyticsPlugin;
+                            if (_angularCfg.errorServices && isArray(_angularCfg.errorServices)) {
+                                _errorServiceInstance.clearErrorHandlers();
                                 arrForEach(_angularCfg.errorServices, (errorService: IErrorService) => {
-                                    ApplicationinsightsAngularpluginErrorService.instance.addErrorHandler(errorService);
+                                    _errorServiceInstance.addErrorHandler(errorService);
                                 });
                             }
                         }
@@ -140,11 +143,11 @@ export class AngularPlugin extends BaseTelemetryPlugin {
         
 
             _self._doTeardown = (unloadCtx?: IProcessTelemetryUnloadContext, unloadState?: ITelemetryUnloadState, asyncCallback?: () => void): void | boolean => {
-                if (_analyticsPlugin && ApplicationinsightsAngularpluginErrorService.instance !== null) {
-                    ApplicationinsightsAngularpluginErrorService.instance.plugin = null;
+                if (_analyticsPlugin && _errorServiceInstance !== null) {
+                    _errorServiceInstance.plugin = null;
                     if (_angularCfg) {
                         if (_angularCfg.errorServices && Array.isArray(_angularCfg.errorServices)) {
-                            ApplicationinsightsAngularpluginErrorService.instance.clearErrorHandlers();
+                            _errorServiceInstance.clearErrorHandlers();
              
                         }
                     }
