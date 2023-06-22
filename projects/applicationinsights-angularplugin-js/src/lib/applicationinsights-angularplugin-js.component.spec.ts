@@ -1,7 +1,7 @@
-import { AppInsightsCore, IConfiguration, DiagnosticLogger, ITelemetryItem, IPlugin, IAppInsightsCore } from "@microsoft/applicationinsights-core-js";
+import { AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin, IAppInsightsCore } from "@microsoft/applicationinsights-core-js";
 import { IConfig, IPageViewTelemetry } from "@microsoft/applicationinsights-common";
 import { AngularPlugin } from "./applicationinsights-angularplugin-js.component";
-import { ComponentFixture, TestBed, fakeAsync, flushMicrotasks, tick } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { Router, RouterModule } from "@angular/router";
 import { ApplicationinsightsAngularpluginErrorService } from "./applicationinsights-angularplugin-error.service";
 import { AnalyticsPlugin } from "@microsoft/applicationinsights-analytics-js";
@@ -40,6 +40,7 @@ describe("ReactAI", () => {
               { provide: AnalyticsPlugin, useValue: spy }
             ]
         });
+        
         service = TestBed.inject(ApplicationinsightsAngularpluginErrorService);
         fixture = TestBed.createComponent(AngularPlugin);
         angularPlugin = fixture.componentInstance;
@@ -97,6 +98,17 @@ describe("ReactAI", () => {
         expect(angularPlugin.trackPageView).toHaveBeenCalledTimes(1);
         router.navigate(['test']).then(() => {
           expect(angularPlugin.trackPageView).toHaveBeenCalledTimes(2);
+          let args = (angularPlugin.trackPageView as jasmine.Spy).calls.mostRecent().args;
+          let pageViewEvents: IPageViewTelemetry = args[0];
+          console.log("get", pageViewEvents);
+          expect(pageViewEvents.uri).toEqual('/test');
+          router.navigateByUrl('about').then(() => {
+            args = (angularPlugin.trackPageView as jasmine.Spy).calls.mostRecent().args;
+            pageViewEvents = args[0];
+            console.log("get", pageViewEvents);
+            expect(pageViewEvents.uri).toEqual('/about');
+          });
+         
         });
       });
     }));

@@ -71,8 +71,6 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                             ApplicationinsightsAngularpluginErrorService.instance.plugin = _analyticsPlugin;
                             if (_angularCfg.errorServices && Array.isArray(_angularCfg.errorServices)) {
                                 ApplicationinsightsAngularpluginErrorService.instance.clearErrorHandlers();
-                                // another method would be use blkVal, and compare the two array value to decide  
-                                // whether clear it or not, but it will cause more performance issue.
                                 arrForEach(_angularCfg.errorServices, (errorService: IErrorService) => {
                                     ApplicationinsightsAngularpluginErrorService.instance.addErrorHandler(errorService);
                                 });
@@ -106,14 +104,10 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                                             _isPageInitialLoad = false;
                                             return;
                                         }
-                                        // question: when navigate from "home" to page "about", as NavigationEnd is the first time 
-                                        // to be triggered, so _isPageInitialLoad is true, so trackpageview will only be triggered
-                                        // at the third page
                                         const pvt: IPageViewTelemetry = {
                                             uri: _angularCfg.router.url,
                                             properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
                                         };
-                                        // question : router.url never changed even navigate to another page
                                         _self.trackPageView(pvt);
                                     }
                                 }
@@ -150,9 +144,6 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                     ApplicationinsightsAngularpluginErrorService.instance.plugin = null;
                     if (_angularCfg) {
                         if (_angularCfg.errorServices && Array.isArray(_angularCfg.errorServices)) {
-                            // arrForEach(_angularCfg.errorServices, (errorService: IErrorService) => {
-                            //     ApplicationinsightsAngularpluginErrorService.instance.removeErrorHandler(errorService);
-                            // });
                             ApplicationinsightsAngularpluginErrorService.instance.clearErrorHandlers();
              
                         }
