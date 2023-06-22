@@ -2,7 +2,7 @@ import { AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin, IAppInsightsC
 import { IConfig, IPageViewTelemetry } from "@microsoft/applicationinsights-common";
 import { AngularPlugin } from "./applicationinsights-angularplugin-js.component";
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
-import { Router, RouterModule } from "@angular/router";
+import { Router } from "@angular/router";
 import { ApplicationinsightsAngularpluginErrorService } from "./applicationinsights-angularplugin-error.service";
 import { AnalyticsPlugin } from "@microsoft/applicationinsights-analytics-js";
 import { RouterTestingModule } from '@angular/router/testing';
@@ -85,7 +85,6 @@ describe("ReactAI", () => {
     }));
 
     it('Dynamic Config Test: trackPageView is updated when router changed', fakeAsync(()=> {
-      const spy = spyOn(angularPlugin, 'trackPageView')
       core.config.extensionConfig[angularPlugin.identifier].router = router;
       tick(3000);
       expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(router);
