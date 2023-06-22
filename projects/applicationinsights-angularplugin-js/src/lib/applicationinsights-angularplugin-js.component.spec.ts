@@ -85,6 +85,7 @@ describe("ReactAI", () => {
     }));
 
     it('Dynamic Config Test: trackPageView is updated when router changed', fakeAsync(()=> {
+      spyOn(angularPlugin, 'trackPageView');
       core.config.extensionConfig[angularPlugin.identifier].router = router;
       tick(3000);
       expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(router);
