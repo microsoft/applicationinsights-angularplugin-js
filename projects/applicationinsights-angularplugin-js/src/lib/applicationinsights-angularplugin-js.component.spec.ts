@@ -100,12 +100,10 @@ describe("ReactAI", () => {
           expect(angularPlugin.trackPageView).toHaveBeenCalledTimes(2);
           let args = (angularPlugin.trackPageView as jasmine.Spy).calls.mostRecent().args;
           let pageViewEvents: IPageViewTelemetry = args[0];
-          console.log("get", pageViewEvents);
           expect(pageViewEvents.uri).toEqual('/test');
           router.navigateByUrl('about').then(() => {
             args = (angularPlugin.trackPageView as jasmine.Spy).calls.mostRecent().args;
             pageViewEvents = args[0];
-            console.log("get", pageViewEvents);
             expect(pageViewEvents.uri).toEqual('/about');
           });
          
