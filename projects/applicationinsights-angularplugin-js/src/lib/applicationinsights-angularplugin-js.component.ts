@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
 import {
-    IConfig, IPageViewTelemetry, IAppInsights, PropertiesPluginIdentifier, AnalyticsPluginIdentifier
+    IConfig, IPageViewTelemetry, PropertiesPluginIdentifier, AnalyticsPluginIdentifier
 } from '@microsoft/applicationinsights-common';
 import {
     IPlugin, IConfiguration, IAppInsightsCore,
     BaseTelemetryPlugin, arrForEach, ITelemetryItem, ITelemetryPluginChain,
-    IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext, ITelemetryUnloadState, generateW3CId
+    IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext, ITelemetryUnloadState, generateW3CId, onConfigChange, IConfigDefaults, isArray
 } from '@microsoft/applicationinsights-core-js';
+import dynamicProto from "@microsoft/dynamicproto-js";
 import { NavigationEnd, Router } from '@angular/router';
-// For types only
-import * as properties from '@microsoft/applicationinsights-properties-js';
 import { ApplicationinsightsAngularpluginErrorService } from './applicationinsights-angularplugin-error.service';
 import { IErrorService } from './IErrorService';
 import { Subscription } from 'rxjs';
 import { AnalyticsPlugin } from '@microsoft/applicationinsights-analytics-js';
+import {objDeepFreeze} from "@nevware21/ts-utils";
+import { PropertiesPlugin } from '@microsoft/applicationinsights-properties-js';
 
 interface IAngularExtensionConfig {
     /**
@@ -27,6 +28,13 @@ interface IAngularExtensionConfig {
     errorServices?: IErrorService[];
 }
 
+let undefValue = undefined;
+
+const defaultAngularExtensionConfig: IConfigDefaults<IAngularExtensionConfig> = objDeepFreeze({
+    router: { blkVal: true, v: undefValue},
+    errorServices: { blkVal: true, v: undefValue}
+});
+
 @Component({
     selector: 'lib-applicationinsights-angularplugin-js',
     template: ``,
@@ -37,83 +45,133 @@ export class AngularPlugin extends BaseTelemetryPlugin {
     public priority = 186;
     public identifier = 'AngularPlugin';
 
-    private analyticsPlugin: AnalyticsPlugin;
-    private propertiesPlugin: properties.PropertiesPlugin;
-    private _angularCfg: IAngularExtensionConfig = null;
-    private _eventSubscription: Subscription = null;
-
-
     constructor() {
         super();
-        let self = this;
+        let _analyticsPlugin: AnalyticsPlugin;
+        let _propertiesPlugin: PropertiesPlugin;
+        let _angularCfg: IAngularExtensionConfig;
+        let _eventSubscription: Subscription;
+        let _isPageInitialLoad: boolean;
+        let _prevRouter: Router;
+        let _errorServiceInstance: ApplicationinsightsAngularpluginErrorService;
 
-        self._doTeardown = (unloadCtx?: IProcessTelemetryUnloadContext, unloadState?: ITelemetryUnloadState, asyncCallback?: () => void): void | boolean => {
-            if (this.analyticsPlugin && ApplicationinsightsAngularpluginErrorService.instance !== null) {
-                ApplicationinsightsAngularpluginErrorService.instance.plugin = null;
-                if (self._angularCfg) {
-                    if (self._angularCfg.errorServices && Array.isArray(self._angularCfg.errorServices)) {
-                        arrForEach(self._angularCfg.errorServices, (errorService: IErrorService) => {
-                            ApplicationinsightsAngularpluginErrorService.instance.removeErrorHandler(errorService);
-                        });
-                    }
-                }
-            }
+        dynamicProto(AngularPlugin, this, (_self, _base) => {
+            _initDefaults();
 
-            if (self._eventSubscription) {
-                self._eventSubscription.unsubscribe();
-                self._eventSubscription = null;
-            }
+            _self.initialize = (config: IConfiguration & IConfig, core: IAppInsightsCore, extensions: IPlugin[], pluginChain?: ITelemetryPluginChain) => {
+                super.initialize(config, core, extensions, pluginChain);
+        
+                _self._addHook(onConfigChange(config, (details) => {
+                    let ctx = _self._getTelCtx();
+                    _angularCfg = ctx.getExtCfg<IAngularExtensionConfig>(_self.identifier, defaultAngularExtensionConfig);
+                    _propertiesPlugin = core.getPlugin<PropertiesPlugin>(PropertiesPluginIdentifier)?.plugin as PropertiesPlugin;
+                    _analyticsPlugin = core.getPlugin<AnalyticsPlugin>(AnalyticsPluginIdentifier)?.plugin as AnalyticsPlugin;
 
-            self.analyticsPlugin = null;
-            self.propertiesPlugin = null;
-            self._angularCfg = null;
-        }
-    }
+                    _errorServiceInstance = ApplicationinsightsAngularpluginErrorService.instance;
 
-    initialize(config: IConfiguration & IConfig, core: IAppInsightsCore, extensions: IPlugin[], pluginChain?: ITelemetryPluginChain) {
-        super.initialize(config, core, extensions, pluginChain);
-        const self = this;
-        const ctx = self._getTelCtx();
-        const extConfig = ctx.getExtCfg<IAngularExtensionConfig>(self.identifier, { router: null, errorServices: null });
-
-        self.propertiesPlugin = core.getPlugin<properties.PropertiesPlugin>(PropertiesPluginIdentifier)?.plugin;
-        self.analyticsPlugin = core.getPlugin<AnalyticsPlugin>(AnalyticsPluginIdentifier)?.plugin;
-        if (self.analyticsPlugin) {
-            if (ApplicationinsightsAngularpluginErrorService.instance !== null) {
-                ApplicationinsightsAngularpluginErrorService.instance.plugin = self.analyticsPlugin;
-                if (extConfig.errorServices && Array.isArray(extConfig.errorServices)) {
-                    arrForEach(extConfig.errorServices, (errorService: IErrorService) => {
-                        ApplicationinsightsAngularpluginErrorService.instance.addErrorHandler(errorService);
-                    });
-                }
-            }
-        }
-
-        if (extConfig.router) {
-            let isPageInitialLoad = true;
-            const pageViewTelemetry: IPageViewTelemetry = {
-                uri: extConfig.router.url
-            };
-            self.trackPageView(pageViewTelemetry);
-            self._eventSubscription = extConfig.router.events.subscribe(event => {
-                if (self.isInitialized()) {
-                    if (event instanceof NavigationEnd) {
-                        // for page initial load, do not call trackPageView twice
-                        if (isPageInitialLoad) {
-                            isPageInitialLoad = false;
-                            return;
+                    if (_analyticsPlugin) {
+                        if (_errorServiceInstance !== null) {
+                            _errorServiceInstance.plugin = _analyticsPlugin;
+                            if (_angularCfg.errorServices && isArray(_angularCfg.errorServices)) {
+                                _errorServiceInstance.clearErrorHandlers();
+                                arrForEach(_angularCfg.errorServices, (errorService: IErrorService) => {
+                                    _errorServiceInstance.addErrorHandler(errorService);
+                                });
+                            }
                         }
-                        const pvt: IPageViewTelemetry = {
-                            uri: extConfig.router.url,
-                            properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
-                        };
-                        self.trackPageView(pvt);
+                    }
+                    
+                    if (_angularCfg.router !== _prevRouter) {
+                        // router is changed, or has not been initialized yet
+
+                        // unsubscribe previous router events
+                        if (_eventSubscription) {
+                            _eventSubscription.unsubscribe();
+                        }
+
+                        if (_angularCfg.router){                            
+                            // only track page view if it is the initial page load for this plugin
+                            if (_isPageInitialLoad){
+                                const pageViewTelemetry: IPageViewTelemetry = {
+                                    uri: _angularCfg.router.url
+                                };
+                                _self.trackPageView(pageViewTelemetry);
+                            }
+                            
+                            // subscribe to new router events
+                            _eventSubscription = _angularCfg.router.events.subscribe(event => {
+                                if (_self.isInitialized()) {
+                                    if (event instanceof NavigationEnd) {
+                                        // for page initial load, do not call trackPageView twice
+                                        if (_isPageInitialLoad) {
+                                            _isPageInitialLoad = false;
+                                            return;
+                                        }
+                                        const pvt: IPageViewTelemetry = {
+                                            uri: _angularCfg.router.url,
+                                            properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
+                                        };
+                                        _self.trackPageView(pvt);
+                                    }
+                                }
+                            });
+                        }     
+                        _prevRouter = _angularCfg.router;
+                    }
+                }));
+
+                // for test purpose only
+                _self["_getDbgPlgTargets"] = () => {
+                    return _angularCfg;
+                };   
+            }
+
+            _self.trackPageView = (pageView: IPageViewTelemetry) => {
+                if (_analyticsPlugin) {
+                    const location = getLocation();
+                    if (_propertiesPlugin && _propertiesPlugin.context && _propertiesPlugin.context.telemetryTrace) {
+                        _propertiesPlugin.context.telemetryTrace.traceID = generateW3CId();
+                        _propertiesPlugin.context.telemetryTrace.name = location && location.pathname || '_unknown_';
+                    }
+                    _analyticsPlugin.trackPageView(pageView);
+                } else {
+                    _throwInternal(_self.diagLog(),
+                        // eslint-disable-next-line max-len
+                        eLoggingSeverity.CRITICAL, _eInternalMessageId.TelemetryInitializerFailed, 'Analytics plugin is not available, Angular plugin telemetry will not be sent: ');
+                }
+            }
+        
+
+            _self._doTeardown = (unloadCtx?: IProcessTelemetryUnloadContext, unloadState?: ITelemetryUnloadState, asyncCallback?: () => void): void | boolean => {
+                if (_analyticsPlugin && _errorServiceInstance !== null) {
+                    _errorServiceInstance.plugin = null;
+                    if (_angularCfg) {
+                        if (_angularCfg.errorServices && Array.isArray(_angularCfg.errorServices)) {
+                            _errorServiceInstance.clearErrorHandlers();
+             
+                        }
                     }
                 }
-            });
-        }
-    }
+    
+                if (_eventSubscription) {
+                    _eventSubscription.unsubscribe();
+                    _eventSubscription = null;
+                }
+                _initDefaults();
+            }
 
+            function _initDefaults() {
+                _analyticsPlugin = null;
+                _propertiesPlugin = null;
+                _angularCfg = null;
+                _eventSubscription = null;
+                _isPageInitialLoad = true;
+                _prevRouter = undefValue;
+            }
+
+        });
+
+    }
     /**
      * Add Part A fields to the event
      *
@@ -123,21 +181,15 @@ export class AngularPlugin extends BaseTelemetryPlugin {
         this.processNext(event, itemCtx);
     }
 
-    trackPageView(pageView: IPageViewTelemetry) {
-        const self = this;
 
-        if (self.analyticsPlugin) {
-            const location = getLocation();
-            if (self.propertiesPlugin && self.propertiesPlugin.context && self.propertiesPlugin.context.telemetryTrace) {
-                self.propertiesPlugin.context.telemetryTrace.traceID = generateW3CId();
-                self.propertiesPlugin.context.telemetryTrace.name = location && location.pathname || '_unknown_';
-            }
-            self.analyticsPlugin.trackPageView(pageView);
-        } else {
-            _throwInternal(self.diagLog(),
-                // eslint-disable-next-line max-len
-                eLoggingSeverity.CRITICAL, _eInternalMessageId.TelemetryInitializerFailed, 'Analytics plugin is not available, Angular plugin telemetry will not be sent: ');
-        }
+    initialize(config: IConfiguration & IConfig, core: IAppInsightsCore, extensions: IPlugin[], pluginChain?:ITelemetryPluginChain) {
+        // @DynamicProtoStub -- DO NOT add any code as this will be removed during packaging
     }
 
+    trackPageView(pageView: IPageViewTelemetry) {
+        // @DynamicProtoStub -- DO NOT add any code as this will be removed during packaging
+    }
+
+
+   
 }
