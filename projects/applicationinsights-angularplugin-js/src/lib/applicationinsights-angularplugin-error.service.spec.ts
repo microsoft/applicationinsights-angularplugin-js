@@ -31,7 +31,7 @@ describe('ApplicationinsightsAngularpluginErrorService', () => {
         core.initialize({
             instrumentationKey: '',
             enableAutoRouteTracking: true,
-            extensions: [component],
+            extensions: [component]
         } as IConfig & IConfiguration, [appInsights, channel]);
     });
 
