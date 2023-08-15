@@ -1,19 +1,19 @@
-import { AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin, IAppInsightsCore } from '@microsoft/applicationinsights-core-js';
-import { IConfig, IPageViewTelemetry } from '@microsoft/applicationinsights-common';
-import { AngularPlugin } from './applicationinsights-angularplugin-js.component';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { ApplicationinsightsAngularpluginErrorService } from './applicationinsights-angularplugin-error.service';
-import { AnalyticsPlugin } from '@microsoft/applicationinsights-analytics-js';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Component } from '@angular/core';
+import { AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin, IAppInsightsCore } from "@microsoft/applicationinsights-core-js";
+import { IConfig, IPageViewTelemetry } from "@microsoft/applicationinsights-common";
+import { AngularPlugin } from "./applicationinsights-angularplugin-js.component";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
+import { Router } from "@angular/router";
+import { ApplicationinsightsAngularpluginErrorService } from "./applicationinsights-angularplugin-error.service";
+import { AnalyticsPlugin } from "@microsoft/applicationinsights-analytics-js";
+import { RouterTestingModule } from "@angular/router/testing";
+import { Component } from "@angular/core";
 
 @Component({
-    template: '<p>Fake Home Component</p>'
+    template: "<p>Fake Home Component</p>"
 })
 class FakeHomeComponent {}
 class FakeAboutComponent {}
-describe('ReactAI', () => {
+describe("ReactAI", () => {
 
     let service: ApplicationinsightsAngularpluginErrorService;
     let fixture: ComponentFixture<AngularPlugin>;
@@ -26,14 +26,14 @@ describe('ReactAI', () => {
     let analyticsPluginSpy: jasmine.SpyObj<AnalyticsPlugin>;
 
     beforeEach(() => {
-        const spy = jasmine.createSpyObj('AnalyticsPlugin', ['trackPageView']);
+        const spy = jasmine.createSpyObj("AnalyticsPlugin", ["trackPageView"]);
         TestBed.configureTestingModule({
             declarations: [AngularPlugin],
             imports: [
                 RouterTestingModule.withRoutes([
-                    { path: 'home', component: FakeHomeComponent  },
-                    { path: 'about', component: FakeAboutComponent },
-                    { path: 'test', component: FakeHomeComponent }
+                    { path: "home", component: FakeHomeComponent  },
+                    { path: "about", component: FakeAboutComponent },
+                    { path: "test", component: FakeHomeComponent }
                 ])
             ],
             providers: [
@@ -56,7 +56,7 @@ describe('ReactAI', () => {
         channel = new ChannelPlugin();
 
         core.initialize({
-            instrumentationKey: '',
+            instrumentationKey: "",
             extensionConfig: {
                 [angularPlugin.identifier]: { }
             }
@@ -77,34 +77,34 @@ describe('ReactAI', () => {
 
     });
 
-    it('Dynamic Config Test: router could be added and removed', fakeAsync(()=> {
-        expect(angularPlugin['_getDbgPlgTargets']().router).toEqual(undefined);
+    it("Dynamic Config Test: router could be added and removed", fakeAsync(()=> {
+        expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(undefined);
         core.config.extensionConfig[angularPlugin.identifier].router = router;
         tick(3000);
-        expect(angularPlugin['_getDbgPlgTargets']().router).toEqual(router);
+        expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(router);
     }));
 
-    it('Dynamic Config Test: trackPageView is updated when router changed', fakeAsync(()=> {
-        spyOn(angularPlugin, 'trackPageView');
+    it("Dynamic Config Test: trackPageView is updated when router changed", fakeAsync(()=> {
+        spyOn(angularPlugin, "trackPageView");
         core.config.extensionConfig[angularPlugin.identifier].router = router;
         tick(3000);
-        expect(angularPlugin['_getDbgPlgTargets']().router).toEqual(router);
+        expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(router);
       
         expect(angularPlugin.trackPageView).toHaveBeenCalledTimes(1);
         let args = (angularPlugin.trackPageView as jasmine.Spy).calls.mostRecent().args;
         let pageViewEvents: IPageViewTelemetry = args[0];
         expect(pageViewEvents.uri).toEqual(router.url);
-        router.navigate(['about']).then(() => {
+        router.navigate(["about"]).then(() => {
             expect(angularPlugin.trackPageView).toHaveBeenCalledTimes(1);
-            router.navigate(['test']).then(() => {
+            router.navigate(["test"]).then(() => {
                 expect(angularPlugin.trackPageView).toHaveBeenCalledTimes(2);
                 let funcArgs = (angularPlugin.trackPageView as jasmine.Spy).calls.mostRecent().args;
                 pageViewEvents = funcArgs[0];
-                expect(pageViewEvents.uri).toEqual('/test');
-                router.navigateByUrl('about').then(() => {
+                expect(pageViewEvents.uri).toEqual("/test");
+                router.navigateByUrl("about").then(() => {
                     funcArgs = (angularPlugin.trackPageView as jasmine.Spy).calls.mostRecent().args;
                     pageViewEvents = funcArgs[0];
-                    expect(pageViewEvents.uri).toEqual('/about');
+                    expect(pageViewEvents.uri).toEqual("/about");
                 });
          
             });
@@ -118,7 +118,7 @@ class ChannelPlugin implements IPlugin {
     public isResumeInvoked = false;
     public isPauseInvoked = false;
 
-    public identifier = 'Sender';
+    public identifier = "Sender";
 
     public priority: number = 1001;
 
