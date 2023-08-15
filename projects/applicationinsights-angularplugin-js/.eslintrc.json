@@ -17,8 +17,7 @@
       },
       "rules": {
         "indent": ["error"],                                        // Enabling for auto fixing
-        "dot-notation": 0,
-        "quotes": ["error", "single"],                              // Enabled for auto fixing
+        "quotes": ["warn", "double"],                               // Enabled for auto fixing
         "curly": [ "error" ],                                       // Enabling for auto fixing
         "brace-style": [ "error" ],                                 // Enabling for auto fixing
         "prefer-const": "off",
@@ -33,19 +32,19 @@
         "no-const-assign": "error",
         "comma-dangle": [ "error", "never" ],                       // Enabled for auto fixing
         "security/detect-object-injection": "off",                  // Suppress Warning -- need to Review Later
+        "security/detect-non-literal-fs-filename": "off",           // This was causing a bunch of false positive matches for dynamic config "watch" function
         "@typescript-eslint/ban-types": "off",
         "@typescript-eslint/no-unused-vars": [ "warn", { "vars": "all", "args": "none", "argsIgnorePattern": "^_", "ignoreRestSiblings": true } ],
         "@typescript-eslint/triple-slash-reference": "off",
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/no-this-alias": "off",
         "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/dot-notation": "off",
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/no-empty-interface": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/no-extra-semi": "error",                // Enabled for auto fixing
         "@typescript-eslint/no-non-null-assertion": "error",
-        "arrow-body-style": ["error", "always"],
+        "@typescript-eslint/dot-notation": "off",
         "@angular-eslint/component-selector": [
           "error",
           {

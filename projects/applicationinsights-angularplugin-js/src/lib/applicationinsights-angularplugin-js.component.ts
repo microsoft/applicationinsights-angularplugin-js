@@ -132,9 +132,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                 }));
 
                 // for test purpose only
-                _self['_getDbgPlgTargets'] = () => {
-                    return _angularCfg;
-                };
+                _self['_getDbgPlgTargets'] = () => _angularCfg;
             };
 
             _self.trackPageView = (pageView: IPageViewTelemetry) => {
