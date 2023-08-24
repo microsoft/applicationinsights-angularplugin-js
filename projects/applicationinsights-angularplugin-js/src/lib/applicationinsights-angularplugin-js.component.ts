@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import {
     IConfig, IPageViewTelemetry, PropertiesPluginIdentifier, AnalyticsPluginIdentifier
 } from '@microsoft/applicationinsights-common';
@@ -26,6 +26,7 @@ interface IAngularExtensionConfig {
      * Custom error service for global error handling.
      */
     errorServices?: IErrorService[];
+    enableInjector?: boolean;
 }
 
 let undefValue = undefined;
@@ -45,7 +46,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
     public priority = 186;
     public identifier = 'AngularPlugin';
 
-    constructor() {
+    constructor(private _injector:Injector = null) { // _injector is optional to provide
         super();
         let _analyticsPlugin: AnalyticsPlugin;
         let _propertiesPlugin: PropertiesPlugin;
@@ -67,7 +68,12 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                     _propertiesPlugin = core.getPlugin<PropertiesPlugin>(PropertiesPluginIdentifier)?.plugin as PropertiesPlugin;
                     _analyticsPlugin = core.getPlugin<AnalyticsPlugin>(AnalyticsPluginIdentifier)?.plugin as AnalyticsPlugin;
 
-                    _errorServiceInstance = ApplicationinsightsAngularpluginErrorService.instance;
+                    if (_angularCfg.enableInjector && _injector){
+                        _errorServiceInstance = this._injector.get(ApplicationinsightsAngularpluginErrorService);
+                    }
+                    _errorServiceInstance = _errorServiceInstance ? _errorServiceInstance : ApplicationinsightsAngularpluginErrorService.instance;
+
+                    // two instance of errorService
 
                     if (_analyticsPlugin) {
                         if (_errorServiceInstance !== null) {
