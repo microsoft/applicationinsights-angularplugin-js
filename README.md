@@ -110,6 +110,33 @@ extensionConfig: {
       }
 ```
 
+## Multiple Instance Setup Method
+When multiple angualr plugin instance is running in the same session, their error service may overlapped each other and cause conflicts. Therefore, we allow user to use injector so that they could walk around this problem.
+
+```
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+    constructor(
+        private router: Router,
+        injector: Injector
+    ){
+        var angularPlugin = new AngularPlugin(injector);
+        const appInsights = new ApplicationInsights({ config: {
+        instrumentationKey: 'YOUR_INSTRUMENTATION_KEY_GOES_HERE',
+        extensions: [angularPlugin],
+        extensionConfig: {
+            [angularPlugin.identifier]: { router: this.router, enableInjector: true }
+        }
+        } });
+        appInsights.loadAppInsights();
+    }
+}
+```
+
 ## Compatibility Matrix
 
 As part of updating to support [ApplicationInsights 3.x](https://github.com/microsoft/ApplicationInsights-JS/blob/main/RELEASES.md) we will be bumping the major version
