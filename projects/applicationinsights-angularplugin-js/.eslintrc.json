@@ -45,7 +45,7 @@
         "@typescript-eslint/no-extra-semi": "error",                // Enabled for auto fixing
         "@typescript-eslint/no-non-null-assertion": "error",
         "@typescript-eslint/dot-notation": "off",
-        "@typescript-eslint/quotes": "off",
+        "@typescript-eslint/quotes": ["warn", "double"],
         "@angular-eslint/component-selector": [
           "error",
           {
