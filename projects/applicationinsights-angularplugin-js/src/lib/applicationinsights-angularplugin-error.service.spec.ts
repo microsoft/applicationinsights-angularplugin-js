@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin } from '@microsoft/applicationinsights-core-js';
-import { AnalyticsPlugin } from '@microsoft/applicationinsights-analytics-js';
-import { IConfig } from '@microsoft/applicationinsights-common';
-import { ApplicationinsightsAngularpluginErrorService } from './applicationinsights-angularplugin-error.service';
-import { AngularPlugin } from '../lib/applicationinsights-angularplugin-js.component';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin } from "@microsoft/applicationinsights-core-js";
+import { AnalyticsPlugin } from "@microsoft/applicationinsights-analytics-js";
+import { IConfig } from "@microsoft/applicationinsights-common";
+import { ApplicationinsightsAngularpluginErrorService } from "./applicationinsights-angularplugin-error.service";
+import { AngularPlugin } from "../lib/applicationinsights-angularplugin-js.component";
 
-describe('ApplicationinsightsAngularpluginErrorService', () => {
+describe("ApplicationinsightsAngularpluginErrorService", () => {
     let service: ApplicationinsightsAngularpluginErrorService;
     let fixture: ComponentFixture<AngularPlugin>;
     let component: AngularPlugin;
@@ -29,9 +29,9 @@ describe('ApplicationinsightsAngularpluginErrorService', () => {
 
         // Act
         core.initialize({
-            instrumentationKey: '',
+            instrumentationKey: "",
             enableAutoRouteTracking: true,
-            extensions: [component],
+            extensions: [component]
         } as IConfig & IConfiguration, [appInsights, channel]);
     });
 
@@ -47,20 +47,20 @@ describe('ApplicationinsightsAngularpluginErrorService', () => {
 
     });
 
-    it('should be created', () => {
+    it("should be created", () => {
         expect(service).toBeTruthy();
     });
 
-    it('should assign analytics plugin to service plugin property', () => {
+    it("should assign analytics plugin to service plugin property", () => {
         // eslint-disable-next-line @typescript-eslint/dot-notation
-        expect(service['analyticsPlugin']).toBeTruthy();
+        expect(service["analyticsPlugin"]).toBeTruthy();
     });
 
     // this is not testing if handleError is called - Angular does that already
-    it('should capture uncaught exception and send exception telemetry', () => {
+    it("should capture uncaught exception and send exception telemetry", () => {
         // eslint-disable-next-line @typescript-eslint/dot-notation
-        const spy = spyOn(service['analyticsPlugin'], 'trackException');
-        const error: Error = new Error('ERROR');
+        const spy = spyOn(service["analyticsPlugin"], "trackException");
+        const error: Error = new Error("ERROR");
         service.handleError(error);
         expect(spy).toHaveBeenCalledWith({ exception: error });
     });
@@ -75,7 +75,7 @@ class ChannelPlugin implements IPlugin {
 
     public processTelemetry;
 
-    public identifier = 'Sender';
+    public identifier = "Sender";
 
     public priority = 1001;
 

@@ -1,20 +1,20 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 import {
     IConfig, IPageViewTelemetry, PropertiesPluginIdentifier, AnalyticsPluginIdentifier
-} from '@microsoft/applicationinsights-common';
+} from "@microsoft/applicationinsights-common";
 import {
-    IPlugin, IConfiguration, IAppInsightsCore,
-    BaseTelemetryPlugin, arrForEach, ITelemetryItem, ITelemetryPluginChain,
-    IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext, ITelemetryUnloadState, generateW3CId, onConfigChange, IConfigDefaults, isArray
-} from '@microsoft/applicationinsights-core-js';
+    IPlugin, IConfiguration, IAppInsightsCore, BaseTelemetryPlugin, arrForEach, ITelemetryItem, ITelemetryPluginChain,
+    IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext,
+    ITelemetryUnloadState, generateW3CId, onConfigChange, IConfigDefaults, isArray
+} from "@microsoft/applicationinsights-core-js";
 import dynamicProto from "@microsoft/dynamicproto-js";
-import { NavigationEnd, Router } from '@angular/router';
-import { ApplicationinsightsAngularpluginErrorService } from './applicationinsights-angularplugin-error.service';
-import { IErrorService } from './IErrorService';
-import { Subscription } from 'rxjs';
-import { AnalyticsPlugin } from '@microsoft/applicationinsights-analytics-js';
+import { NavigationEnd, Router } from "@angular/router";
+import { ApplicationinsightsAngularpluginErrorService } from "./applicationinsights-angularplugin-error.service";
+import { IErrorService } from "./IErrorService";
+import { Subscription } from "rxjs";
+import { AnalyticsPlugin } from "@microsoft/applicationinsights-analytics-js";
 import {objDeepFreeze} from "@nevware21/ts-utils";
-import { PropertiesPlugin } from '@microsoft/applicationinsights-properties-js';
+import { PropertiesPlugin } from "@microsoft/applicationinsights-properties-js";
 
 interface IAngularExtensionConfig {
     /**
@@ -28,7 +28,7 @@ interface IAngularExtensionConfig {
     errorServices?: IErrorService[];
 }
 
-let undefValue = undefined;
+let undefValue;
 
 const defaultAngularExtensionConfig: IConfigDefaults<IAngularExtensionConfig> = objDeepFreeze({
     router: { blkVal: true, v: undefValue},
@@ -36,14 +36,14 @@ const defaultAngularExtensionConfig: IConfigDefaults<IAngularExtensionConfig> = 
 });
 
 @Component({
-    selector: 'lib-applicationinsights-angularplugin-js',
-    template: ``,
+    selector: "lib-applicationinsights-angularplugin-js",
+    template: "",
     styles: []
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class AngularPlugin extends BaseTelemetryPlugin {
     public priority = 186;
-    public identifier = 'AngularPlugin';
+    public identifier = "AngularPlugin";
 
     constructor() {
         super();
@@ -56,9 +56,20 @@ export class AngularPlugin extends BaseTelemetryPlugin {
         let _errorServiceInstance: ApplicationinsightsAngularpluginErrorService;
 
         dynamicProto(AngularPlugin, this, (_self, _base) => {
+
+            const _initDefaults = () => {
+                _analyticsPlugin = null;
+                _propertiesPlugin = null;
+                _angularCfg = null;
+                _eventSubscription = null;
+                _isPageInitialLoad = true;
+                _prevRouter = undefValue;
+            };
+
             _initDefaults();
 
-            _self.initialize = (config: IConfiguration & IConfig, core: IAppInsightsCore, extensions: IPlugin[], pluginChain?: ITelemetryPluginChain) => {
+            _self.initialize = (config: IConfiguration & IConfig, core: IAppInsightsCore, extensions: IPlugin[],
+                pluginChain?: ITelemetryPluginChain) => {
                 super.initialize(config, core, extensions, pluginChain);
         
                 _self._addHook(onConfigChange(config, (details) => {
@@ -89,7 +100,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                             _eventSubscription.unsubscribe();
                         }
 
-                        if (_angularCfg.router){                            
+                        if (_angularCfg.router){
                             // only track page view if it is the initial page load for this plugin
                             if (_isPageInitialLoad){
                                 const pageViewTelemetry: IPageViewTelemetry = {
@@ -115,34 +126,33 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                                     }
                                 }
                             });
-                        }     
+                        }
                         _prevRouter = _angularCfg.router;
                     }
                 }));
 
                 // for test purpose only
-                _self["_getDbgPlgTargets"] = () => {
-                    return _angularCfg;
-                };   
-            }
+                _self["_getDbgPlgTargets"] = () => _angularCfg;
+            };
 
             _self.trackPageView = (pageView: IPageViewTelemetry) => {
                 if (_analyticsPlugin) {
                     const location = getLocation();
                     if (_propertiesPlugin && _propertiesPlugin.context && _propertiesPlugin.context.telemetryTrace) {
                         _propertiesPlugin.context.telemetryTrace.traceID = generateW3CId();
-                        _propertiesPlugin.context.telemetryTrace.name = location && location.pathname || '_unknown_';
+                        _propertiesPlugin.context.telemetryTrace.name = location && location.pathname || "_unknown_";
                     }
                     _analyticsPlugin.trackPageView(pageView);
                 } else {
                     _throwInternal(_self.diagLog(),
                         // eslint-disable-next-line max-len
-                        eLoggingSeverity.CRITICAL, _eInternalMessageId.TelemetryInitializerFailed, 'Analytics plugin is not available, Angular plugin telemetry will not be sent: ');
+                        eLoggingSeverity.CRITICAL, _eInternalMessageId.TelemetryInitializerFailed, "Analytics plugin is not available, Angular plugin telemetry will not be sent: ");
                 }
-            }
+            };
         
 
-            _self._doTeardown = (unloadCtx?: IProcessTelemetryUnloadContext, unloadState?: ITelemetryUnloadState, asyncCallback?: () => void): void | boolean => {
+            _self._doTeardown = (unloadCtx?: IProcessTelemetryUnloadContext, unloadState?: ITelemetryUnloadState,
+                asyncCallback?: () => void): void | boolean => {
                 if (_analyticsPlugin && _errorServiceInstance !== null) {
                     _errorServiceInstance.plugin = null;
                     if (_angularCfg) {
@@ -158,17 +168,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                     _eventSubscription = null;
                 }
                 _initDefaults();
-            }
-
-            function _initDefaults() {
-                _analyticsPlugin = null;
-                _propertiesPlugin = null;
-                _angularCfg = null;
-                _eventSubscription = null;
-                _isPageInitialLoad = true;
-                _prevRouter = undefValue;
-            }
-
+            };
         });
 
     }
@@ -182,7 +182,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
     }
 
 
-    initialize(config: IConfiguration & IConfig, core: IAppInsightsCore, extensions: IPlugin[], pluginChain?:ITelemetryPluginChain) {
+    initialize(config: IConfiguration & IConfig, core: IAppInsightsCore, extensions: IPlugin[], pluginChain?: ITelemetryPluginChain) {
         // @DynamicProtoStub -- DO NOT add any code as this will be removed during packaging
     }
 
