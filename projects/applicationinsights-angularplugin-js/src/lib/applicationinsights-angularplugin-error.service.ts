@@ -1,15 +1,13 @@
-import { Injectable } from '@angular/core';
-import { IAppInsights } from '@microsoft/applicationinsights-common';
-import { arrForEach, isFunction } from '@microsoft/applicationinsights-core-js';
-import { IErrorService } from './IErrorService';
+import { Injectable } from "@angular/core";
+import { IAppInsights } from "@microsoft/applicationinsights-common";
+import { arrForEach, isFunction } from "@microsoft/applicationinsights-core-js";
+import { IErrorService } from "./IErrorService";
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: "root"
 })
 export class ApplicationinsightsAngularpluginErrorService implements IErrorService {
     public static instance: ApplicationinsightsAngularpluginErrorService = null;
-    // What's the purpose of making this the only instance for the class?
-    // Is this for shriking the size of the bundle? 
     private analyticsPlugin: IAppInsights;
     private errorServices: IErrorService[] = [];
 
@@ -24,7 +22,7 @@ export class ApplicationinsightsAngularpluginErrorService implements IErrorServi
     }
 
     public clearErrorHandlers() {
-       this.errorServices = [];
+        this.errorServices = [];
     }
 
     public addErrorHandler(errorService: IErrorService): void {
