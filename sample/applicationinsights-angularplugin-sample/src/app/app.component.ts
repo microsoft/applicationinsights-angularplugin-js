@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { ApplicationInsightsService } from './telemetry.service';
+import { AngularPlugin, ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { ApplicationInsightsService } from './telemetry.service';
 })
 export class AppComponent { 
   title = 'insights';
-  private appInsights: ApplicationInsightsService
+  private appInsights: ApplicationInsightsService;
 
   constructor(private router: Router ) {
     this.appInsights = new ApplicationInsightsService(router);

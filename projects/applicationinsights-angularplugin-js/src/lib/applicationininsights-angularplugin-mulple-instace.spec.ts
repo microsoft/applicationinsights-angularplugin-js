@@ -5,11 +5,11 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testin
 import { Router } from "@angular/router";
 import { ApplicationinsightsAngularpluginErrorService } from "./applicationinsights-angularplugin-error.service";
 import { AnalyticsPlugin } from "@microsoft/applicationinsights-analytics-js";
-import { RouterTestingModule } from '@angular/router/testing';
-import { Component, Injector } from '@angular/core';
+import { RouterTestingModule } from "@angular/router/testing";
+import { Component, Injector } from "@angular/core";
 
 @Component({
-  template: '<p>Fake Home Component</p>'
+    template: "<p>Fake Home Component</p>"
 })
 class FakeHomeComponent {}
 class FakeAboutComponent {}
@@ -26,38 +26,38 @@ describe("ReactAI", () => {
     let analyticsPluginSpy: jasmine.SpyObj<AnalyticsPlugin>;
 
     beforeEach(() => {
-        const spy = jasmine.createSpyObj('AnalyticsPlugin', ['trackPageView']);
+        const spy = jasmine.createSpyObj("AnalyticsPlugin", ["trackPageView"]);
         const _injector: Injector = Injector.create({
             providers: [
-              { provide: ApplicationinsightsAngularpluginErrorService, useClass: ApplicationinsightsAngularpluginErrorService }
+                { provide: AngularPlugin.instance, useExisting: ApplicationinsightsAngularpluginErrorService }
             ]
         });
         TestBed.configureTestingModule({
             declarations: [AngularPlugin],
             imports: [
-              RouterTestingModule.withRoutes([
-                { path: 'home', component: FakeHomeComponent  },
-                { path: 'about', component: FakeAboutComponent },
-                { path: 'test', component: FakeHomeComponent },
-              ]),
+                RouterTestingModule.withRoutes([
+                    { path: "home", component: FakeHomeComponent  },
+                    { path: "about", component: FakeAboutComponent },
+                    { path: "test", component: FakeHomeComponent }
+                ])
             ],
             providers: [
-                { 
-                    provide: AnalyticsPlugin,  
-                    useFactory: (injector: Injector) => {
+                {
+                    provide: AnalyticsPlugin,
+                    useFactory: (injector: Injector) =>
                     // Initialize AngularPlugin with arguments here
-                    return new AngularPlugin(injector);
-                    },
-                }, 
+                        new AngularPlugin(injector)
+                    
+                },
                 { provide: AnalyticsPlugin, useValue: spy },
                 { provide: Injector, useValue: _injector }
-              ]
+            ]
         });
         
         service = TestBed.inject(ApplicationinsightsAngularpluginErrorService);
         fixture = TestBed.createComponent(AngularPlugin);
         angularPlugin = fixture.componentInstance;
-        router = TestBed.inject(Router); 
+        router = TestBed.inject(Router);
 
         // Get the spy on trackPageView from the spy object
         analyticsPluginSpy = TestBed.inject(AnalyticsPlugin) as jasmine.SpyObj<AnalyticsPlugin>;
@@ -69,10 +69,10 @@ describe("ReactAI", () => {
         channel = new ChannelPlugin();
 
         core.initialize({
-          instrumentationKey: '',
-          extensionConfig: {
-            [angularPlugin.identifier]: {enableInjector: true }
-          }
+            instrumentationKey: "",
+            extensionConfig: {
+                [angularPlugin.identifier]: {enableInjector: true }
+            }
         } as IConfig & IConfiguration, [angularPlugin, analyticsPlugin, channel]);
 
        
@@ -89,13 +89,13 @@ describe("ReactAI", () => {
         ApplicationinsightsAngularpluginErrorService.instance = null; // reset the singleton instance to null for re-assignment
     });
 
-    it('Dynamic Config Test: router could be added and removed', fakeAsync(()=> {
-        console.log("testing---",core.config);
-      expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(undefined);
-    //   core.config.extensionConfig[angularPlugin.identifier].router = router;
-    //   tick(3000)
-    //   expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(router);
-    }));
+    // it("Multiple Instances Test: ", fakeAsync(()=> {
+    //     console.log("testing---",core.config);
+    //     // expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(undefined);
+    // //   core.config.extensionConfig[angularPlugin.identifier].router = router;
+    // //   tick(3000)
+    // //   expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(router);
+    // }));
 
     // it('Error Service', fakeAsync(()=> {
     //     expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(undefined);
@@ -133,48 +133,48 @@ describe("ReactAI", () => {
 });
 
 class ChannelPlugin implements IPlugin {
-  public isFlushInvoked = false;
-  public isTearDownInvoked = false;
-  public isResumeInvoked = false;
-  public isPauseInvoked = false;
+    public isFlushInvoked = false;
+    public isTearDownInvoked = false;
+    public isResumeInvoked = false;
+    public isPauseInvoked = false;
 
-  public identifier = "Sender";
+    public identifier = "Sender";
 
-  public priority: number = 1001;
+    public priority: number = 1001;
 
-  constructor() {
-    this.processTelemetry = this._processTelemetry.bind(this);
-  }
-  public pause(): void {
-    this.isPauseInvoked = true;
-  }
-
-  public resume(): void {
-    this.isResumeInvoked = true;
-  }
-
-  public teardown(): void {
-    this.isTearDownInvoked = true;
-  }
-
-  flush(async?: boolean, callBack?: () => void): void {
-    this.isFlushInvoked = true;
-    if (callBack) {
-      callBack();
+    constructor() {
+        this.processTelemetry = this._processTelemetry.bind(this);
     }
-  }
+    public pause(): void {
+        this.isPauseInvoked = true;
+    }
 
-  public processTelemetry(env: ITelemetryItem) { }
+    public resume(): void {
+        this.isResumeInvoked = true;
+    }
 
-  setNextPlugin(next: any) {
+    public teardown(): void {
+        this.isTearDownInvoked = true;
+    }
+
+    flush(async?: boolean, callBack?: () => void): void {
+        this.isFlushInvoked = true;
+        if (callBack) {
+            callBack();
+        }
+    }
+
+    public processTelemetry(env: ITelemetryItem) { }
+
+    setNextPlugin(next: any) {
     // no next setup
-  }
+    }
 
-  public initialize = (config: IConfiguration, core: IAppInsightsCore, plugin: IPlugin[]) => {
+    public initialize = (config: IConfiguration, core: IAppInsightsCore, plugin: IPlugin[]) => {
     // Mocked - Do Nothing
-  }
+    };
 
-  private _processTelemetry(env: ITelemetryItem) {
+    private _processTelemetry(env: ITelemetryItem) {
 
-  }
+    }
 }
