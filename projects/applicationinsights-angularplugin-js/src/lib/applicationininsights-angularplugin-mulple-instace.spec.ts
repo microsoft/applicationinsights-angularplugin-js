@@ -14,7 +14,6 @@ import { Component, Injector } from "@angular/core";
 class FakeHomeComponent {}
 class FakeAboutComponent {}
 describe("ReactAI", () => {
-
     let service: ApplicationinsightsAngularpluginErrorService;
     let fixture: ComponentFixture<AngularPlugin>;
     let angularPlugin: AngularPlugin;
@@ -23,15 +22,36 @@ describe("ReactAI", () => {
     let channel: ChannelPlugin;
     let router: Router;
 
+    let fixture2: ComponentFixture<AngularPlugin>;
+    let angularPlugin2: AngularPlugin;
+    let analyticsPlugin2: AnalyticsPlugin;
+    let core2: AppInsightsCore;
+    let channel2: ChannelPlugin;
+    let router2: Router;
+
+    let angularPlugin3: AngularPlugin;
+    let analyticsPlugin3: AnalyticsPlugin;
+    let core3: AppInsightsCore;
+
+    let angularPlugin4: AngularPlugin;
+    let analyticsPlugin4: AnalyticsPlugin;
+    let core4: AppInsightsCore;
+
     let analyticsPluginSpy: jasmine.SpyObj<AnalyticsPlugin>;
+
+    const arg1: Injector = Injector.create({
+        providers: [
+            { provide: ApplicationinsightsAngularpluginErrorService, useClass: ApplicationinsightsAngularpluginErrorService }
+        ]
+    });
+    const arg2: Injector = Injector.create({
+        providers: [
+            { provide: ApplicationinsightsAngularpluginErrorService, useClass: ApplicationinsightsAngularpluginErrorService }
+        ]
+    });
 
     beforeEach(() => {
         const spy = jasmine.createSpyObj("AnalyticsPlugin", ["trackPageView"]);
-        const _injector: Injector = Injector.create({
-            providers: [
-                { provide: AngularPlugin.instance, useExisting: ApplicationinsightsAngularpluginErrorService }
-            ]
-        });
         TestBed.configureTestingModule({
             declarations: [AngularPlugin],
             imports: [
@@ -42,30 +62,42 @@ describe("ReactAI", () => {
                 ])
             ],
             providers: [
-                {
-                    provide: AnalyticsPlugin,
-                    useFactory: (injector: Injector) =>
-                    // Initialize AngularPlugin with arguments here
-                        new AngularPlugin(injector)
-                    
-                },
-                { provide: AnalyticsPlugin, useValue: spy },
-                { provide: Injector, useValue: _injector }
+                { provide: AnalyticsPlugin, useValue: spy }
             ]
         });
-        
-        service = TestBed.inject(ApplicationinsightsAngularpluginErrorService);
+
+        TestBed.overrideProvider(AngularPlugin, { useValue: new AngularPlugin(arg1) });
         fixture = TestBed.createComponent(AngularPlugin);
         angularPlugin = fixture.componentInstance;
+
+        // TestBed.overrideProvider(AngularPlugin, { useValue: new AngularPlugin() });
+        // fixture2 = TestBed.createComponent(AngularPlugin);
+        // angularPlugin2 = fixture2.componentInstance;
+
+        angularPlugin2 = new AngularPlugin(arg2);
+        angularPlugin3 = new AngularPlugin();
+        angularPlugin4 = new AngularPlugin();
+
+
+        service = TestBed.inject(ApplicationinsightsAngularpluginErrorService);
         router = TestBed.inject(Router);
 
         // Get the spy on trackPageView from the spy object
         analyticsPluginSpy = TestBed.inject(AnalyticsPlugin) as jasmine.SpyObj<AnalyticsPlugin>;
         fixture.detectChanges();
+        // fixture2.detectChanges();
 
         // Setup
         analyticsPlugin = new AnalyticsPlugin();
+        analyticsPlugin2 = new AnalyticsPlugin();
+        analyticsPlugin3 = new AnalyticsPlugin();
+        analyticsPlugin4 = new AnalyticsPlugin();
+
         core = new AppInsightsCore();
+        core2 = new AppInsightsCore();
+        core3 = new AppInsightsCore();
+        core4 = new AppInsightsCore();
+
         channel = new ChannelPlugin();
 
         core.initialize({
@@ -73,8 +105,28 @@ describe("ReactAI", () => {
             extensionConfig: {
                 [angularPlugin.identifier]: {enableInjector: true }
             }
-        } as IConfig & IConfiguration, [angularPlugin, analyticsPlugin, channel]);
+        } as IConfig & IConfiguration, [angularPlugin, channel]);
 
+        core2.initialize({
+            instrumentationKey: "",
+            extensionConfig: {
+                [angularPlugin.identifier]: {enableInjector: true }
+            }
+        } as IConfig & IConfiguration, [angularPlugin2, analyticsPlugin2, channel]);
+
+        core3.initialize({
+            instrumentationKey: "",
+            extensionConfig: {
+                [angularPlugin.identifier]: {enableInjector: true }
+            }
+        } as IConfig & IConfiguration, [angularPlugin3, analyticsPlugin3, channel]);
+
+        core4.initialize({
+            instrumentationKey: "",
+            extensionConfig: {
+                [angularPlugin.identifier]: {enableInjector: false }
+            }
+        } as IConfig & IConfiguration, [angularPlugin4, analyticsPlugin4, channel]);
        
     });
 
@@ -87,51 +139,67 @@ describe("ReactAI", () => {
         core = undefined;
         channel = undefined;
         ApplicationinsightsAngularpluginErrorService.instance = null; // reset the singleton instance to null for re-assignment
+
     });
 
-    // it("Multiple Instances Test: ", fakeAsync(()=> {
-    //     console.log("testing---",core.config);
-    //     // expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(undefined);
-    // //   core.config.extensionConfig[angularPlugin.identifier].router = router;
-    // //   tick(3000)
-    // //   expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(router);
-    // }));
+    it("Multiple: router could be added and removed", fakeAsync(()=> {
+        console.log("multiple");
+        expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(undefined);
+        expect(angularPlugin2["_getDbgPlgTargets"]().router).toEqual(undefined);
 
-    // it('Error Service', fakeAsync(()=> {
-    //     expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(undefined);
-    //     core.config.extensionConfig[angularPlugin.identifier].router = router;
-    //     tick(3000)
-    //     expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(router);
-    //   }));
+        core.config.extensionConfig[angularPlugin.identifier].router = router;
+        tick(3000);
+        expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(router);
 
-    // it('Dynamic Config Test: trackPageView is updated when router changed', fakeAsync(()=> {
-    //   spyOn(angularPlugin, 'trackPageView');
-    //   core.config.extensionConfig[angularPlugin.identifier].router = router;
-    //   tick(3000);
-    //   expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(router);
+        // add error handler in angularPlugin1 should not affect angularPlugin2
+        let customErrorHandler = new CustomErrorHandler()
+        angularPlugin["_getErrorService"]().addErrorHandler(customErrorHandler);
+        const spy = spyOn(customErrorHandler, "handleError");
+        angularPlugin["_getErrorService"]().handleError();
+        expect(spy).toHaveBeenCalledTimes(1);
+
+        angularPlugin2["_getErrorService"]().handleError();
+        expect(spy).toHaveBeenCalledTimes(1);
+
+        angularPlugin3["_getErrorService"]().handleError();
+        angularPlugin4["_getErrorService"]().handleError();
+        expect(spy).toHaveBeenCalledTimes(3);
+
+        // on contrast, adding error handler to angularPlugin3 will affect angularPlugin4
+        // as they share the same ApplicationinsightsAngularpluginErrorService
+        // it will also affect angularPlugin1 as 3 is sharing from 1 error service instance
+        let customErrorHandler2 = new CustomErrorHandler2()
+        angularPlugin3["_getErrorService"]().addErrorHandler(customErrorHandler2);
+        const spy2 = spyOn(customErrorHandler2, "handleError");
+        angularPlugin3["_getErrorService"]().handleError();
+        expect(spy2).toHaveBeenCalledTimes(1);
+
+        angularPlugin["_getErrorService"]().handleError();
+        expect(spy2).toHaveBeenCalledTimes(2);
+
+        angularPlugin2["_getErrorService"]().handleError();
+        expect(spy2).toHaveBeenCalledTimes(2);
+
+        angularPlugin4["_getErrorService"]().handleError();
+        expect(spy2).toHaveBeenCalledTimes(3);
+    }));
+
       
-    //   expect(angularPlugin.trackPageView).toHaveBeenCalledTimes(1);
-    //   let args = (angularPlugin.trackPageView as jasmine.Spy).calls.mostRecent().args;
-    //   let pageViewEvents: IPageViewTelemetry = args[0];
-    //   expect(pageViewEvents.uri).toEqual(router.url);
-    //   router.navigate(['about']).then(() => {
-    //     expect(angularPlugin.trackPageView).toHaveBeenCalledTimes(1);
-    //     router.navigate(['test']).then(() => {
-    //       expect(angularPlugin.trackPageView).toHaveBeenCalledTimes(2);
-    //       let args = (angularPlugin.trackPageView as jasmine.Spy).calls.mostRecent().args;
-    //       let pageViewEvents: IPageViewTelemetry = args[0];
-    //       expect(pageViewEvents.uri).toEqual('/test');
-    //       router.navigateByUrl('about').then(() => {
-    //         args = (angularPlugin.trackPageView as jasmine.Spy).calls.mostRecent().args;
-    //         pageViewEvents = args[0];
-    //         expect(pageViewEvents.uri).toEqual('/about');
-    //       });
-         
-    //     });
-    //   });
-    // }));
 });
-
+class CustomErrorHandler {
+    constructor() {
+    }
+    handleError() {
+        return "Custom error handler";
+    }
+}
+class CustomErrorHandler2 {
+    constructor() {
+    }
+    handleError() {
+        return "Custom error handler";
+    }
+}
 class ChannelPlugin implements IPlugin {
     public isFlushInvoked = false;
     public isTearDownInvoked = false;

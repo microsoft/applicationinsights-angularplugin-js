@@ -79,10 +79,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                     _propertiesPlugin = core.getPlugin<PropertiesPlugin>(PropertiesPluginIdentifier)?.plugin as PropertiesPlugin;
                     _analyticsPlugin = core.getPlugin<AnalyticsPlugin>(AnalyticsPluginIdentifier)?.plugin as AnalyticsPlugin;
                     
-                    console.log("enable injector", _angularCfg.enableInjector);
                     if (_angularCfg.enableInjector && _injector){
-                        console.log("_injector2", _injector);
-                        console.log("_injector get", _injector.get(ApplicationinsightsAngularpluginErrorService));
                         _errorServiceInstance = this._injector.get(ApplicationinsightsAngularpluginErrorService);
                     }
                     _errorServiceInstance = _errorServiceInstance ? _errorServiceInstance
@@ -143,6 +140,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
 
                 // for test purpose only
                 _self["_getDbgPlgTargets"] = () => _angularCfg;
+                _self["_getErrorService"] = () => _errorServiceInstance;
             };
 
             _self.trackPageView = (pageView: IPageViewTelemetry) => {
