@@ -136,7 +136,14 @@ export class AppComponent {
     }
 }
 ```
-
+The way to init injector would be
+```
+const injector: Injector = Injector.create({
+    providers: [
+        { provide: ApplicationinsightsAngularpluginErrorService, useClass: ApplicationinsightsAngularpluginErrorService }
+    ]
+});
+```
 ## Compatibility Matrix
 
 As part of updating to support [ApplicationInsights 3.x](https://github.com/microsoft/ApplicationInsights-JS/blob/main/RELEASES.md) we will be bumping the major version

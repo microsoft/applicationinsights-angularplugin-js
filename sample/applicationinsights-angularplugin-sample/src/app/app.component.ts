@@ -1,8 +1,7 @@
-import { Component, Injector } from '@angular/core';
+import { Component} from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { ApplicationInsightsService } from './telemetry.service';
-import { AngularPlugin, ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
 
 @Component({
   selector: 'app-root',

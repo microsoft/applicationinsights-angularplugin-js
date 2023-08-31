@@ -1,4 +1,4 @@
-import { Injectable, Injector, StaticProvider } from '@angular/core';
+import { Injectable, Injector} from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularPlugin, ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
 import { ApplicationInsights, ICustomProperties, IDependencyTelemetry, IEventTelemetry, IExceptionTelemetry, IMetricTelemetry, IPageViewTelemetry, ITraceTelemetry } from '@microsoft/applicationinsights-web';
