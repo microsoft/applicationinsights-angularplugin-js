@@ -1,5 +1,5 @@
 import { AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin, IAppInsightsCore } from "@microsoft/applicationinsights-core-js";
-import { IConfig, IPageViewTelemetry } from "@microsoft/applicationinsights-common";
+import { IConfig} from "@microsoft/applicationinsights-common";
 import { AngularPlugin } from "./applicationinsights-angularplugin-js.component";
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { Router } from "@angular/router";
@@ -22,12 +22,9 @@ describe("ReactAI", () => {
     let channel: ChannelPlugin;
     let router: Router;
 
-    let fixture2: ComponentFixture<AngularPlugin>;
     let angularPlugin2: AngularPlugin;
     let analyticsPlugin2: AnalyticsPlugin;
     let core2: AppInsightsCore;
-    let channel2: ChannelPlugin;
-    let router2: Router;
 
     let angularPlugin3: AngularPlugin;
     let analyticsPlugin3: AnalyticsPlugin;
@@ -85,7 +82,6 @@ describe("ReactAI", () => {
         // Get the spy on trackPageView from the spy object
         analyticsPluginSpy = TestBed.inject(AnalyticsPlugin) as jasmine.SpyObj<AnalyticsPlugin>;
         fixture.detectChanges();
-        // fixture2.detectChanges();
 
         // Setup
         analyticsPlugin = new AnalyticsPlugin();
@@ -143,7 +139,7 @@ describe("ReactAI", () => {
     });
 
     it("Multiple: router could be added and removed", fakeAsync(()=> {
-        console.log("multiple");
+        console.log("multiple -- ");
         expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(undefined);
         expect(angularPlugin2["_getDbgPlgTargets"]().router).toEqual(undefined);
 
@@ -152,7 +148,7 @@ describe("ReactAI", () => {
         expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(router);
 
         // add error handler in angularPlugin1 should not affect angularPlugin2
-        let customErrorHandler = new CustomErrorHandler()
+        let customErrorHandler = new CustomErrorHandler();
         angularPlugin["_getErrorService"]().addErrorHandler(customErrorHandler);
         const spy = spyOn(customErrorHandler, "handleError");
         angularPlugin["_getErrorService"]().handleError();
@@ -168,7 +164,7 @@ describe("ReactAI", () => {
         // on contrast, adding error handler to angularPlugin3 will affect angularPlugin4
         // as they share the same ApplicationinsightsAngularpluginErrorService
         // it will also affect angularPlugin1 as 3 is sharing from 1 error service instance
-        let customErrorHandler2 = new CustomErrorHandler2()
+        let customErrorHandler2 = new CustomErrorHandler2();
         angularPlugin3["_getErrorService"]().addErrorHandler(customErrorHandler2);
         const spy2 = spyOn(customErrorHandler2, "handleError");
         angularPlugin3["_getErrorService"]().handleError();

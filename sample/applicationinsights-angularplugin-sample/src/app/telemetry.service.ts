@@ -16,7 +16,7 @@ export class ApplicationInsightsService {
     private angularPlugin = new AngularPlugin(this.myinjector);
     private appInsights = new ApplicationInsights({
         config: {
-            instrumentationKey: environment.instrumentationKey,
+            instrumentationKey: environment.connectionString,
             extensions: [this.angularPlugin],
             // auto router tracking, default pageview duration will be set to 0
             extensionConfig: {

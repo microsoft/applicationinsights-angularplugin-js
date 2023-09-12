@@ -1,4 +1,4 @@
-import { Component, Injector, Type } from "@angular/core";
+import { Component, Injector} from "@angular/core";
 import {
     IConfig, IPageViewTelemetry, PropertiesPluginIdentifier, AnalyticsPluginIdentifier
 } from "@microsoft/applicationinsights-common";
@@ -46,7 +46,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
     public priority = 186;
     public identifier = "AngularPlugin";
 
-    constructor(private _injector: Injector = null) { // _injector is optional to provide
+    constructor(private _injector?: Injector) { // _injector is optional to provide
         super();
         let _analyticsPlugin: AnalyticsPlugin;
         let _propertiesPlugin: PropertiesPlugin;
