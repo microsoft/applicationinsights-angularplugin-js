@@ -1,5 +1,14 @@
 # Releases
 
+## 14.0.0 (Sep 25th, 2023)
+
+Re-numbering the plugin to match the major version number of the targeted angular version used to create the plugin.
+
+### Changelog
+
+- #121 add optional init arg 'injector' for angular plugin 
+- #57 Re-Numbering the plugin release so the major number matches the Angular release
+
 ## 3.0.3 (June 8th, 2023)
 
 Version 3.x is now being maintained / released from the [release3.x branch](https://github.com/microsoft/applicationinsights-angularplugin-js/tree/release3.x) as
