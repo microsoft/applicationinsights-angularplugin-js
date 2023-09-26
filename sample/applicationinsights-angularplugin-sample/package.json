@@ -31,7 +31,7 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
-    "@microsoft/applicationinsights-angularplugin-js": "^3.0.3",
+    "@microsoft/applicationinsights-angularplugin-js": "../../dist/applicationinsights-angularplugin-js",
     "@microsoft/applicationinsights-web": "^3.0.2",
     "angular-in-memory-web-api": "~0.14.0",
     "rxjs": "~7.5.0",

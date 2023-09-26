@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Injector} from "@angular/core";
 import {
     IConfig, IPageViewTelemetry, PropertiesPluginIdentifier, AnalyticsPluginIdentifier
 } from "@microsoft/applicationinsights-common";
@@ -26,6 +26,7 @@ interface IAngularExtensionConfig {
      * Custom error service for global error handling.
      */
     errorServices?: IErrorService[];
+    useInjector?: boolean;
 }
 
 let undefValue;
@@ -45,7 +46,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
     public priority = 186;
     public identifier = "AngularPlugin";
 
-    constructor() {
+    constructor(private _injector?: Injector) { // _injector is optional to provide
         super();
         let _analyticsPlugin: AnalyticsPlugin;
         let _propertiesPlugin: PropertiesPlugin;
@@ -77,8 +78,14 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                     _angularCfg = ctx.getExtCfg<IAngularExtensionConfig>(_self.identifier, defaultAngularExtensionConfig);
                     _propertiesPlugin = core.getPlugin<PropertiesPlugin>(PropertiesPluginIdentifier)?.plugin as PropertiesPlugin;
                     _analyticsPlugin = core.getPlugin<AnalyticsPlugin>(AnalyticsPluginIdentifier)?.plugin as AnalyticsPlugin;
+                    
+                    if (_angularCfg.useInjector && _injector){
+                        _errorServiceInstance = this._injector.get(ApplicationinsightsAngularpluginErrorService);
+                    }
+                    _errorServiceInstance = _errorServiceInstance ? _errorServiceInstance
+                        : ApplicationinsightsAngularpluginErrorService.instance;
 
-                    _errorServiceInstance = ApplicationinsightsAngularpluginErrorService.instance;
+                    // two instance of errorService
 
                     if (_analyticsPlugin) {
                         if (_errorServiceInstance !== null) {
@@ -133,6 +140,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
 
                 // for test purpose only
                 _self["_getDbgPlgTargets"] = () => _angularCfg;
+                _self["_getErrorService"] = () => _errorServiceInstance;
             };
 
             _self.trackPageView = (pageView: IPageViewTelemetry) => {
