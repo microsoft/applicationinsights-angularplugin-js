@@ -99,28 +99,28 @@ describe("ReactAI", () => {
         core.initialize({
             instrumentationKey: "",
             extensionConfig: {
-                [angularPlugin.identifier]: {enableInjector: true }
+                [angularPlugin.identifier]: {useInjector: true }
             }
         } as IConfig & IConfiguration, [angularPlugin, channel]);
 
         core2.initialize({
             instrumentationKey: "",
             extensionConfig: {
-                [angularPlugin.identifier]: {enableInjector: true }
+                [angularPlugin.identifier]: {useInjector: true }
             }
         } as IConfig & IConfiguration, [angularPlugin2, analyticsPlugin2, channel]);
 
         core3.initialize({
             instrumentationKey: "",
             extensionConfig: {
-                [angularPlugin.identifier]: {enableInjector: true }
+                [angularPlugin.identifier]: {useInjector: true }
             }
         } as IConfig & IConfiguration, [angularPlugin3, analyticsPlugin3, channel]);
 
         core4.initialize({
             instrumentationKey: "",
             extensionConfig: {
-                [angularPlugin.identifier]: {enableInjector: false }
+                [angularPlugin.identifier]: {useInjector: false }
             }
         } as IConfig & IConfiguration, [angularPlugin4, analyticsPlugin4, channel]);
        

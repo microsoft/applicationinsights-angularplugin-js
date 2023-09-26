@@ -26,7 +26,7 @@ interface IAngularExtensionConfig {
      * Custom error service for global error handling.
      */
     errorServices?: IErrorService[];
-    enableInjector?: boolean;
+    useInjector?: boolean;
 }
 
 let undefValue;
@@ -79,7 +79,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                     _propertiesPlugin = core.getPlugin<PropertiesPlugin>(PropertiesPluginIdentifier)?.plugin as PropertiesPlugin;
                     _analyticsPlugin = core.getPlugin<AnalyticsPlugin>(AnalyticsPluginIdentifier)?.plugin as AnalyticsPlugin;
                     
-                    if (_angularCfg.enableInjector && _injector){
+                    if (_angularCfg.useInjector && _injector){
                         _errorServiceInstance = this._injector.get(ApplicationinsightsAngularpluginErrorService);
                     }
                     _errorServiceInstance = _errorServiceInstance ? _errorServiceInstance

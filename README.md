@@ -129,7 +129,7 @@ export class AppComponent {
         instrumentationKey: 'YOUR_INSTRUMENTATION_KEY_GOES_HERE',
         extensions: [angularPlugin],
         extensionConfig: {
-            [angularPlugin.identifier]: { router: this.router, enableInjector: true }
+            [angularPlugin.identifier]: { router: this.router, useInjector: true }
         }
         } });
         appInsights.loadAppInsights();
