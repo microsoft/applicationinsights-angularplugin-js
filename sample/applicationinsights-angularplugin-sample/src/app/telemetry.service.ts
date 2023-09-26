@@ -1,22 +1,29 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector} from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
+import { AngularPlugin, ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
 import { ApplicationInsights, ICustomProperties, IDependencyTelemetry, IEventTelemetry, IExceptionTelemetry, IMetricTelemetry, IPageViewTelemetry, ITraceTelemetry } from '@microsoft/applicationinsights-web';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ApplicationInsightsService {
-    private angularPlugin = new AngularPlugin();
+
+     myinjector = Injector.create({
+        providers: [
+            { provide: ApplicationinsightsAngularpluginErrorService, useClass: ApplicationinsightsAngularpluginErrorService }
+        ]
+      });
+
+    private angularPlugin = new AngularPlugin(this.myinjector);
     private appInsights = new ApplicationInsights({
         config: {
             connectionString: environment.connectionString,
             extensions: [this.angularPlugin],
             // auto router tracking, default pageview duration will be set to 0
-            // extensionConfig: {
-            //     [this.angularPlugin.identifier]: {
-            //         router: this.router,
-            //     },
-            // },
+            extensionConfig: {
+                [this.angularPlugin.identifier]: {
+                    router: this.router, useInjector: true
+                },
+            },
         },
     });
 
