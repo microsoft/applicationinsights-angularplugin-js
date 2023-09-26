@@ -64,8 +64,8 @@
     "zone.js": "^0.11.8"
   },
   "dependencies": {
-    "@microsoft/applicationinsights-common": "^3.0.2",
-    "@microsoft/applicationinsights-core-js": "^3.0.2",
+    "@microsoft/applicationinsights-common": "^3.0.3",
+    "@microsoft/applicationinsights-core-js": "^3.0.3",
     "@microsoft/applicationinsights-properties-js": "^3.0.3",
     "@microsoft/applicationinsights-shims": "^3.0.1",
     "tslib": "^2.6.2"
@@ -73,7 +73,7 @@
   "peerDependencies": {
     "@angular/common": ">= 14.0.3",
     "@angular/core": ">= 14.0.3",
-    "@microsoft/applicationinsights-analytics-js": "^3.0.2"
+    "@microsoft/applicationinsights-analytics-js": "^3.0.3"
   },
   "license": "MIT"
 }

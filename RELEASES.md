@@ -1,6 +1,6 @@
 # Releases
 
-## 14.0.0 (Sep 25th, 2023)
+## 14.0.0 (Sep 26th, 2023)
 
 Re-numbering the plugin to match the major version number of the targeted angular version used to create the plugin.
 
@@ -8,6 +8,7 @@ Re-numbering the plugin to match the major version number of the targeted angula
 
 - #121 add optional init arg 'injector' for angular plugin 
 - #57 Re-Numbering the plugin release so the major number matches the Angular release
+- #119 update eslint config and correct format error
 
 ## 3.0.3 (June 8th, 2023)
 
