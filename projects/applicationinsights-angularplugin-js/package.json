@@ -1,6 +1,6 @@
 {
   "name": "@microsoft/applicationinsights-angularplugin-js",
-  "version": "3.0.3",
+  "version": "14.0.0",
   "description": "Microsoft Application Insights Angular plugin",
   "author": "Microsoft Application Insights Team",
   "license": "MIT",
@@ -14,16 +14,16 @@
   "homepage": "https://github.com/microsoft/applicationinsights-angularplugin-js#readme",
   "dependencies": {
     "@microsoft/applicationinsights-shims": "^3.0.1",
-    "@microsoft/applicationinsights-common": "^3.0.2",
-    "@microsoft/applicationinsights-core-js": "^3.0.2",
-    "@microsoft/applicationinsights-properties-js": "^3.0.2",
+    "@microsoft/applicationinsights-common": "^3.0.3",
+    "@microsoft/applicationinsights-core-js": "^3.0.3",
+    "@microsoft/applicationinsights-properties-js": "^3.0.3",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@microsoft/applicationinsights-analytics-js": "^3.0.2"
+    "@microsoft/applicationinsights-analytics-js": "^3.0.3"
   },
   "peerDependencies": {
-    "@microsoft/applicationinsights-analytics-js": "^2.8.14",
+    "@microsoft/applicationinsights-analytics-js": "^3.0.3",
     "@angular/common": ">= 14.0.3",
     "@angular/core": ">= 14.0.3"
   }
