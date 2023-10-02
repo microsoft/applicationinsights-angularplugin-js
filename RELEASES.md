@@ -1,6 +1,6 @@
 # Releases
 
-## 15.0.0 (Sep 28th, 2023)
+## 15.0.0 (Oct 2nd, 2023)
 
 Match the major version of the supported Angular-JS version (which will be v14.x as the first release)
 
