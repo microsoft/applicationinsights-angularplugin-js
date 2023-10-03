@@ -6,7 +6,7 @@ Match the major version of the supported Angular-JS version (which will be v14.x
 
 ### Changelog
 
-- #104 Upgrade to Angular 15 
+- #125 Update dependency for angular 15 
 
 ## 14.0.0 (Sep 26th, 2023)
 
