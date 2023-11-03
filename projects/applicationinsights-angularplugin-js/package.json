@@ -23,7 +23,7 @@
     "@microsoft/applicationinsights-analytics-js": "^3.0.5"
   },
   "peerDependencies": {
-    "@microsoft/applicationinsights-analytics-js": "^3.0.3",
+    "@microsoft/applicationinsights-analytics-js": "^3.0.5",
     "@angular/common": ">= 14.0.3",
     "@angular/core": ">= 14.0.3"
   }
