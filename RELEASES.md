@@ -1,5 +1,13 @@
 # Releases
 
+## 15.0.0 (Oct 2nd, 2023)
+
+Match the major version of the supported Angular-JS version (which will be v14.x as the first release)
+
+### Changelog
+
+- #125 Update dependency for angular 15 
+
 ## 14.0.0 (Sep 26th, 2023)
 
 Re-numbering the plugin to match the major version number of the targeted angular version used to create the plugin.
