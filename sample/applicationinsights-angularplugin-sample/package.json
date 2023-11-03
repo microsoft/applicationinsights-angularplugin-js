@@ -1,6 +1,6 @@
 {
   "name": "applicationinsights-angularplugin-sample",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Microsoft Applicationinsights Angularplugin Sample App",
   "author": "Microsoft Application Insights Team",
   "license": "MIT",
