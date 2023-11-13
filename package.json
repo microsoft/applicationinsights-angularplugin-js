@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/microsoft/applicationinsights-angularplugin-js"
   },
-  "scripts": {
+    "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "rebuild": "npm run build && npm run test",
