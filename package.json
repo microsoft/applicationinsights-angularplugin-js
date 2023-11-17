@@ -1,6 +1,6 @@
 {
   "name": "@microsoft/applicationinsights-angularplugin-js",
-  "version": "14.0.0",
+  "version": "14.0.1",
   "description": "Microsoft Application Insights Angular plugin",
   "main": "dist/bundles/microsoft-applicationinsights-angularplugin-js.umd.js",
   "module": "dist/fesm2015/microsoft-applicationinsights-angularplugin-js.js",
@@ -74,6 +74,9 @@
     "@angular/common": ">= 14.0.3",
     "@angular/core": ">= 14.0.3",
     "@microsoft/applicationinsights-analytics-js": "^3.0.5"
+  },
+  "publishConfig": {
+    "tag": "Angular14"
   },
   "license": "MIT"
 }
