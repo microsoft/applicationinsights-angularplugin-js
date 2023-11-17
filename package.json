@@ -76,7 +76,7 @@
     "@microsoft/applicationinsights-analytics-js": "^3.0.5"
   },
   "publishConfig": {
-    "tag": "angular14"
+    "tag": "Angular14"
   },
   "license": "MIT"
 }

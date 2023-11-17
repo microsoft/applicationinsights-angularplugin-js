@@ -28,6 +28,6 @@
     "@angular/core": ">= 14.0.3"
   },
   "publishConfig": {
-    "tag": "angular14"
+    "tag": "Angular14"
   }
 }
