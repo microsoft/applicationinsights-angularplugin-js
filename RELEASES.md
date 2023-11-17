@@ -1,5 +1,12 @@
 # Releases
 
+## 14.0.1 (Nov 17th, 2023)
+
+### Changelog
+
+- #136 [angular14] Update angular.yml (for github pipeline running)
+- #134 [pre-release] udpate application insight dependency 
+
 ## 14.0.0 (Sep 26th, 2023)
 
 Re-numbering the plugin to match the major version number of the targeted angular version used to create the plugin.
