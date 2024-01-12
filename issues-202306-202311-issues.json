@@ -1,0 +1,665 @@
+[
+    {
+        "closedAt": "2023-10-23T18:04:47Z",
+        "createdAt": "2023-10-20T16:27:49Z",
+        "labels": [],
+        "milestone": null,
+        "number": 130,
+        "state": "CLOSED",
+        "title": "pageView always the same time",
+        "updatedAt": "2023-10-23T18:04:47Z"
+    },
+    {
+        "closedAt": "2023-10-31T02:08:34Z",
+        "createdAt": "2023-10-18T17:11:15Z",
+        "labels": [
+            {
+                "id": "MDU6TGFiZWwyNzE4ODA1Mzk0",
+                "name": "question",
+                "description": "Further information is requested",
+                "color": "d876e3"
+            }
+        ],
+        "milestone": null,
+        "number": 127,
+        "state": "CLOSED",
+        "title": "Compatibility with Angular 7",
+        "updatedAt": "2023-10-31T02:08:34Z"
+    },
+    {
+        "closedAt": null,
+        "createdAt": "2023-09-27T09:24:15Z",
+        "labels": [],
+        "milestone": null,
+        "number": 123,
+        "state": "OPEN",
+        "title": "v3.0.2 (next: ITelemetryPluginChain | ITelemetryPlugin) => void' is not assignable to type '(next: ITelemetryPlugin | ITelemetryPluginChain) => void'.",
+        "updatedAt": "2023-10-02T21:20:50Z"
+    },
+    {
+        "closedAt": null,
+        "createdAt": "2023-08-25T20:03:18Z",
+        "labels": [],
+        "milestone": null,
+        "number": 120,
+        "state": "OPEN",
+        "title": "Doesn't support angular v16",
+        "updatedAt": "2023-10-06T07:04:40Z"
+    },
+    {
+        "closedAt": "2023-08-15T04:57:56Z",
+        "createdAt": "2023-08-13T07:10:31Z",
+        "labels": [],
+        "milestone": null,
+        "number": 118,
+        "state": "CLOSED",
+        "title": "Disable logging in local environment",
+        "updatedAt": "2023-08-15T04:57:56Z"
+    },
+    {
+        "closedAt": null,
+        "createdAt": "2023-07-28T19:20:53Z",
+        "labels": [
+            {
+                "id": "MDU6TGFiZWwyNzE4ODA1Mzkw",
+                "name": "enhancement",
+                "description": "New feature or request",
+                "color": "a2eeef"
+            },
+            {
+                "id": "LA_kwDOFAyQw88AAAABWeNcRw",
+                "name": "zone support",
+                "description": "",
+                "color": "0052cc"
+            }
+        ],
+        "milestone": null,
+        "number": 117,
+        "state": "OPEN",
+        "title": "[BUG] Incompatible with Angular Hydration",
+        "updatedAt": "2023-08-02T16:26:41Z"
+    },
+    {
+        "closedAt": null,
+        "createdAt": "2023-06-01T23:05:59Z",
+        "labels": [
+            {
+                "id": "MDU6TGFiZWwyNzE4ODA1Mzk1",
+                "name": "wontfix",
+                "description": "This will not be worked on",
+                "color": "ffffff"
+            }
+        ],
+        "milestone": null,
+        "number": 107,
+        "state": "OPEN",
+        "title": "Add @microsoft/applicationinsights-web to peer dependencies",
+        "updatedAt": "2023-06-14T17:09:43Z"
+    },
+    {
+        "closedAt": null,
+        "createdAt": "2023-05-12T03:40:55Z",
+        "labels": [
+            {
+                "id": "MDU6TGFiZWwyNzE4ODA1Mzg4",
+                "name": "documentation",
+                "description": "Improvements or additions to documentation",
+                "color": "0075ca"
+            }
+        ],
+        "milestone": null,
+        "number": 102,
+        "state": "OPEN",
+        "title": "Docs Warning \"Angular plugin is NOT ECMAScript 3 (ES3) compatible.\"",
+        "updatedAt": "2023-06-12T16:07:09Z"
+    },
+    {
+        "closedAt": "2023-04-13T00:20:17Z",
+        "createdAt": "2023-04-05T07:09:06Z",
+        "labels": [
+            {
+                "id": "MDU6TGFiZWwyNzE4ODA1Mzg3",
+                "name": "bug",
+                "description": "Something isn't working",
+                "color": "d73a4a"
+            },
+            {
+                "id": "LA_kwDOFAyQw87yGeAR",
+                "name": "released - NPM",
+                "description": "",
+                "color": "0052cc"
+            },
+            {
+                "id": "LA_kwDOFAyQw88AAAABPysxSQ",
+                "name": "packaging",
+                "description": "",
+                "color": "bfdadc"
+            }
+        ],
+        "milestone": {
+            "number": 11,
+            "title": "3.0.2",
+            "description": "",
+            "dueOn": "2023-04-12T00:00:00Z"
+        },
+        "number": 98,
+        "state": "CLOSED",
+        "title": "Repository URL pointing to stale page in another repo",
+        "updatedAt": "2023-04-13T00:20:18Z"
+    },
+    {
+        "closedAt": null,
+        "createdAt": "2023-02-17T11:36:46Z",
+        "labels": [],
+        "milestone": null,
+        "number": 97,
+        "state": "OPEN",
+        "title": " Type 'AngularPlugin' is not assignable to type 'ITelemetryPlugin', Angular 15 ( \"@angular/common\": \"15.1.0\") error when trying to build the project",
+        "updatedAt": "2023-10-02T21:16:31Z"
+    },
+    {
+        "closedAt": "2022-09-30T00:32:05Z",
+        "createdAt": "2022-09-29T10:39:35Z",
+        "labels": [],
+        "milestone": null,
+        "number": 77,
+        "state": "CLOSED",
+        "title": "Angular unit testing by mocking ApplicationInsights with AI connection string.",
+        "updatedAt": "2023-10-01T00:06:24Z"
+    },
+    {
+        "closedAt": "2023-02-07T16:30:05Z",
+        "createdAt": "2022-09-21T13:38:41Z",
+        "labels": [
+            {
+                "id": "LA_kwDOFAyQw87yGeAR",
+                "name": "released - NPM",
+                "description": "",
+                "color": "0052cc"
+            }
+        ],
+        "milestone": {
+            "number": 10,
+            "title": "3.0.1",
+            "description": "Published to NPM on Feb 7th, 2023 @ 8:30am (PST)",
+            "dueOn": "2023-02-07T00:00:00Z"
+        },
+        "number": 76,
+        "state": "CLOSED",
+        "title": "Types incompatibility with `@microsoft/applicationinsights-web`",
+        "updatedAt": "2023-02-07T16:30:05Z"
+    },
+    {
+        "closedAt": "2022-08-02T21:20:56Z",
+        "createdAt": "2022-07-28T23:28:36Z",
+        "labels": [
+            {
+                "id": "LA_kwDOFAyQw87yGeAR",
+                "name": "released - NPM",
+                "description": "",
+                "color": "0052cc"
+            }
+        ],
+        "milestone": {
+            "number": 8,
+            "title": "3.0.0",
+            "description": "Released to npm on Aug 2nd, 2022 @ 2:15pm (PST)",
+            "dueOn": "2022-08-02T00:00:00Z"
+        },
+        "number": 68,
+        "state": "CLOSED",
+        "title": "[Testing] Re-enable test validation during PR validation on github",
+        "updatedAt": "2023-08-03T00:05:49Z"
+    },
+    {
+        "closedAt": "2022-08-02T21:20:56Z",
+        "createdAt": "2022-06-24T05:10:23Z",
+        "labels": [
+            {
+                "id": "LA_kwDOFAyQw87yGeAR",
+                "name": "released - NPM",
+                "description": "",
+                "color": "0052cc"
+            }
+        ],
+        "milestone": {
+            "number": 8,
+            "title": "3.0.0",
+            "description": "Released to npm on Aug 2nd, 2022 @ 2:15pm (PST)",
+            "dueOn": "2022-08-02T00:00:00Z"
+        },
+        "number": 63,
+        "state": "CLOSED",
+        "title": "Angular 14 support",
+        "updatedAt": "2023-08-03T00:05:48Z"
+    },
+    {
+        "closedAt": "2022-08-02T21:20:55Z",
+        "createdAt": "2022-05-27T05:30:23Z",
+        "labels": [
+            {
+                "id": "MDU6TGFiZWwyNzE4ODA1Mzg4",
+                "name": "documentation",
+                "description": "Improvements or additions to documentation",
+                "color": "0075ca"
+            },
+            {
+                "id": "LA_kwDOFAyQw87yGeAR",
+                "name": "released - NPM",
+                "description": "",
+                "color": "0052cc"
+            }
+        ],
+        "milestone": {
+            "number": 8,
+            "title": "3.0.0",
+            "description": "Released to npm on Aug 2nd, 2022 @ 2:15pm (PST)",
+            "dueOn": "2022-08-02T00:00:00Z"
+        },
+        "number": 62,
+        "state": "CLOSED",
+        "title": "Missing Dependency either in package.json or documentation",
+        "updatedAt": "2023-08-03T00:05:52Z"
+    },
+    {
+        "closedAt": "2022-08-05T14:53:12Z",
+        "createdAt": "2022-05-18T05:52:44Z",
+        "labels": [],
+        "milestone": null,
+        "number": 61,
+        "state": "CLOSED",
+        "title": "InstrumentationKey should not be needed if connectionString is already present",
+        "updatedAt": "2023-08-06T00:06:16Z"
+    },
+    {
+        "closedAt": "2022-05-02T20:18:21Z",
+        "createdAt": "2022-05-02T18:22:07Z",
+        "labels": [
+            {
+                "id": "MDU6TGFiZWwyNzE4ODA1Mzg3",
+                "name": "bug",
+                "description": "Something isn't working",
+                "color": "d73a4a"
+            },
+            {
+                "id": "LA_kwDOFAyQw87yGeAR",
+                "name": "released - NPM",
+                "description": "",
+                "color": "0052cc"
+            },
+            {
+                "id": "LA_kwDOFAyQw87yGeDi",
+                "name": "Angular 11",
+                "description": "",
+                "color": "403F96"
+            }
+        ],
+        "milestone": {
+            "number": 6,
+            "title": "Angular 11 - 2.7.2",
+            "description": "",
+            "dueOn": "2022-05-02T00:00:00Z"
+        },
+        "number": 59,
+        "state": "CLOSED",
+        "title": "[IE8] Support for IE8 and ES3 support was broken a while ago",
+        "updatedAt": "2023-05-03T00:05:32Z"
+    },
+    {
+        "closedAt": null,
+        "createdAt": "2022-04-26T07:23:04Z",
+        "labels": [
+            {
+                "id": "MDU6TGFiZWwyNzE4ODA1Mzkw",
+                "name": "enhancement",
+                "description": "New feature or request",
+                "color": "a2eeef"
+            }
+        ],
+        "milestone": null,
+        "number": 72,
+        "state": "OPEN",
+        "title": "[BUG] - Events are not tracked using Angular Material - Autocomplete &  mat-option",
+        "updatedAt": "2022-08-02T00:40:48Z"
+    },
+    {
+        "closedAt": "2023-09-28T20:36:02Z",
+        "createdAt": "2022-04-22T22:58:51Z",
+        "labels": [],
+        "milestone": {
+            "number": 12,
+            "title": "14.0.0",
+            "description": "Published to npm on 9/26/2023 @ 4:30pm (PST)",
+            "dueOn": "2023-09-27T00:00:00Z"
+        },
+        "number": 57,
+        "state": "CLOSED",
+        "title": "[Discussion] Re-Numbering the plugin release so the major number matches the Angular release",
+        "updatedAt": "2023-09-28T20:36:02Z"
+    },
+    {
+        "closedAt": "2022-08-02T21:20:54Z",
+        "createdAt": "2022-04-22T20:23:34Z",
+        "labels": [
+            {
+                "id": "LA_kwDOFAyQw87yGeAR",
+                "name": "released - NPM",
+                "description": "",
+                "color": "0052cc"
+            }
+        ],
+        "milestone": {
+            "number": 8,
+            "title": "3.0.0",
+            "description": "Released to npm on Aug 2nd, 2022 @ 2:15pm (PST)",
+            "dueOn": "2022-08-02T00:00:00Z"
+        },
+        "number": 55,
+        "state": "CLOSED",
+        "title": "The root package.json has the ApplicationInsights components listed as devDependencies they should be dependencies",
+        "updatedAt": "2023-08-03T00:05:50Z"
+    },
+    {
+        "closedAt": "2022-08-02T21:20:54Z",
+        "createdAt": "2022-04-22T20:13:58Z",
+        "labels": [
+            {
+                "id": "MDU6TGFiZWwyNzE4ODA1Mzg4",
+                "name": "documentation",
+                "description": "Improvements or additions to documentation",
+                "color": "0075ca"
+            },
+            {
+                "id": "LA_kwDOFAyQw87yGeAR",
+                "name": "released - NPM",
+                "description": "",
+                "color": "0052cc"
+            }
+        ],
+        "milestone": {
+            "number": 8,
+            "title": "3.0.0",
+            "description": "Released to npm on Aug 2nd, 2022 @ 2:15pm (PST)",
+            "dueOn": "2022-08-02T00:00:00Z"
+        },
+        "number": 54,
+        "state": "CLOSED",
+        "title": "Create a compatibility table for the versions of the AngularPlugin -> ApplicationInsights versions",
+        "updatedAt": "2023-03-27T19:07:56Z"
+    },
+    {
+        "closedAt": "2022-04-22T23:07:02Z",
+        "createdAt": "2022-04-20T08:34:01Z",
+        "labels": [
+            {
+                "id": "LA_kwDOFAyQw87yGeAR",
+                "name": "released - NPM",
+                "description": "",
+                "color": "0052cc"
+            },
+            {
+                "id": "LA_kwDOFAyQw87yGeDi",
+                "name": "Angular 11",
+                "description": "",
+                "color": "403F96"
+            }
+        ],
+        "milestone": {
+            "number": 5,
+            "title": "Angular 11 - 2.7.1",
+            "description": "Published to NPM on April 22nd, 2022 @ 4:00pm (PST)",
+            "dueOn": "2022-04-22T00:00:00Z"
+        },
+        "number": 51,
+        "state": "CLOSED",
+        "title": "[BUG] Type 'AngularPlugin' is not assignable to type 'ITelemetryPlugin'",
+        "updatedAt": "2023-04-23T00:06:00Z"
+    },
+    {
+        "closedAt": "2022-03-29T23:19:48Z",
+        "createdAt": "2022-03-28T21:47:40Z",
+        "labels": [],
+        "milestone": null,
+        "number": 46,
+        "state": "CLOSED",
+        "title": "How does this differ from @microsoft/applicationinsights-web?",
+        "updatedAt": "2023-03-30T00:05:48Z"
+    },
+    {
+        "closedAt": "2022-04-22T23:20:02Z",
+        "createdAt": "2022-02-04T19:53:36Z",
+        "labels": [
+            {
+                "id": "LA_kwDOFAyQw87yGeAR",
+                "name": "released - NPM",
+                "description": "",
+                "color": "0052cc"
+            },
+            {
+                "id": "LA_kwDOFAyQw87yGeDi",
+                "name": "Angular 11",
+                "description": "",
+                "color": "403F96"
+            }
+        ],
+        "milestone": {
+            "number": 5,
+            "title": "Angular 11 - 2.7.1",
+            "description": "Published to NPM on April 22nd, 2022 @ 4:00pm (PST)",
+            "dueOn": "2022-04-22T00:00:00Z"
+        },
+        "number": 41,
+        "state": "CLOSED",
+        "title": "microsoft-applicationinsights-angularplugin-js.mjs error EcmaScript. ",
+        "updatedAt": "2023-05-03T00:05:34Z"
+    },
+    {
+        "closedAt": "2022-02-07T14:49:47Z",
+        "createdAt": "2022-01-25T01:00:38Z",
+        "labels": [],
+        "milestone": null,
+        "number": 37,
+        "state": "CLOSED",
+        "title": "Azure insights trackEvent function is reporting duplicate events.",
+        "updatedAt": "2023-02-08T00:05:48Z"
+    },
+    {
+        "closedAt": "2022-10-17T07:14:21Z",
+        "createdAt": "2021-11-02T16:51:51Z",
+        "labels": [
+            {
+                "id": "LA_kwDOFAyQw88AAAABDpmoGw",
+                "name": "stale",
+                "description": "",
+                "color": "ededed"
+            },
+            {
+                "id": "LA_kwDOFAyQw88AAAABFulaHg",
+                "name": "closed",
+                "description": "",
+                "color": "ededed"
+            }
+        ],
+        "milestone": null,
+        "number": 31,
+        "state": "CLOSED",
+        "title": "Don't swallow exceptions",
+        "updatedAt": "2023-10-18T00:05:51Z"
+    },
+    {
+        "closedAt": "2022-02-20T12:45:52Z",
+        "createdAt": "2021-10-08T20:18:14Z",
+        "labels": [],
+        "milestone": null,
+        "number": 30,
+        "state": "CLOSED",
+        "title": "Wanting to contribute",
+        "updatedAt": "2023-02-21T00:05:46Z"
+    },
+    {
+        "closedAt": "2021-12-07T21:55:32Z",
+        "createdAt": "2021-09-13T09:09:00Z",
+        "labels": [],
+        "milestone": null,
+        "number": 29,
+        "state": "CLOSED",
+        "title": "Incompatible with @microsoft/applicationinsights-web 2.7.0",
+        "updatedAt": "2023-04-23T00:06:02Z"
+    },
+    {
+        "closedAt": "2022-02-03T22:28:55Z",
+        "createdAt": "2021-08-20T13:35:14Z",
+        "labels": [],
+        "milestone": {
+            "number": 2,
+            "title": "2.8.0",
+            "description": "Published to npm on Thursday Feb 3rd @2:30pm (PST)",
+            "dueOn": "2022-02-02T00:00:00Z"
+        },
+        "number": 28,
+        "state": "CLOSED",
+        "title": "Add support for Angular v13",
+        "updatedAt": "2023-02-23T00:06:26Z"
+    },
+    {
+        "closedAt": null,
+        "createdAt": "2021-08-19T20:57:03Z",
+        "labels": [
+            {
+                "id": "MDU6TGFiZWwyNzE4ODA1Mzg4",
+                "name": "documentation",
+                "description": "Improvements or additions to documentation",
+                "color": "0075ca"
+            }
+        ],
+        "milestone": null,
+        "number": 27,
+        "state": "OPEN",
+        "title": "How to log to application insights from a component",
+        "updatedAt": "2022-08-12T18:40:53Z"
+    },
+    {
+        "closedAt": "2021-08-12T20:51:40Z",
+        "createdAt": "2021-06-23T17:42:15Z",
+        "labels": [],
+        "milestone": {
+            "number": 1,
+            "title": "2.6.4",
+            "description": "",
+            "dueOn": null
+        },
+        "number": 23,
+        "state": "CLOSED",
+        "title": "Add support for Angular v12",
+        "updatedAt": "2022-11-13T00:06:46Z"
+    },
+    {
+        "closedAt": "2021-06-10T05:30:47Z",
+        "createdAt": "2021-06-07T09:14:03Z",
+        "labels": [
+            {
+                "id": "MDU6TGFiZWwyOTM4OTQyMTE4",
+                "name": "fixed - waiting release",
+                "description": "",
+                "color": "3DB53D"
+            }
+        ],
+        "milestone": null,
+        "number": 20,
+        "state": "CLOSED",
+        "title": "This plugin does not work with prod build",
+        "updatedAt": "2022-08-10T00:05:56Z"
+    },
+    {
+        "closedAt": "2021-06-10T05:31:00Z",
+        "createdAt": "2021-04-12T10:26:48Z",
+        "labels": [
+            {
+                "id": "MDU6TGFiZWwyOTM4OTQyMTE4",
+                "name": "fixed - waiting release",
+                "description": "",
+                "color": "3DB53D"
+            }
+        ],
+        "milestone": null,
+        "number": 12,
+        "state": "CLOSED",
+        "title": "Shouldn't ApplicationinsightsAngularpluginErrorService rethrow the error? ",
+        "updatedAt": "2022-08-10T00:05:55Z"
+    },
+    {
+        "closedAt": "2023-06-29T07:00:33Z",
+        "createdAt": "2021-02-18T10:04:48Z",
+        "labels": [
+            {
+                "id": "MDU6TGFiZWw0Mzg1NDY3MDA1",
+                "name": "angular",
+                "description": "",
+                "color": "150E3B"
+            },
+            {
+                "id": "LA_kwDOFAyQw88AAAABDpmoGw",
+                "name": "stale",
+                "description": "",
+                "color": "ededed"
+            },
+            {
+                "id": "LA_kwDOFAyQw88AAAABFulaHg",
+                "name": "closed",
+                "description": "",
+                "color": "ededed"
+            }
+        ],
+        "milestone": null,
+        "number": 74,
+        "state": "CLOSED",
+        "title": "[BUG] Angular 6 | Uncaught RangeError: Maximum call stack size exceeded",
+        "updatedAt": "2023-06-29T07:00:33Z"
+    },
+    {
+        "closedAt": "2023-11-20T07:00:23Z",
+        "createdAt": "2020-07-08T01:45:25Z",
+        "labels": [
+            {
+                "id": "LA_kwDOFAyQw88AAAABDpmoGw",
+                "name": "stale",
+                "description": "",
+                "color": "ededed"
+            },
+            {
+                "id": "LA_kwDOFAyQw88AAAABFulaHg",
+                "name": "closed",
+                "description": "",
+                "color": "ededed"
+            }
+        ],
+        "milestone": null,
+        "number": 73,
+        "state": "CLOSED",
+        "title": "[BUG] Angular app does not appear in AppInsights Application map",
+        "updatedAt": "2023-11-20T07:00:23Z"
+    },
+    {
+        "closedAt": "2023-06-29T07:00:35Z",
+        "createdAt": "2017-08-22T22:10:52Z",
+        "labels": [
+            {
+                "id": "LA_kwDOFAyQw88AAAABDpmoGw",
+                "name": "stale",
+                "description": "",
+                "color": "ededed"
+            },
+            {
+                "id": "LA_kwDOFAyQw88AAAABFulaHg",
+                "name": "closed",
+                "description": "",
+                "color": "ededed"
+            }
+        ],
+        "milestone": null,
+        "number": 71,
+        "state": "CLOSED",
+        "title": "Unhandled browser exceptions not being tracked in Angular app",
+        "updatedAt": "2023-06-29T07:00:35Z"
+    }
+]

@@ -1,0 +1,424 @@
+{
+    "2017": {
+        "cnt": 1,
+        "opened": 1,
+        "closed": 0,
+        "08": {
+            "cnt": 1,
+            "opened": 1,
+            "closed": 0,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#71 [stale, closed] =<(Closed)>=- :Unhandled browser exceptions not being tracked in Angular app"
+                ]
+            }
+        }
+    },
+    "2020": {
+        "cnt": 1,
+        "opened": 1,
+        "closed": 0,
+        "07": {
+            "cnt": 1,
+            "opened": 1,
+            "closed": 0,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#73 [stale, closed] =<(Closed)>=- :[BUG] Angular app does not appear in AppInsights Application map"
+                ]
+            }
+        }
+    },
+    "2021": {
+        "10": {
+            "cnt": 1,
+            "opened": 1,
+            "closed": 0,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#30  =<(Closed)>=- :Wanting to contribute"
+                ]
+            }
+        },
+        "11": {
+            "cnt": 1,
+            "opened": 1,
+            "closed": 0,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#31 [stale, closed] =<(Closed)>=- :Don't swallow exceptions"
+                ]
+            }
+        },
+        "12": {
+            "cnt": -1,
+            "opened": 0,
+            "closed": 1,
+            "closedIssues": {
+                "<No Milestone>": [
+                    "#29 - Incompatible with @microsoft/applicationinsights-web 2.7.0"
+                ]
+            }
+        },
+        "cnt": 5,
+        "opened": 9,
+        "closed": 4,
+        "09": {
+            "cnt": 1,
+            "opened": 1,
+            "closed": 0,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#29  =<(Closed)>=- :Incompatible with @microsoft/applicationinsights-web 2.7.0"
+                ]
+            }
+        },
+        "08": {
+            "cnt": 1,
+            "opened": 2,
+            "closed": 1,
+            "openedIssues": {
+                "2.8.0": [
+                    "#28  =<(Closed)>=- :Add support for Angular v13"
+                ],
+                "<No Milestone>": [
+                    "#27 [documentation] :How to log to application insights from a component"
+                ]
+            },
+            "closedIssues": {
+                "2.6.4": [
+                    "#23 - Add support for Angular v12"
+                ]
+            }
+        },
+        "06": {
+            "cnt": 0,
+            "opened": 2,
+            "closed": 2,
+            "openedIssues": {
+                "2.6.4": [
+                    "#23  =<(Closed)>=- :Add support for Angular v12"
+                ],
+                "<No Milestone>": [
+                    "#20 [fixed - waiting release] =<(Closed)>=- :This plugin does not work with prod build"
+                ]
+            },
+            "closedIssues": {
+                "<No Milestone>": [
+                    "#20 - This plugin does not work with prod build",
+                    "#12 - Shouldn't ApplicationinsightsAngularpluginErrorService rethrow the error? "
+                ]
+            }
+        },
+        "04": {
+            "cnt": 1,
+            "opened": 1,
+            "closed": 0,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#12 [fixed - waiting release] =<(Closed)>=- :Shouldn't ApplicationinsightsAngularpluginErrorService rethrow the error? "
+                ]
+            }
+        },
+        "02": {
+            "cnt": 1,
+            "opened": 1,
+            "closed": 0,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#74 [angular, stale, closed] =<(Closed)>=- :[BUG] Angular 6 | Uncaught RangeError: Maximum call stack size exceeded"
+                ]
+            }
+        }
+    },
+    "2022": {
+        "10": {
+            "cnt": -1,
+            "opened": 0,
+            "closed": 1,
+            "closedIssues": {
+                "<No Milestone>": [
+                    "#31 - Don't swallow exceptions"
+                ]
+            }
+        },
+        "cnt": 0,
+        "opened": 15,
+        "closed": 15,
+        "09": {
+            "cnt": 1,
+            "opened": 2,
+            "closed": 1,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#77  =<(Closed)>=- :Angular unit testing by mocking ApplicationInsights with AI connection string."
+                ],
+                "3.0.1": [
+                    "#76 [released - NPM] =<(Closed)>=- :Types incompatibility with `@microsoft/applicationinsights-web`"
+                ]
+            },
+            "closedIssues": {
+                "<No Milestone>": [
+                    "#77 - Angular unit testing by mocking ApplicationInsights with AI connection string."
+                ]
+            }
+        },
+        "07": {
+            "cnt": 1,
+            "opened": 1,
+            "closed": 0,
+            "openedIssues": {
+                "3.0.0": [
+                    "#68 [released - NPM] =<(Closed)>=- :[Testing] Re-enable test validation during PR validation on github"
+                ]
+            }
+        },
+        "08": {
+            "cnt": -6,
+            "opened": 0,
+            "closed": 6,
+            "closedIssues": {
+                "3.0.0": [
+                    "#68 - [Testing] Re-enable test validation during PR validation on github",
+                    "#63 - Angular 14 support",
+                    "#62 - Missing Dependency either in package.json or documentation",
+                    "#55 - The root package.json has the ApplicationInsights components listed as devDependencies they should be dependencies",
+                    "#54 - Create a compatibility table for the versions of the AngularPlugin -> ApplicationInsights versions"
+                ],
+                "<No Milestone>": [
+                    "#61 - InstrumentationKey should not be needed if connectionString is already present"
+                ]
+            }
+        },
+        "06": {
+            "cnt": 1,
+            "opened": 1,
+            "closed": 0,
+            "openedIssues": {
+                "3.0.0": [
+                    "#63 [released - NPM] =<(Closed)>=- :Angular 14 support"
+                ]
+            }
+        },
+        "05": {
+            "cnt": 2,
+            "opened": 3,
+            "closed": 1,
+            "openedIssues": {
+                "3.0.0": [
+                    "#62 [documentation, released - NPM] =<(Closed)>=- :Missing Dependency either in package.json or documentation"
+                ],
+                "<No Milestone>": [
+                    "#61  =<(Closed)>=- :InstrumentationKey should not be needed if connectionString is already present"
+                ],
+                "Angular 11 - 2.7.2": [
+                    "#59 [bug, released - NPM, Angular 11] =<(Closed)>=- :[IE8] Support for IE8 and ES3 support was broken a while ago"
+                ]
+            },
+            "closedIssues": {
+                "Angular 11 - 2.7.2": [
+                    "#59 - [IE8] Support for IE8 and ES3 support was broken a while ago"
+                ]
+            }
+        },
+        "04": {
+            "cnt": 3,
+            "opened": 5,
+            "closed": 2,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#72 [enhancement] :[BUG] - Events are not tracked using Angular Material - Autocomplete &  mat-option"
+                ],
+                "14.0.0": [
+                    "#57  =<(Closed)>=- :[Discussion] Re-Numbering the plugin release so the major number matches the Angular release"
+                ],
+                "3.0.0": [
+                    "#55 [released - NPM] =<(Closed)>=- :The root package.json has the ApplicationInsights components listed as devDependencies they should be dependencies",
+                    "#54 [documentation, released - NPM] =<(Closed)>=- :Create a compatibility table for the versions of the AngularPlugin -> ApplicationInsights versions"
+                ],
+                "Angular 11 - 2.7.1": [
+                    "#51 [released - NPM, Angular 11] =<(Closed)>=- :[BUG] Type 'AngularPlugin' is not assignable to type 'ITelemetryPlugin'"
+                ]
+            },
+            "closedIssues": {
+                "Angular 11 - 2.7.1": [
+                    "#51 - [BUG] Type 'AngularPlugin' is not assignable to type 'ITelemetryPlugin'",
+                    "#41 - microsoft-applicationinsights-angularplugin-js.mjs error EcmaScript. "
+                ]
+            }
+        },
+        "03": {
+            "cnt": 0,
+            "opened": 1,
+            "closed": 1,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#46  =<(Closed)>=- :How does this differ from @microsoft/applicationinsights-web?"
+                ]
+            },
+            "closedIssues": {
+                "<No Milestone>": [
+                    "#46 - How does this differ from @microsoft/applicationinsights-web?"
+                ]
+            }
+        },
+        "02": {
+            "cnt": -2,
+            "opened": 1,
+            "closed": 3,
+            "openedIssues": {
+                "Angular 11 - 2.7.1": [
+                    "#41 [released - NPM, Angular 11] =<(Closed)>=- :microsoft-applicationinsights-angularplugin-js.mjs error EcmaScript. "
+                ]
+            },
+            "closedIssues": {
+                "<No Milestone>": [
+                    "#37 - Azure insights trackEvent function is reporting duplicate events.",
+                    "#30 - Wanting to contribute"
+                ],
+                "2.8.0": [
+                    "#28 - Add support for Angular v13"
+                ]
+            }
+        },
+        "01": {
+            "cnt": 1,
+            "opened": 1,
+            "closed": 0,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#37  =<(Closed)>=- :Azure insights trackEvent function is reporting duplicate events."
+                ]
+            }
+        }
+    },
+    "2023": {
+        "10": {
+            "cnt": 0,
+            "opened": 2,
+            "closed": 2,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#130  =<(Closed)>=- :pageView always the same time",
+                    "#127 [question] =<(Closed)>=- :Compatibility with Angular 7"
+                ]
+            },
+            "closedIssues": {
+                "<No Milestone>": [
+                    "#130 - pageView always the same time",
+                    "#127 - Compatibility with Angular 7"
+                ]
+            }
+        },
+        "11": {
+            "cnt": -1,
+            "opened": 0,
+            "closed": 1,
+            "closedIssues": {
+                "<No Milestone>": [
+                    "#73 - [BUG] Angular app does not appear in AppInsights Application map"
+                ]
+            }
+        },
+        "cnt": 1,
+        "opened": 10,
+        "closed": 9,
+        "09": {
+            "cnt": 0,
+            "opened": 1,
+            "closed": 1,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#123  :v3.0.2 (next: ITelemetryPluginChain | ITelemetryPlugin) => void' is not assignable to type '(next: ITelemetryPlugin | ITelemetryPluginChain) => void'."
+                ]
+            },
+            "closedIssues": {
+                "14.0.0": [
+                    "#57 - [Discussion] Re-Numbering the plugin release so the major number matches the Angular release"
+                ]
+            }
+        },
+        "08": {
+            "cnt": 1,
+            "opened": 2,
+            "closed": 1,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#120  :Doesn't support angular v16",
+                    "#118  =<(Closed)>=- :Disable logging in local environment"
+                ]
+            },
+            "closedIssues": {
+                "<No Milestone>": [
+                    "#118 - Disable logging in local environment"
+                ]
+            }
+        },
+        "07": {
+            "cnt": 1,
+            "opened": 1,
+            "closed": 0,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#117 [enhancement, zone support] :[BUG] Incompatible with Angular Hydration"
+                ]
+            }
+        },
+        "06": {
+            "cnt": -1,
+            "opened": 1,
+            "closed": 2,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#107 [wontfix] :Add @microsoft/applicationinsights-web to peer dependencies"
+                ]
+            },
+            "closedIssues": {
+                "<No Milestone>": [
+                    "#74 - [BUG] Angular 6 | Uncaught RangeError: Maximum call stack size exceeded",
+                    "#71 - Unhandled browser exceptions not being tracked in Angular app"
+                ]
+            }
+        },
+        "05": {
+            "cnt": 1,
+            "opened": 1,
+            "closed": 0,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#102 [documentation] :Docs Warning \"Angular plugin is NOT ECMAScript 3 (ES3) compatible.\""
+                ]
+            }
+        },
+        "04": {
+            "cnt": 0,
+            "opened": 1,
+            "closed": 1,
+            "openedIssues": {
+                "3.0.2": [
+                    "#98 [bug, released - NPM, packaging] =<(Closed)>=- :Repository URL pointing to stale page in another repo"
+                ]
+            },
+            "closedIssues": {
+                "3.0.2": [
+                    "#98 - Repository URL pointing to stale page in another repo"
+                ]
+            }
+        },
+        "02": {
+            "cnt": 0,
+            "opened": 1,
+            "closed": 1,
+            "openedIssues": {
+                "<No Milestone>": [
+                    "#97  : Type 'AngularPlugin' is not assignable to type 'ITelemetryPlugin', Angular 15 ( \"@angular/common\": \"15.1.0\") error when trying to build the project"
+                ]
+            },
+            "closedIssues": {
+                "3.0.1": [
+                    "#76 - Types incompatibility with `@microsoft/applicationinsights-web`"
+                ]
+            }
+        }
+    }
+}
