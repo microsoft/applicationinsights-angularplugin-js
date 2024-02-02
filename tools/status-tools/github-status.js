@@ -368,6 +368,9 @@ function processIssues(issues) {
         if (lastMonth < openMonth) {
             lastMonth = openMonth;
         }
+        if (openYear > lastYear) {
+            lastYear = openYear;
+        }
 
         if (closedAt) {
             let closeYear = closedAt.getFullYear();
