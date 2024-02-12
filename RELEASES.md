@@ -1,5 +1,13 @@
 # Releases
 
+## 15.0.2 (Feb 12th, 2024)
+
+- #135 Update workflow angular.yml to support angular 14 release branch
+- #137 [main] Update codeql-analysis.yml to add Angular 14 branch
+- #126 Add Issue state reporting script
+- #143 Update GitHub Status script with -dump switch
+- #144 Update to Application Insights ^3.0.8
+
 ## 15.0.1 (Nov 3rd, 2023)
 
 - #132 [pre-release] udpate application insight dependency, get ready for release
