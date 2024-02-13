@@ -14,7 +14,6 @@ import { Component, Injector } from "@angular/core";
 class FakeHomeComponent {}
 class FakeAboutComponent {}
 describe("ReactAI", () => {
-    // let service: ApplicationinsightsAngularpluginErrorService;
     let fixture: ComponentFixture<AngularPlugin>;
     let angularPlugin: AngularPlugin;
     let analyticsPlugin: AnalyticsPlugin;
@@ -33,8 +32,6 @@ describe("ReactAI", () => {
     let angularPlugin4: AngularPlugin;
     let analyticsPlugin4: AnalyticsPlugin;
     let core4: AppInsightsCore;
-
-    // let analyticsPluginSpy: jasmine.SpyObj<AnalyticsPlugin>;
 
     const arg1: Injector = Injector.create({
         providers: [
@@ -75,7 +72,7 @@ describe("ReactAI", () => {
         angularPlugin3 = new AngularPlugin();
         angularPlugin4 = new AngularPlugin();
 
-
+        // this is for analyticsPluginSpy
         TestBed.inject(ApplicationinsightsAngularpluginErrorService);
         router = TestBed.inject(Router);
 

@@ -15,15 +15,12 @@ class FakeHomeComponent {}
 class FakeAboutComponent {}
 describe("ReactAI", () => {
 
-    // let service: ApplicationinsightsAngularpluginErrorService;
     let fixture: ComponentFixture<AngularPlugin>;
     let angularPlugin: AngularPlugin;
     let analyticsPlugin: AnalyticsPlugin;
     let core: AppInsightsCore;
     let channel: ChannelPlugin;
     let router: Router;
-
-    // let analyticsPluginSpy: jasmine.SpyObj<AnalyticsPlugin>;
 
     beforeEach(() => {
         const spy = jasmine.createSpyObj("AnalyticsPlugin", ["trackPageView"]);
@@ -47,6 +44,7 @@ describe("ReactAI", () => {
         router = TestBed.inject(Router);
 
         // Get the spy on trackPageView from the spy object
+        // analyticsPluginSpy
         TestBed.inject(AnalyticsPlugin) as jasmine.SpyObj<AnalyticsPlugin>;
         fixture.detectChanges();
 
