@@ -1,6 +1,6 @@
 {
   "name": "@microsoft/applicationinsights-angularplugin-js",
-  "version": "15.0.2",
+  "version": "15.0.3",
   "description": "Microsoft Application Insights Angular plugin",
   "main": "dist/bundles/microsoft-applicationinsights-angularplugin-js.umd.js",
   "module": "dist/fesm2015/microsoft-applicationinsights-angularplugin-js.js",

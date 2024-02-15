@@ -1,5 +1,10 @@
 # Releases
 
+## 15.0.3 (Feb 15th, 2024)
+
+- #147 Update to Application Insights ^3.1.0
+- #146 Fix lint problem in tests
+
 ## 15.0.2 (Feb 12th, 2024)
 
 - #135 Update workflow angular.yml to support angular 14 release branch
