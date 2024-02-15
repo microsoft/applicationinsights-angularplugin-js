@@ -1,6 +1,6 @@
 # Releases
 
-## 15.0.3 (Feb 15th, 2024)
+## 15.1.0 (Feb 15th, 2024)
 
 - #147 Update to Application Insights ^3.1.0
 - #146 Fix lint problem in tests
