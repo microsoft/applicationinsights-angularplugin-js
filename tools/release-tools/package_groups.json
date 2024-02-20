@@ -1,0 +1,9 @@
+// ------------------------------
+// NPM Publish group definitions
+// ------------------------------
+{
+    // Angular packages
+    "angular": [
+        "./projects/applicationinsights-angularplugin-js"
+    ]
+}
