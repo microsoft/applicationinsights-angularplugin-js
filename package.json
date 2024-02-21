@@ -20,7 +20,8 @@
     "lint": "ng lint",
     "lintfix": "ng lint --fix",
     "clean": "git clean -xdf",
-    "gh-status": "node ./tools/status-tools/github-status.js"
+    "gh-status": "node ./tools/status-tools/github-status.js",
+    "npm-package": "node ./tools/release-tools/npm-package.js"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.2.9",
