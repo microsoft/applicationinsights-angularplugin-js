@@ -1,5 +1,9 @@
 # Releases
 
+## 15.1.1 (Mar 14th, 2024)
+
+- #150 [pre-release] update application insights to 3.1.1 
+
 ## 15.1.0 (Feb 15th, 2024)
 
 - #147 Update to Application Insights ^3.1.0
