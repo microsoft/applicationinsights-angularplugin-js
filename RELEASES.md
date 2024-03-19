@@ -1,5 +1,9 @@
 # Releases
 
+## 15.1.2 (Mar 19th, 2024)
+
+fix build pipeline error, republish the package
+
 ## 15.1.1 (Mar 14th, 2024)
 
 - #150 [pre-release] update application insights to 3.1.1 
