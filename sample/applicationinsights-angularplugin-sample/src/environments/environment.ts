@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  connectionString: 'instrumentationKey=abcd'
+  connectionString: 'instrumentationKey=abcd',
+  instrumentationKey: "abcd"
 };
