@@ -4,6 +4,6 @@
 {
     // Angular packages
     "angular": [
-        "./projects/applicationinsights-angularplugin-js"
+        "./dist/applicationinsights-angularplugin-js"
     ]
 }
