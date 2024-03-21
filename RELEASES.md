@@ -1,6 +1,13 @@
 # Releases
 
-## 15.1.1 (Mar 14th, 2024)
+## 15.1.2 (Mar 21st, 2024)
+
+Notice: 15.1.1 is deprecated
+- #159 [pre-release] update application insights to 3.1.2
+- #157 Bump webpack-dev-middleware from 5.3.3 to 5.3.4 in /sample/applicationinsights-angularplugin-sample
+- #155 [bug] Update package_groups.json to point to right dir
+
+## 15.1.1 (Mar 14th, 2024) (deprecated)
 
 - #150 [pre-release] update application insights to 3.1.1 
 
