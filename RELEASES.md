@@ -1,5 +1,13 @@
 # Releases
 
+## 14.0.2 (Mar 21st, 2024)
+
+### Changelog
+
+- #161 [angular14] add release tool 
+- #160 [angular14][pre-release] update application insights to 3.0.9 
+
+
 ## 14.0.1 (Nov 17th, 2023)
 
 ### Changelog
