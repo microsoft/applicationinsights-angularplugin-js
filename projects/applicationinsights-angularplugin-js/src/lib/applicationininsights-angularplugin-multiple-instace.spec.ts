@@ -14,7 +14,6 @@ import { Component, Injector } from "@angular/core";
 class FakeHomeComponent {}
 class FakeAboutComponent {}
 describe("ReactAI", () => {
-    let service: ApplicationinsightsAngularpluginErrorService;
     let fixture: ComponentFixture<AngularPlugin>;
     let angularPlugin: AngularPlugin;
     let analyticsPlugin: AnalyticsPlugin;
@@ -33,8 +32,6 @@ describe("ReactAI", () => {
     let angularPlugin4: AngularPlugin;
     let analyticsPlugin4: AnalyticsPlugin;
     let core4: AppInsightsCore;
-
-    let analyticsPluginSpy: jasmine.SpyObj<AnalyticsPlugin>;
 
     const arg1: Injector = Injector.create({
         providers: [
@@ -75,12 +72,12 @@ describe("ReactAI", () => {
         angularPlugin3 = new AngularPlugin();
         angularPlugin4 = new AngularPlugin();
 
-
-        service = TestBed.inject(ApplicationinsightsAngularpluginErrorService);
+        // this is for analyticsPluginSpy
+        TestBed.inject(ApplicationinsightsAngularpluginErrorService);
         router = TestBed.inject(Router);
 
         // Get the spy on trackPageView from the spy object
-        analyticsPluginSpy = TestBed.inject(AnalyticsPlugin) as jasmine.SpyObj<AnalyticsPlugin>;
+        TestBed.inject(AnalyticsPlugin) as jasmine.SpyObj<AnalyticsPlugin>;
         fixture.detectChanges();
 
         // Setup
@@ -101,7 +98,7 @@ describe("ReactAI", () => {
             extensionConfig: {
                 [angularPlugin.identifier]: {useInjector: true }
             }
-        } as IConfig & IConfiguration, [angularPlugin, channel]);
+        } as IConfig & IConfiguration, [angularPlugin, analyticsPlugin, channel]);
 
         core2.initialize({
             instrumentationKey: "",
@@ -132,6 +129,10 @@ describe("ReactAI", () => {
 
         // clean up
         analyticsPlugin = undefined;
+        analyticsPlugin2 = undefined;
+        analyticsPlugin3 = undefined;
+        analyticsPlugin4 = undefined;
+
         core = undefined;
         channel = undefined;
         ApplicationinsightsAngularpluginErrorService.instance = null; // reset the singleton instance to null for re-assignment
