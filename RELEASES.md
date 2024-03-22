@@ -2,7 +2,7 @@
 
 ## 15.0.3 (Mar 22nd, 2024)
 
-- #164 [angular15][pre-release] update application insights to 3.0.9 and add tag 
+- #164 [angular15][pre-release] update application insights to 3.0.9 and add tag  
 
 ## 15.0.2 (Feb 12nd, 2024)
 
