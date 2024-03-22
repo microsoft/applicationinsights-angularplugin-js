@@ -26,5 +26,8 @@
     "@microsoft/applicationinsights-analytics-js": "^3.0.9",
     "@angular/common": ">= 14.0.3",
     "@angular/core": ">= 14.0.3"
+  },
+  "publishConfig": {
+    "tag": "Angular15"
   }
 }
