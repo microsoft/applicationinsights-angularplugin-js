@@ -19,7 +19,8 @@
     "watch": "ng test",
     "lint": "ng lint",
     "lintfix": "ng lint --fix",
-    "clean": "git clean -xdf"
+    "clean": "git clean -xdf",
+    "npm-package": "node ./tools/release-tools/npm-package.js"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.12",
