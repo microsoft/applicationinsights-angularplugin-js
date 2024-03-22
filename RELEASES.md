@@ -1,6 +1,10 @@
 # Releases
 
-## 15.0.2 (Feb 12th, 2024)
+## 15.0.3 (Mar 22nd, 2024)
+
+- #164 [angular15][pre-release] update application insights to 3.0.9 and add tag 
+
+## 15.0.2 (Feb 12nd, 2024)
 
 - #135 Update workflow angular.yml to support angular 14 release branch
 - #137 [main] Update codeql-analysis.yml to add Angular 14 branch
