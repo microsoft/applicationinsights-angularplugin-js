@@ -14,17 +14,20 @@
   "homepage": "https://github.com/microsoft/applicationinsights-angularplugin-js#readme",
   "dependencies": {
     "@microsoft/applicationinsights-shims": "^3.0.1",
-    "@microsoft/applicationinsights-common": "^3.0.8",
-    "@microsoft/applicationinsights-core-js": "^3.0.8",
-    "@microsoft/applicationinsights-properties-js": "^3.0.8",
+    "@microsoft/applicationinsights-common": "^3.0.9",
+    "@microsoft/applicationinsights-core-js": "^3.0.9",
+    "@microsoft/applicationinsights-properties-js": "^3.0.9",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@microsoft/applicationinsights-analytics-js": "^3.0.8"
+    "@microsoft/applicationinsights-analytics-js": "^3.0.9"
   },
   "peerDependencies": {
-    "@microsoft/applicationinsights-analytics-js": "^3.0.8",
+    "@microsoft/applicationinsights-analytics-js": "^3.0.9",
     "@angular/common": ">= 14.0.3",
     "@angular/core": ">= 14.0.3"
+  },
+  "publishConfig": {
+    "tag": "Angular15"
   }
 }
