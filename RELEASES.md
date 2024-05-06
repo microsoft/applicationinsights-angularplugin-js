@@ -1,5 +1,9 @@
 # Releases
 
+## 15.2.0 (May 6th, 2024) 
+
+- #168 [pre-release] update application insights to 3.2.0
+
 ## 15.1.2 (Mar 21st, 2024)
 
 Notice: 15.1.1 is deprecated

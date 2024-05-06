@@ -153,6 +153,7 @@ Additionally, as part of this change the existing v3.x extension has been moved 
 
 | Version |  Application Insights | Angular              | Branch
 |---------|-----------------------|----------------------|-----------
+| 15.2.0  | ^3.2.0                | peer: ^15.2.9        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
 | 15.1.2  | ^3.1.2                | peer: ^15.2.9        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
 | ~~15.1.1~~ (deprecated)  | ^3.1.1                | peer: ^15.2.9        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
 | 15.1.0  | ^3.1.0                | peer: ^15.2.9        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)
