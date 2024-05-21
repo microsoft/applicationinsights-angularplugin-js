@@ -1,28 +1,35 @@
-import { Component} from '@angular/core';
-import { ActivatedRouteSnapshot, ResolveEnd, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { ApplicationInsightsService } from './telemetry.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent { 
+export class AppComponent {
   title = 'insights';
-  private appInsights: ApplicationInsightsService;
 
-  constructor(private router: Router ) {
-    this.appInsights = new ApplicationInsightsService(router);
-  }
+  constructor(
+    private router: Router,
+    private appInsights: ApplicationInsightsService
+  ) {}
 
   ngOnInit() {
     this.router.events
-      .pipe(filter((event): event is ResolveEnd => event instanceof ResolveEnd))
+      .pipe(
+        filter(
+          (event): event is NavigationEnd => event instanceof NavigationEnd
+        )
+      )
       .subscribe((event) => {
         const activatedComponent = this.getActivatedComponent(event.state.root);
         if (activatedComponent) {
-          this.appInsights.trackPageView({name:activatedComponent.name, uri: event.urlAfterRedirects});
+          this.appInsights.trackPageView({
+            name: activatedComponent.name,
+            uri: event.urlAfterRedirects,
+          });
         }
       });
   }
