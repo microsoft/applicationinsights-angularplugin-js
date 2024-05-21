@@ -10,7 +10,6 @@ import { ApplicationInsightsService } from './telemetry.service';
 import { AccountComponent } from './account/account.component';
 import { ListComponent } from './list/list.component';
 
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -19,7 +18,7 @@ import { ListComponent } from './list/list.component';
     RouterModule.forRoot([
       { path: '', component: ListComponent },
       { path: 'account', component: AccountComponent },
-    ])
+    ]),
   ],
   declarations: [
     AppComponent,
@@ -27,11 +26,6 @@ import { ListComponent } from './list/list.component';
     AccountComponent,
     ListComponent,
   ],
-  bootstrap: [
-    AppComponent
-  ],
-  providers: [
-    ApplicationInsightsService
-],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
