@@ -1,6 +1,6 @@
 {
   "name": "@microsoft/applicationinsights-angularplugin-js",
-  "version": "15.2.0",
+  "version": "15.3.0",
   "description": "Microsoft Application Insights Angular plugin",
   "author": "Microsoft Application Insights Team",
   "license": "MIT",
