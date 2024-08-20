@@ -1,6 +1,6 @@
 {
   "name": "applicationinsights-angularplugin-sample",
-  "version": "0.0.1",
+  "version": "0.3.0",
   "description": "Microsoft Applicationinsights Angularplugin Sample App",
   "author": "Microsoft Application Insights Team",
   "license": "MIT",
@@ -31,8 +31,8 @@
     "@angular/platform-browser": "^15.2.9",
     "@angular/platform-browser-dynamic": "^15.2.9",
     "@angular/router": "^15.2.9",
-    "@microsoft/applicationinsights-angularplugin-js": "^15.1.0",
-    "@microsoft/applicationinsights-web": "^3.1.2",
+    "@microsoft/applicationinsights-angularplugin-js": "^15.3.0",
+    "@microsoft/applicationinsights-web": "^3.3.0",
     "angular-in-memory-web-api": "~0.15.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
