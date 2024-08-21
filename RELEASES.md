@@ -1,5 +1,14 @@
 # Releases
 
+## 15.3.1 (Aug 20th, 2024) 
+
+### Changelog
+
+- #174 Bump ws, engine.io, socket.io-adapter and puppeteer 
+- #176 Bump ws, engine.io and socket.io-adapter in /sample/applicationinsights-angularplugin-sample 
+- #177 [pre-release] update application insights to 3.3.1 
+
+
 ## 15.3.0 (July 2nd, 2024) 
 
 ### Changelog
