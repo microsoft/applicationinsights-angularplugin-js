@@ -24,7 +24,7 @@
     "npm-package": "node ./tools/release-tools/npm-package.js"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^15.2.9",
+    "@angular-devkit/build-angular": "^18.2.2",
     "@angular-eslint/builder": "15.0.0",
     "@angular-eslint/eslint-plugin": "15.0.0",
     "@angular-eslint/eslint-plugin-template": "15.0.0",
