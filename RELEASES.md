@@ -1,5 +1,12 @@
 # Releases
 
+## 15.3.4 (Oct 31st, 2024) 
+
+### Changelog
+
+- #190 Bump cookie, socket.io and express
+- #192 [pre-release] update application insights to 3.3.4
+
 ## 15.3.3 (Sep 27th, 2024) 
 
 ### Changelog
