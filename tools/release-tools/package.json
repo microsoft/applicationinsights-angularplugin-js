@@ -1,0 +1,28 @@
+{
+    "name": "applicationinsights-angularplugin-js-release-tools",
+    "version": "15.3.4",
+    "author": "Microsoft Application Insights Team",
+    "description": "Microsoft Application Insights Angular plugin release tools",
+    "homepage": "https://github.com/microsoft/applicationinsights-angularplugin-js#readme",
+    "sideEffects": false,
+    "scripts": {
+        "update": "rush update",
+        "build": "",
+        "rebuild": "",
+        "test": "",
+        "updateVer": "node ./tools/release-tools/updateVersion.js"
+    },
+    "keywords": [
+        "1DS",
+        "Js",
+        "SDK"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/microsoft/applicationinsights-angularplugin-js"
+    },
+    "devDependencies": {
+        "grunt": "^1.5.3",
+        "globby": "^11.0.0"
+    }
+}
