@@ -15,6 +15,7 @@ import { Subscription } from "rxjs";
 import { AnalyticsPlugin } from "@microsoft/applicationinsights-analytics-js";
 import {objDeepFreeze} from "@nevware21/ts-utils";
 import { PropertiesPlugin } from "@microsoft/applicationinsights-properties-js";
+import { runOutsideAngular } from "./run-outside-angular";
 
 interface IAngularExtensionConfig {
     /**
@@ -113,7 +114,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                                 const pageViewTelemetry: IPageViewTelemetry = {
                                     uri: _angularCfg.router.url
                                 };
-                                _self.trackPageView(pageViewTelemetry);
+                                runOutsideAngular(() => _self.trackPageView(pageViewTelemetry));
                             }
                             
                             // subscribe to new router events
@@ -129,7 +130,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                                             uri: _angularCfg.router.url,
                                             properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
                                         };
-                                        _self.trackPageView(pvt);
+                                        runOutsideAngular(() => _self.trackPageView(pvt));
                                     }
                                 }
                             });
@@ -150,7 +151,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                         _propertiesPlugin.context.telemetryTrace.traceID = generateW3CId();
                         _propertiesPlugin.context.telemetryTrace.name = location && location.pathname || "_unknown_";
                     }
-                    _analyticsPlugin.trackPageView(pageView);
+                    runOutsideAngular(() => _analyticsPlugin.trackPageView(pageView));
                 } else {
                     _throwInternal(_self.diagLog(),
                         // eslint-disable-next-line max-len
@@ -186,7 +187,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
      * @param event The event that needs to be processed
      */
     processTelemetry(event: ITelemetryItem, itemCtx?: IProcessTelemetryContext) {
-        this.processNext(event, itemCtx);
+        runOutsideAngular(() => this.processNext(event, itemCtx));
     }
 
 
