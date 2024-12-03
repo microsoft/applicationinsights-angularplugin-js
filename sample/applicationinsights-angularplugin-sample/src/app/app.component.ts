@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, NavigationEnd, Router, ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
 import { ApplicationInsightsService } from './telemetry.service';
 
@@ -13,7 +13,8 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private appInsights: ApplicationInsightsService
+    private appInsights: ApplicationInsightsService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -24,7 +25,7 @@ export class AppComponent {
         )
       )
       .subscribe((event) => {
-        const activatedComponent = this.getActivatedComponent(event.state.root);
+        const activatedComponent = this.getActivatedComponent(this.activatedRoute.snapshot);
         if (activatedComponent) {
           this.appInsights.trackPageView({
             name: activatedComponent.name,
