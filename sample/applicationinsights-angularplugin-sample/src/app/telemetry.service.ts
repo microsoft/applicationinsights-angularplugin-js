@@ -51,6 +51,7 @@ export class ApplicationInsightsService {
       envelope.tags = envelope.tags || [];
       envelope.tags['ai.cloud.role'] = 'testTag';
     });
+    (window as any)["appInsights"] = this.appInsights;
   }
 
   // expose tracking methods
