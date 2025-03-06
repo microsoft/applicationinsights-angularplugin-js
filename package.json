@@ -42,7 +42,7 @@
         "@angular/platform-browser": "^15.2.9",
         "@angular/platform-browser-dynamic": "^15.2.9",
         "@angular/router": "^15.2.9",
-        "@microsoft/applicationinsights-analytics-js": "^3.3.5",
+        "@microsoft/applicationinsights-analytics-js": "^3.3.6",
         "@types/jasmine": "~3.6.0",
         "@types/node": "^12.20.55",
         "@typescript-eslint/eslint-plugin": "^5.62.0",
@@ -68,16 +68,16 @@
         "zone.js": "^0.11.8"
     },
     "dependencies": {
-        "@microsoft/applicationinsights-common": "^3.3.5",
-        "@microsoft/applicationinsights-core-js": "^3.3.5",
-        "@microsoft/applicationinsights-properties-js": "^3.3.5",
+        "@microsoft/applicationinsights-common": "^3.3.6",
+        "@microsoft/applicationinsights-core-js": "^3.3.6",
+        "@microsoft/applicationinsights-properties-js": "^3.3.6",
         "@microsoft/applicationinsights-shims": "^3.0.1",
         "tslib": "^2.6.2"
     },
     "peerDependencies": {
         "@angular/common": ">= 14.0.3",
         "@angular/core": ">= 14.0.3",
-        "@microsoft/applicationinsights-analytics-js": "^3.3.5"
+        "@microsoft/applicationinsights-analytics-js": "^3.3.6"
     },
     "license": "MIT"
 }
