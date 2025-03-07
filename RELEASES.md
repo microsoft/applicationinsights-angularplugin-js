@@ -1,11 +1,18 @@
 # Releases
 
+## 15.3.6 (March 6th, 2025)
+
+### Changelog
+- #203 [pre-release] update application insights to 3.3.6 
+
 ## 15.3.5 (Feb 4th, 2025)
 
 ### Changelog
 
 - #200 Update to Application Insights 3.3.5
 - #195 Add support scripts to enable automated nightly integration testing
+- #197 Update Stale Issue action 
+- #198 Update Lock Issue action
 
 ## 15.3.4 (Oct 31st, 2024) 
 
