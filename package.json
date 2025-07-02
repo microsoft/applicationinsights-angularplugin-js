@@ -72,6 +72,7 @@
         "@microsoft/applicationinsights-core-js": "^3.3.6",
         "@microsoft/applicationinsights-properties-js": "^3.3.6",
         "@microsoft/applicationinsights-shims": "^3.0.1",
+        "@microsoft/applicationinsights-web": "^3.3.9",
         "tslib": "^2.6.2"
     },
     "peerDependencies": {
