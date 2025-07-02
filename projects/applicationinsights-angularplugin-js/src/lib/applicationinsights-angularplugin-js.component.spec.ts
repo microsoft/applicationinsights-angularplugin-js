@@ -109,23 +109,23 @@ describe("ReactAI", () => {
         });
     }));
 
-    it('should be compatible with ITelemetryPlugin interface (TypeScript compatibility)', () => {
-        const angularPlugin = new AngularPlugin();
+    it("should be compatible with ITelemetryPlugin interface (TypeScript compatibility)", () => {
+        const testPlugin = new AngularPlugin();
         
         // Test that the plugin has the required properties for ITelemetryPlugin
-        expect(angularPlugin.identifier).toBe('AngularPlugin');
-        expect(angularPlugin.priority).toBe(186);
-        expect(typeof angularPlugin.setNextPlugin).toBe('function');
+        expect(testPlugin.identifier).toBe("AngularPlugin");
+        expect(testPlugin.priority).toBe(186);
+        expect(typeof testPlugin.setNextPlugin).toBe("function");
         
         // Test that it can be used in an extensions array without TypeScript errors
-        const extensionsArray = [angularPlugin];
+        const extensionsArray = [testPlugin];
         expect(extensionsArray.length).toBe(1);
-        expect(extensionsArray[0]).toBe(angularPlugin);
+        expect(extensionsArray[0]).toBe(testPlugin);
         
         // Verify the setNextPlugin method exists and can be called
-        expect(angularPlugin.setNextPlugin).toBeDefined();
+        expect(testPlugin.setNextPlugin).toBeDefined();
         expect(() => {
-            angularPlugin.setNextPlugin(undefined as any);
+            testPlugin.setNextPlugin(undefined as any);
         }).not.toThrow();
     });
 });
