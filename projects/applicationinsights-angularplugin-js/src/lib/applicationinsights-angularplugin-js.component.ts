@@ -3,7 +3,7 @@ import {
     IConfig, IPageViewTelemetry, PropertiesPluginIdentifier, AnalyticsPluginIdentifier
 } from "@microsoft/applicationinsights-common";
 import {
-    IPlugin, IConfiguration, IAppInsightsCore, BaseTelemetryPlugin, arrForEach, ITelemetryItem, ITelemetryPluginChain,
+    IPlugin, IConfiguration, IAppInsightsCore, BaseTelemetryPlugin, arrForEach, ITelemetryItem, ITelemetryPlugin, ITelemetryPluginChain,
     IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext,
     ITelemetryUnloadState, generateW3CId, onConfigChange, IConfigDefaults, isArray
 } from "@microsoft/applicationinsights-core-js";
@@ -46,6 +46,14 @@ export class AngularPlugin extends BaseTelemetryPlugin {
     public priority = 186;
     public identifier = "AngularPlugin";
 
+
+    /**
+     * Set next extension for telemetry processing, this is not optional as plugins should use the
+     * processNext() function of the passed IProcessTelemetryContext instead. It is being kept for
+     * now for backward compatibility only.
+     */
+    public setNextPlugin: (next: ITelemetryPlugin | ITelemetryPluginChain) => void;
+
     constructor(private _injector?: Injector) { // _injector is optional to provide
         super();
         let _analyticsPlugin: AnalyticsPlugin;
@@ -68,6 +76,9 @@ export class AngularPlugin extends BaseTelemetryPlugin {
             };
 
             _initDefaults();
+
+            // Explicitly implement setNextPlugin to ensure compatibility with ITelemetryPlugin
+            _self.setNextPlugin = _base.setNextPlugin;
 
             _self.initialize = (config: IConfiguration & IConfig, core: IAppInsightsCore, extensions: IPlugin[],
                 pluginChain?: ITelemetryPluginChain) => {
