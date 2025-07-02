@@ -46,6 +46,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
     public priority = 186;
     public identifier = "AngularPlugin";
 
+
     /**
      * Set next extension for telemetry processing, this is not optional as plugins should use the
      * processNext() function of the passed IProcessTelemetryContext instead. It is being kept for
