@@ -108,6 +108,26 @@ describe("ReactAI", () => {
             });
         });
     }));
+
+    it('should be compatible with ITelemetryPlugin interface (TypeScript compatibility)', () => {
+        const angularPlugin = new AngularPlugin();
+        
+        // Test that the plugin has the required properties for ITelemetryPlugin
+        expect(angularPlugin.identifier).toBe('AngularPlugin');
+        expect(angularPlugin.priority).toBe(186);
+        expect(typeof angularPlugin.setNextPlugin).toBe('function');
+        
+        // Test that it can be used in an extensions array without TypeScript errors
+        const extensionsArray = [angularPlugin];
+        expect(extensionsArray.length).toBe(1);
+        expect(extensionsArray[0]).toBe(angularPlugin);
+        
+        // Verify the setNextPlugin method exists and can be called
+        expect(angularPlugin.setNextPlugin).toBeDefined();
+        expect(() => {
+            angularPlugin.setNextPlugin(undefined as any);
+        }).not.toThrow();
+    });
 });
 
 class ChannelPlugin implements IPlugin {
