@@ -1,5 +1,12 @@
 # Releases
 
+## 15.3.7 (July 18th, 2025)
+
+### Changelog
+
+- #208 Update to Application Insights 3.3.9
+- #205 Update Components to address Component Governance issues
+
 ## 15.3.6 (March 6th, 2025)
 
 ### Changelog
