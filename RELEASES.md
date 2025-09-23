@@ -1,5 +1,11 @@
 # Releases
 
+## 15.3.7 (Sept 24th, 2025)
+
+### Changelog
+
+- #210 Update to Application Insights 3.3.10
+
 ## 15.3.7 (July 18th, 2025)
 
 ### Changelog
