@@ -1,5 +1,6 @@
-import { AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin, IAppInsightsCore } from "@microsoft/applicationinsights-core-js";
-import { IConfig, IPageViewTelemetry } from "@microsoft/applicationinsights-common";
+import {
+    AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin, IAppInsightsCore, IConfig, IPageViewTelemetry
+} from "@microsoft/applicationinsights-core-js";
 import { AngularPlugin } from "./applicationinsights-angularplugin-js.component";
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { Router } from "@angular/router";
