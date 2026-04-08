@@ -6,7 +6,7 @@
 
 This release bumps the Application Insights dependency from ^3.3.10 to ^3.4.1. The 3.4.x release of Application Insights includes significant changes that may affect your application. Please review the following before upgrading.
 
-This version is NOT supported on any eariler versions of Application Insights.
+This version is NOT supported on any earlier versions of Application Insights.
 
 #### Package Deprecation
 
