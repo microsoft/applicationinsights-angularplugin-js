@@ -33,7 +33,7 @@
         "@angular-eslint/schematics": "15.0.0",
         "@angular-eslint/template-parser": "15.0.0",
         "@angular/animations": "^15.2.10",
-        "@angular/cli": "^15.2.10",
+        "@angular/cli": "^21.2.7",
         "@angular/common": "^15.2.10",
         "@angular/compiler": "^15.2.10",
         "@angular/compiler-cli": "^15.2.10",
