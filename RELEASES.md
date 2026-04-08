@@ -41,6 +41,7 @@ For full details see the [Application Insights JS 3.4.1 release notes](https://g
 - #212 Bump on-headers and compression
 - Update dependency overrides to address known security vulnerabilities (tar, serialize-javascript, basic-ftp)
 
+**Application Insights Full Changelog**: https://github.com/microsoft/ApplicationInsights-JS/compare/3.3.11...3.4.1
 
 ## 15.3.7 (Sept 24th, 2025)
 
