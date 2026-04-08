@@ -15,7 +15,7 @@
         "start": "ng serve",
         "rebuild": "npm run build && npm run test",
         "build": "npm run lintfix && ng build --configuration production",
-        "test": "ng test --watch=false  --browsers=ChromeHeadless --code-coverage=true",
+        "test": "ng test --watch=false  --browsers=ChromeHeadlessNoSandbox --code-coverage=true",
         "watch": "ng test",
         "lint": "ng lint",
         "lintfix": "ng lint --fix",
