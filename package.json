@@ -76,7 +76,7 @@
         "@microsoft/applicationinsights-analytics-js": "^3.4.1"
     },
     "overrides": {
-        "basic-ftp": ">=5.2.0",
+        "basic-ftp": ">=5.2.1",
         "form-data": "^2.5.5",
         "tar": "^7.5.13",
         "minimatch": "^3.1.4"
