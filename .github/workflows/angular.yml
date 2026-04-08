@@ -28,4 +28,6 @@ jobs:
           run: echo "CHROME_BIN=$(node -e 'process.stdout.write(require("puppeteer").executablePath())')" >> $GITHUB_ENV
         - run: npm run build
         - name: Run tests (print Angular error log on failure)
+          env:
+            CHROMIUM_FLAGS: "--no-sandbox --disable-setuid-sandbox"
           run: npm run test || { echo "=== angular-errors.log ==="; cat /tmp/ng-*/angular-errors.log 2>/dev/null || true; exit 1; }
