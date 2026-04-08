@@ -1,11 +1,9 @@
 import { Component, Injector} from "@angular/core";
 import {
-    IConfig, IPageViewTelemetry, PropertiesPluginIdentifier, AnalyticsPluginIdentifier
-} from "@microsoft/applicationinsights-common";
-import {
     IPlugin, IConfiguration, IAppInsightsCore, BaseTelemetryPlugin, arrForEach, ITelemetryItem, ITelemetryPluginChain,
     IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext,
-    ITelemetryUnloadState, generateW3CId, onConfigChange, IConfigDefaults, isArray, ITelemetryPlugin
+    ITelemetryUnloadState, generateW3CId, onConfigChange, IConfigDefaults, isArray,
+    IPageViewTelemetry, PropertiesPluginIdentifier, AnalyticsPluginIdentifier
 } from "@microsoft/applicationinsights-core-js";
 import dynamicProto from "@microsoft/dynamicproto-js";
 import { NavigationEnd, Router } from "@angular/router";
@@ -46,13 +44,6 @@ export class AngularPlugin extends BaseTelemetryPlugin {
     public priority = 186;
     public identifier = "AngularPlugin";
     
-    /**
-     * Set next extension for telemetry processing, this is not optional as plugins should use the
-     * processNext() function of the passed IProcessTelemetryContext instead. It is being kept for
-     * now for backward compatibility only.
-     */
-    public setNextPlugin: (next: ITelemetryPlugin | ITelemetryPluginChain) => void;
-
     constructor(private _injector?: Injector) { // _injector is optional to provide
         super();
         let _analyticsPlugin: AnalyticsPlugin;
@@ -72,11 +63,12 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                 _eventSubscription = null;
                 _isPageInitialLoad = true;
                 _prevRouter = undefValue;
+                _errorServiceInstance = null;
             };
 
             _initDefaults();
 
-            _self.initialize = (config: IConfiguration & IConfig, core: IAppInsightsCore, extensions: IPlugin[],
+            _self.initialize = (config: IConfiguration, core: IAppInsightsCore, extensions: IPlugin[],
                 pluginChain?: ITelemetryPluginChain) => {
                 super.initialize(config, core, extensions, pluginChain);
         
@@ -197,14 +189,12 @@ export class AngularPlugin extends BaseTelemetryPlugin {
     }
 
 
-    initialize(config: IConfiguration & IConfig, core: IAppInsightsCore, extensions: IPlugin[], pluginChain?: ITelemetryPluginChain) {
+    initialize(config: IConfiguration, core: IAppInsightsCore, extensions: IPlugin[], pluginChain?: ITelemetryPluginChain) {
         // @DynamicProtoStub -- DO NOT add any code as this will be removed during packaging
     }
 
     trackPageView(pageView: IPageViewTelemetry) {
         // @DynamicProtoStub -- DO NOT add any code as this will be removed during packaging
     }
-
-
-   
+ 
 }

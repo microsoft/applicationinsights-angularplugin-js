@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IAppInsights } from "@microsoft/applicationinsights-common";
-import { arrForEach, isFunction } from "@microsoft/applicationinsights-core-js";
+import { IAppInsights, arrForEach, isFunction } from "@microsoft/applicationinsights-core-js";
 import { IErrorService } from "./IErrorService";
 
 @Injectable({

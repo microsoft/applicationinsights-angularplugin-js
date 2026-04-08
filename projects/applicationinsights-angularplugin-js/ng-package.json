@@ -6,7 +6,6 @@
     "entryFile": "src/public-api.ts"
   },
   "allowedNonPeerDependencies": [
-    "@microsoft/applicationinsights-common",
     "@microsoft/applicationinsights-core-js",
     "@microsoft/applicationinsights-properties-js",
     "@microsoft/applicationinsights-rollup-es3",

@@ -24,5 +24,8 @@ jobs:
           with:
               node-version: ${{ matrix.node-version }}
         - run: npm install
+        - name: Set CHROME_BIN to Puppeteer's bundled Chromium
+          run: echo "CHROME_BIN=$(node -e 'process.stdout.write(require("puppeteer").executablePath())')" >> $GITHUB_ENV
         - run: npm run build
-        - run: npm run test
+        - name: Run tests (print Angular error log on failure)
+          run: npm run test || { echo "=== angular-errors.log ==="; cat /tmp/ng-*/angular-errors.log 2>/dev/null || true; exit 1; }

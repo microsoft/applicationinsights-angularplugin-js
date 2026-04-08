@@ -1,6 +1,6 @@
 {
     "name": "@microsoft/applicationinsights-angularplugin-js",
-    "version": "15.3.8",
+    "version": "15.4.0",
     "description": "Microsoft Application Insights Angular plugin",
     "main": "dist/bundles/microsoft-applicationinsights-angularplugin-js.umd.js",
     "module": "dist/fesm2015/microsoft-applicationinsights-angularplugin-js.js",
@@ -15,7 +15,7 @@
         "start": "ng serve",
         "rebuild": "npm run build && npm run test",
         "build": "npm run lintfix && ng build --configuration production",
-        "test": "ng test --watch=false  --browsers=ChromeHeadless --code-coverage=true",
+        "test": "ng test --watch=false  --browsers=ChromeHeadlessNoSandbox  --code-coverage=true",
         "watch": "ng test",
         "lint": "ng lint",
         "lintfix": "ng lint --fix",
@@ -42,16 +42,16 @@
         "@angular/platform-browser": "^15.2.10",
         "@angular/platform-browser-dynamic": "^15.2.10",
         "@angular/router": "^15.2.10",
-        "@microsoft/applicationinsights-analytics-js": "^3.3.10",
+        "@microsoft/applicationinsights-analytics-js": "^3.4.1",
         "@types/jasmine": "~3.6.0",
         "@types/node": "^12.20.55",
         "@typescript-eslint/eslint-plugin": "^5.62.0",
         "@typescript-eslint/parser": "^5.62.0",
-        "chromium": "^3.0.3",
-        "eslint": "^8.50.0",
+        "eslint": "^8.56.0",
         "eslint-plugin-import": "^2.28.1",
         "eslint-plugin-jsdoc": "^46.8.2",
         "eslint-plugin-prefer-arrow": "^1.2.3",
+        "eslint-plugin-security": "^1.5.0",
         "jasmine-core": "~3.6.0",
         "jasmine-spec-reporter": "~5.0.0",
         "karma": "~6.3.17",
@@ -59,29 +59,27 @@
         "karma-coverage": "~2.0.3",
         "karma-jasmine": "~4.0.0",
         "ng-packagr": "^15.2.2",
-        "protractor": "~7.0.0",
-        "puppeteer": "^24.8.2",
+        "puppeteer": "^24.40.0",
         "rxjs": "~6.6.0",
         "ts-node": "~8.3.0",
-        "tslib": "^2.6.2",
         "typescript": "~4.9.5",
         "zone.js": "^0.11.8"
     },
     "dependencies": {
-        "@microsoft/applicationinsights-common": "^3.3.10",
-        "@microsoft/applicationinsights-core-js": "^3.3.10",
-        "@microsoft/applicationinsights-properties-js": "^3.3.10",
-        "@microsoft/applicationinsights-shims": "^3.0.1",
-        "tslib": "^2.6.2"
+        "@microsoft/applicationinsights-core-js": "^3.4.1",
+        "@microsoft/applicationinsights-properties-js": "^3.4.1",
+        "@microsoft/applicationinsights-shims": "^3.0.1"
     },
     "peerDependencies": {
         "@angular/common": ">= 14.0.3",
         "@angular/core": ">= 14.0.3",
-        "@microsoft/applicationinsights-analytics-js": "^3.3.10"
+        "@microsoft/applicationinsights-analytics-js": "^3.4.1"
     },
     "overrides": {
-        "form-data": "2.5.4",
-        "tar": "7.5.3"
+        "basic-ftp": ">=5.2.0",
+        "form-data": "^2.5.5",
+        "tar": "^7.5.13",
+        "minimatch": "^3.1.4"
     },
     "license": "MIT"
 }

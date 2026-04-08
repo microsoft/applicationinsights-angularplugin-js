@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin } from "@microsoft/applicationinsights-core-js";
+import { AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin, IConfig } from "@microsoft/applicationinsights-core-js";
 import { AnalyticsPlugin } from "@microsoft/applicationinsights-analytics-js";
-import { IConfig } from "@microsoft/applicationinsights-common";
 import { ApplicationinsightsAngularpluginErrorService } from "./applicationinsights-angularplugin-error.service";
 import { AngularPlugin } from "../lib/applicationinsights-angularplugin-js.component";
 
