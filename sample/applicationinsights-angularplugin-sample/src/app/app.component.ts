@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { ApplicationInsightsService } from './telemetry.service';
 
