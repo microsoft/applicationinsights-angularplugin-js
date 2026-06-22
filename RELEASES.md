@@ -6,7 +6,8 @@
 
 - Bump `@microsoft/applicationinsights-core-js`, `@microsoft/applicationinsights-properties-js` and `@microsoft/applicationinsights-analytics-js` dependencies from `^3.4.1` to `^3.4.2`.
 - Updated the sample app `@microsoft/applicationinsights-web` dependency to `^3.4.2`.
-- Resolved npm audit security advisories in the build/dev toolchain via dependency `overrides` (`serialize-javascript`, `webpack`, `ajv`, `webpack-dev-server`, `uuid`, `piscina`, `js-yaml`).
+- Resolved npm audit security advisories in the build/dev toolchain via dependency `overrides` (`webpack`, `ajv`, `webpack-dev-server`, `uuid`, `piscina`, `js-yaml`).
+- Updated the CI Node.js matrix from `16, 18, 20` to `18, 20, 22` (Node 16 is end-of-life), enabling the security-patched build tooling that requires Node 18+.
 
 ## 15.4.0 (April 8th, 2026)
 
