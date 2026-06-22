@@ -1,5 +1,13 @@
 # Releases
 
+## 15.4.1 (June 22nd, 2026)
+
+### Changes
+
+- Bump `@microsoft/applicationinsights-core-js`, `@microsoft/applicationinsights-properties-js` and `@microsoft/applicationinsights-analytics-js` dependencies from `^3.4.1` to `^3.4.2`.
+- Updated the sample app `@microsoft/applicationinsights-web` dependency to `^3.4.2`.
+- Resolved npm audit security advisories in the build/dev toolchain via dependency `overrides` (`serialize-javascript`, `webpack`, `ajv`, `webpack-dev-server`, `uuid`, `piscina`, `js-yaml`).
+
 ## 15.4.0 (April 8th, 2026)
 
 ### Potential Breaking Changes (from @microsoft/applicationinsights-web v3.4.1)
