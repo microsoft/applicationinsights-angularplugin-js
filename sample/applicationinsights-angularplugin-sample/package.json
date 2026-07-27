@@ -59,7 +59,7 @@
     "overrides": {
         "basic-ftp": ">=5.2.1",
         "form-data": "^2.5.5",
-        "tar": "^7.5.13",
+        "tar": "^7.5.22",
         "minimatch": "^3.1.4"
     }
 }
