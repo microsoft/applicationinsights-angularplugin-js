@@ -38,7 +38,7 @@
         "zone.js": "~0.11.4"
     },
     "devDependencies": {
-        "@angular-devkit/build-angular": "^15.2.9",
+        "@angular-devkit/build-angular": "^21.2.19",
         "@angular/cli": "^22.0.8",
         "@angular/compiler-cli": "^15.2.9",
         "@types/jasmine": "~4.0.0",
@@ -59,7 +59,7 @@
     "overrides": {
         "basic-ftp": ">=5.2.1",
         "form-data": "^2.5.5",
-        "tar": "^7.5.13",
+        "tar": "^7.5.22",
         "minimatch": "^3.1.4"
     }
 }
