@@ -151,6 +151,10 @@ number of this extension to match the major version of the supported Angular ver
 
 Additionally, as part of this change the existing v3.x extension has been moved into the [release3.x branch](https://github.com/microsoft/applicationinsights-angularplugin-js/tree/release3.x)
 
+The `15.x` line requires **Angular 15.0.0 or later** and is compatible with newer Angular majors (verified through Angular 21).
+Angular 14 is *not* supported by `15.x` — its generated type declarations cannot be consumed by the Angular 14 compiler.
+Angular 14 users should stay on the [`14.x`](https://github.com/microsoft/applicationinsights-angularplugin-js/tree/Angular14) line.
+
 | Version |  Application Insights | Angular              | Branch
 |---------|-----------------------|----------------------|-----------
 | 15.4.0  | ^3.4.1                | peer: ^15.2.9        | [main](https://github.com/microsoft/applicationinsights-angularplugin-js)

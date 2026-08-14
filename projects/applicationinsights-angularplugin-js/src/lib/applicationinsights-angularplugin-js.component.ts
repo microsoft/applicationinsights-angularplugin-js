@@ -37,7 +37,8 @@ const defaultAngularExtensionConfig: IConfigDefaults<IAngularExtensionConfig> = 
 @Component({
     selector: "lib-applicationinsights-angularplugin-js",
     template: "",
-    styles: []
+    styles: [],
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class AngularPlugin extends BaseTelemetryPlugin {
