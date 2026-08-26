@@ -34,6 +34,20 @@ const defaultAngularExtensionConfig: IConfigDefaults<IAngularExtensionConfig> = 
     errorServices: { blkVal: true, v: undefValue}
 });
 
+declare const Zone: any;
+
+// If code runs inside Angular's zone, any setTimeout/promise/etc it kicks off also
+// runs inside that zone. Angular waits for the zone to go quiet (no pending timers)
+// before it considers the app "stable" - that's what hydration and isStable/whenStable
+// wait on. The telemetry SDK keeps a recurring batch/retry timer alive to send events,
+// so if that timer is scheduled inside Angular's zone, the zone never goes quiet and
+// the app never becomes stable. Running our calls in the root zone instead keeps that
+// timer invisible to Angular, so it doesn't block stability.
+const isNgZoneEnabled = typeof Zone !== "undefined" && typeof Zone.root?.run === "function";
+function runOutsideAngular<T>(callback: () => T): T {
+    return isNgZoneEnabled ? Zone.root.run(callback) : callback();
+}
+
 @Component({
     selector: "lib-applicationinsights-angularplugin-js",
     template: "",
@@ -129,7 +143,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
                                             uri: _angularCfg.router.url,
                                             properties: { duration: 0 } // SPA route change loading durations are undefined, so send 0
                                         };
-                                        _self.trackPageView(pvt);
+                                        runOutsideAngular(() => _self.trackPageView(pvt));
                                     }
                                 }
                             });
@@ -186,7 +200,7 @@ export class AngularPlugin extends BaseTelemetryPlugin {
      * @param event The event that needs to be processed
      */
     processTelemetry(event: ITelemetryItem, itemCtx?: IProcessTelemetryContext) {
-        this.processNext(event, itemCtx);
+        runOutsideAngular(() => this.processNext(event, itemCtx));
     }
 
 
