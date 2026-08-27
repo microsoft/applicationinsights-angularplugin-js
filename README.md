@@ -59,6 +59,36 @@ export class AppComponent {
 }
 ```
 
+## Avoiding Hydration / Stability Delays
+
+If your app uses Angular's SSR hydration, or anything else that waits on `ApplicationRef.isStable`/`whenStable()`,
+call `loadAppInsights()` itself outside Angular's zone. The SDK keeps its own timers alive in the background for as
+long as it's running (batching/retrying telemetry, polling for config changes, diagnostic logging), and if
+`loadAppInsights()` runs inside NgZone, those timers get scheduled inside NgZone too - which can keep Angular from
+ever reporting the app as stable.
+
+This plugin keeps its own telemetry-processing timers out of NgZone automatically (route-change tracking and
+`processTelemetry`), but it doesn't call `loadAppInsights()` for you, so that part is on your app:
+
+```js
+constructor(
+    private router: Router,
+    private ngZone: NgZone
+){
+    this.ngZone.runOutsideAngular(() => {
+        var angularPlugin = new AngularPlugin();
+        const appInsights = new ApplicationInsights({ config: {
+        instrumentationKey: 'YOUR_INSTRUMENTATION_KEY_GOES_HERE',
+        extensions: [angularPlugin],
+        extensionConfig: {
+            [angularPlugin.identifier]: { router: this.router }
+        }
+        } });
+        appInsights.loadAppInsights();
+    });
+}
+```
+
 To track uncaught exceptions, setup ApplicationinsightsAngularpluginErrorService in `app.module.ts`:
 
 > Note: When using the ErrorService there is an implicit dependency on the ```@microsoft/applicationinsights-analytics-js``` extension which is also include in the that your MUST include the ```@microsoft/applicationinsights-web``` Sku, so for uncaught exceptions to be tracked your project MUST be initialized to include the analytics package otherwise unhandled errors caught by the error service will not be sent
