@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { TestBed } from "@angular/core/testing";
 import { AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin, IConfig } from "@microsoft/applicationinsights-core-js";
 import { AnalyticsPlugin } from "@microsoft/applicationinsights-analytics-js";
 import { ApplicationinsightsAngularpluginErrorService } from "./applicationinsights-angularplugin-error.service";
@@ -6,20 +6,15 @@ import { AngularPlugin } from "../lib/applicationinsights-angularplugin-js.compo
 
 describe("ApplicationinsightsAngularpluginErrorService", () => {
     let service: ApplicationinsightsAngularpluginErrorService;
-    let fixture: ComponentFixture<AngularPlugin>;
     let component: AngularPlugin;
     let appInsights: AnalyticsPlugin;
     let core: AppInsightsCore;
     let channel: ChannelPlugin;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [AngularPlugin]
-        });
+        TestBed.configureTestingModule({});
         service = TestBed.inject(ApplicationinsightsAngularpluginErrorService);
-        fixture = TestBed.createComponent(AngularPlugin);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+        component = new AngularPlugin();
 
         // Setup
         appInsights = new AnalyticsPlugin();
