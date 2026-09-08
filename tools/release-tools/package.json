@@ -22,7 +22,7 @@
         "url": "https://github.com/microsoft/applicationinsights-angularplugin-js"
     },
     "devDependencies": {
-        "grunt": "^1.5.3",
+        "grunt": "^1.6.3",
         "globby": "^11.0.0"
     }
 }
