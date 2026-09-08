@@ -89,6 +89,21 @@ constructor(
 }
 ```
 
+### Page view titles
+
+For automatically tracked route changes, the page view name is read from `document.title`. Angular may update the title after the plugin handles the `NavigationEnd` event, especially when the application uses `TitleStrategy` or a title resolver. In that case, the page view can contain the new URL but the previous page title.
+
+To guarantee the page view name, track the page view after the application updates the title and pass the `name` explicitly:
+
+```js
+appInsights.trackPageView({
+    name: document.title,
+    uri: router.url
+});
+```
+
+See the [sample application](./sample/applicationinsights-angularplugin-sample/src/app/app.component.ts) for an example of subscribing to router events and calling `trackPageView`. When tracking route changes manually, do not pass `router` in the Angular plugin configuration; otherwise both the plugin and the application will report the same navigation.
+
 To track uncaught exceptions, setup ApplicationinsightsAngularpluginErrorService in `app.module.ts`:
 
 > Note: When using the ErrorService there is an implicit dependency on the ```@microsoft/applicationinsights-analytics-js``` extension which is also include in the that your MUST include the ```@microsoft/applicationinsights-web``` Sku, so for uncaught exceptions to be tracked your project MUST be initialized to include the analytics package otherwise unhandled errors caught by the error service will not be sent
