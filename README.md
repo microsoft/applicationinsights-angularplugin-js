@@ -89,20 +89,7 @@ constructor(
 }
 ```
 
-### Page view titles
-
-For automatically tracked route changes, the page view name is read from `document.title`. Angular may update the title after the plugin handles the `NavigationEnd` event, especially when the application uses `TitleStrategy` or a title resolver. In that case, the page view can contain the new URL but the previous page title.
-
-To guarantee the page view name, track the page view after the application updates the title and pass the `name` explicitly:
-
-```js
-appInsights.trackPageView({
-    name: document.title,
-    uri: router.url
-});
-```
-
-See the [sample application](./sample/applicationinsights-angularplugin-sample/src/app/app.component.ts) for an example of subscribing to router events and calling `trackPageView`. When tracking route changes manually, do not pass `router` in the Angular plugin configuration; otherwise both the plugin and the application will report the same navigation.
+See [Page view titles](./projects/applicationinsights-angularplugin-js/README.md#page-view-titles) for title timing behavior and manual tracking guidance.
 
 To track uncaught exceptions, setup ApplicationinsightsAngularpluginErrorService in `app.module.ts`:
 
