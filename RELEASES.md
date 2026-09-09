@@ -1,5 +1,16 @@
 # Releases
 
+## 15.4.2 (September 9th, 2026)
+
+### Changes
+
+- Updated `@microsoft/applicationinsights-web`, `@microsoft/applicationinsights-analytics-js`, `@microsoft/applicationinsights-core-js`, and `@microsoft/applicationinsights-properties-js` to `^3.4.4`.
+- Prevented Application Insights telemetry timers from blocking Angular application stability and server-side hydration.
+- Added hydration coverage using a real `loadAppInsights()` initialization path.
+- Upgraded the Angular build toolchain to Angular 21 while preserving support for Angular 15 and later.
+- Updated audited build dependencies, including `fast-uri`, `tar`, `js-yaml`, and related transitive tooling.
+- Refreshed CI actions and expanded the Node.js test matrix through Node.js 24.
+
 ## 15.4.1 (June 22nd, 2026)
 
 ### Changes
