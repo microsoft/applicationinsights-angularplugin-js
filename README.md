@@ -89,6 +89,8 @@ constructor(
 }
 ```
 
+See [Page view titles](./projects/applicationinsights-angularplugin-js/README.md#page-view-titles) for title timing behavior and manual tracking guidance.
+
 To track uncaught exceptions, setup ApplicationinsightsAngularpluginErrorService in `app.module.ts`:
 
 > Note: When using the ErrorService there is an implicit dependency on the ```@microsoft/applicationinsights-analytics-js``` extension which is also include in the that your MUST include the ```@microsoft/applicationinsights-web``` Sku, so for uncaught exceptions to be tracked your project MUST be initialized to include the analytics package otherwise unhandled errors caught by the error service will not be sent
