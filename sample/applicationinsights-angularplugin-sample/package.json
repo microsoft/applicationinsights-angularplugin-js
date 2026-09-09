@@ -32,7 +32,7 @@
         "@angular/platform-browser-dynamic": "^21.2.19",
         "@angular/router": "^21.2.19",
         "@microsoft/applicationinsights-angularplugin-js": "^15.4.1",
-        "@microsoft/applicationinsights-web": "^3.4.2",
+        "@microsoft/applicationinsights-web": "^3.4.4",
         "angular-in-memory-web-api": "~0.15.0",
         "rxjs": "~7.8.1",
         "zone.js": "~0.15.0"
