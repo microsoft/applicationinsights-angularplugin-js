@@ -1,5 +1,5 @@
 import { ApplicationRef, Component, NgZone, provideZoneChangeDetection } from "@angular/core";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { TestBed } from "@angular/core/testing";
 import { Router } from "@angular/router";
 import { RouterTestingModule } from "@angular/router/testing";
 import { ApplicationInsights } from "@microsoft/applicationinsights-web";
@@ -33,7 +33,6 @@ class FakeAboutComponent { }
 // NgZone (matching a real click/navigate() call) to prove this plugin's own fix
 // covers what's left - stability has to come back quickly after both.
 describe("AngularPlugin hydration regression (#117)", () => {
-    let fixture: ComponentFixture<AngularPlugin>;
     let angularPlugin: AngularPlugin;
     let router: Router;
     let ngZone: NgZone;
@@ -42,7 +41,6 @@ describe("AngularPlugin hydration regression (#117)", () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [AngularPlugin],
             imports: [
                 RouterTestingModule.withRoutes([
                     { path: "home", component: FakeHomeComponent },
@@ -55,12 +53,10 @@ describe("AngularPlugin hydration regression (#117)", () => {
             providers: [provideZoneChangeDetection()]
         });
 
-        fixture = TestBed.createComponent(AngularPlugin);
-        angularPlugin = fixture.componentInstance;
+        angularPlugin = new AngularPlugin();
         router = TestBed.inject(Router);
         ngZone = TestBed.inject(NgZone);
         appRef = TestBed.inject(ApplicationRef);
-        fixture.detectChanges();
     });
 
     afterEach(() => {
