@@ -1,4 +1,4 @@
-import { Component, Injector} from "@angular/core";
+import { Injector} from "@angular/core";
 import {
     IPlugin, IConfiguration, IAppInsightsCore, BaseTelemetryPlugin, arrForEach, ITelemetryItem, ITelemetryPluginChain,
     IProcessTelemetryContext, getLocation, _throwInternal, eLoggingSeverity, _eInternalMessageId, IProcessTelemetryUnloadContext,
@@ -16,14 +16,84 @@ import { PropertiesPlugin } from "@microsoft/applicationinsights-properties-js";
 
 interface IAngularExtensionConfig {
     /**
-     * Angular router for enabling Application Insights PageView tracking.
+     * Angular router for enabling Application Insights PageView tracking. When set, the
+     * plugin automatically tracks the initial page view and every subsequent route change
+     * as PageView telemetry - you don't need to call trackPageView() yourself.
+     *
+     * @example
+     * ```ts
+     * const angularPlugin = new AngularPlugin();
+     * const appInsights = new ApplicationInsights({
+     *     config: {
+     *         instrumentationKey: 'YOUR_INSTRUMENTATION_KEY_GOES_HERE',
+     *         extensions: [angularPlugin],
+     *         extensionConfig: {
+     *             [angularPlugin.identifier]: { router }
+     *         }
+     *     }
+     * });
+     * ```
      */
     router?: Router;
 
     /**
-     * Custom error service for global error handling.
+     * Custom error handlers to chain into the error service (see IErrorService and
+     * ApplicationinsightsAngularpluginErrorService). Whenever that service - set up as
+     * Angular's ErrorHandler provider - catches an uncaught error, it tracks exception
+     * telemetry and then calls handleError() on each of these, in order.
+     *
+     * @example
+     * ```ts
+     * class CustomErrorHandler implements IErrorService {
+     *     handleError(error: any) {
+     *         // ...
+     *     }
+     * }
+     *
+     * extensionConfig: {
+     *     [angularPlugin.identifier]: {
+     *         router,
+     *         errorServices: [new CustomErrorHandler()]
+     *     }
+     * }
+     * ```
      */
     errorServices?: IErrorService[];
+
+    /**
+     * By default, every AngularPlugin instance on the page shares one
+     * ApplicationinsightsAngularpluginErrorService singleton (its static `instance`
+     * field), so error handlers added through one instance are visible to all of them.
+     * That's fine with a single ApplicationInsights instance, but if you're running
+     * more than one in the same session - e.g. one per tenant, or a host app plus
+     * embedded widgets, each with its own errorServices - they'd otherwise all share
+     * (and stomp on) the same handler list.
+     *
+     * Set this to true, together with passing an Injector into
+     * `new AngularPlugin(injector)`, to give that instance its own error service
+     * instead of the shared one. The injector just needs to be able to resolve
+     * ApplicationinsightsAngularpluginErrorService - it doesn't need to be (and usually
+     * isn't) the app's root injector. Setting useInjector without also passing an
+     * injector to the constructor has no effect - it silently falls back to the shared
+     * singleton.
+     *
+     * @example
+     * ```ts
+     * const injector = Injector.create({
+     *     providers: [ApplicationinsightsAngularpluginErrorService]
+     * });
+     * const angularPlugin = new AngularPlugin(injector);
+     * const appInsights = new ApplicationInsights({
+     *     config: {
+     *         instrumentationKey: 'YOUR_INSTRUMENTATION_KEY_GOES_HERE',
+     *         extensions: [angularPlugin],
+     *         extensionConfig: {
+     *             [angularPlugin.identifier]: { router, useInjector: true }
+     *         }
+     *     }
+     * });
+     * ```
+     */
     useInjector?: boolean;
 }
 
@@ -48,13 +118,6 @@ function runOutsideAngular<T>(callback: () => T): T {
     return isNgZoneEnabled ? Zone.root.run(callback) : callback();
 }
 
-@Component({
-    selector: "lib-applicationinsights-angularplugin-js",
-    template: "",
-    styles: [],
-    standalone: false
-})
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class AngularPlugin extends BaseTelemetryPlugin {
     public priority = 186;
     public identifier = "AngularPlugin";

@@ -2,7 +2,7 @@ import {
     AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin, IAppInsightsCore, IConfig
 } from "@microsoft/applicationinsights-core-js";
 import { AngularPlugin } from "./applicationinsights-angularplugin-js.component";
-import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
+import { TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { Router } from "@angular/router";
 import { ApplicationinsightsAngularpluginErrorService } from "./applicationinsights-angularplugin-error.service";
 import { AnalyticsPlugin } from "@microsoft/applicationinsights-analytics-js";
@@ -15,7 +15,6 @@ import { Component, Injector } from "@angular/core";
 class FakeHomeComponent {}
 class FakeAboutComponent {}
 describe("ReactAI", () => {
-    let fixture: ComponentFixture<AngularPlugin>;
     let angularPlugin: AngularPlugin;
     let analyticsPlugin: AnalyticsPlugin;
     let core: AppInsightsCore;
@@ -48,7 +47,6 @@ describe("ReactAI", () => {
     beforeEach(() => {
         const spy = jasmine.createSpyObj("AnalyticsPlugin", ["trackPageView"]);
         TestBed.configureTestingModule({
-            declarations: [AngularPlugin],
             imports: [
                 RouterTestingModule.withRoutes([
                     { path: "home", component: FakeHomeComponent  },
@@ -61,14 +59,7 @@ describe("ReactAI", () => {
             ]
         });
 
-        TestBed.overrideProvider(AngularPlugin, { useValue: new AngularPlugin(arg1) });
-        fixture = TestBed.createComponent(AngularPlugin);
-        angularPlugin = fixture.componentInstance;
-
-        // TestBed.overrideProvider(AngularPlugin, { useValue: new AngularPlugin() });
-        // fixture2 = TestBed.createComponent(AngularPlugin);
-        // angularPlugin2 = fixture2.componentInstance;
-
+        angularPlugin = new AngularPlugin(arg1);
         angularPlugin2 = new AngularPlugin(arg2);
         angularPlugin3 = new AngularPlugin();
         angularPlugin4 = new AngularPlugin();
@@ -79,7 +70,6 @@ describe("ReactAI", () => {
 
         // Get the spy on trackPageView from the spy object
         TestBed.inject(AnalyticsPlugin) as jasmine.SpyObj<AnalyticsPlugin>;
-        fixture.detectChanges();
 
         // Setup
         analyticsPlugin = new AnalyticsPlugin();
@@ -149,7 +139,9 @@ describe("ReactAI", () => {
         tick(3000);
         expect(angularPlugin["_getDbgPlgTargets"]().router).toEqual(router);
 
-        // add error handler in angularPlugin1 should not affect angularPlugin2
+        // angularPlugin/angularPlugin2 each got their own injector (arg1/arg2), so
+        // they each get their own error service - adding a handler to one must not
+        // affect the other.
         let customErrorHandler = new CustomErrorHandler();
         angularPlugin["_getErrorService"]().addErrorHandler(customErrorHandler);
         const spy = spyOn(customErrorHandler, "handleError");
@@ -159,13 +151,17 @@ describe("ReactAI", () => {
         angularPlugin2["_getErrorService"]().handleError();
         expect(spy).toHaveBeenCalledTimes(1);
 
+        // angularPlugin3/angularPlugin4 were constructed without an injector, so they
+        // both fall back to the shared ApplicationinsightsAngularpluginErrorService
+        // singleton - which is separate from angularPlugin's own (injector-scoped)
+        // instance, so neither call here should reach customErrorHandler.
         angularPlugin3["_getErrorService"]().handleError();
         angularPlugin4["_getErrorService"]().handleError();
-        expect(spy).toHaveBeenCalledTimes(3);
+        expect(spy).toHaveBeenCalledTimes(1);
 
-        // on contrast, adding error handler to angularPlugin3 will affect angularPlugin4
-        // as they share the same ApplicationinsightsAngularpluginErrorService
-        // it will also affect angularPlugin1 as 3 is sharing from 1 error service instance
+        // angularPlugin3 and angularPlugin4 share the same fallback singleton, so
+        // adding a handler through angularPlugin3 affects angularPlugin4 too - but
+        // not angularPlugin/angularPlugin2, which each have their own instance.
         let customErrorHandler2 = new CustomErrorHandler2();
         angularPlugin3["_getErrorService"]().addErrorHandler(customErrorHandler2);
         const spy2 = spyOn(customErrorHandler2, "handleError");
@@ -173,13 +169,13 @@ describe("ReactAI", () => {
         expect(spy2).toHaveBeenCalledTimes(1);
 
         angularPlugin["_getErrorService"]().handleError();
-        expect(spy2).toHaveBeenCalledTimes(2);
+        expect(spy2).toHaveBeenCalledTimes(1);
 
         angularPlugin2["_getErrorService"]().handleError();
-        expect(spy2).toHaveBeenCalledTimes(2);
+        expect(spy2).toHaveBeenCalledTimes(1);
 
         angularPlugin4["_getErrorService"]().handleError();
-        expect(spy2).toHaveBeenCalledTimes(3);
+        expect(spy2).toHaveBeenCalledTimes(2);
     }));
 
       
