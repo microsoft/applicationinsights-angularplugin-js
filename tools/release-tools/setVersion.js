@@ -1,3 +1,5 @@
+require("../check-node").checkNodeVersion();
+
 const fs = require("fs");
 const globby = require("globby");
 

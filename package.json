@@ -11,19 +11,21 @@
         "url": "https://github.com/microsoft/applicationinsights-angularplugin-js"
     },
     "scripts": {
-        "ng": "ng",
-        "start": "ng serve",
+        "check-node": "node ./tools/check-node.js",
+        "test:node": "node --test ./tools/check-node.test.js",
+        "ng": "node ./tools/check-node.js && ng",
+        "start": "npm run ng -- serve",
         "rebuild": "npm run build && npm run test",
-        "build": "npm run lintfix && ng build --configuration production",
-        "test": "ng test --watch=false  --browsers=ChromeHeadlessNoSandbox  --code-coverage=true",
-        "watch": "ng test",
-        "lint": "ng lint",
-        "lintfix": "ng lint --fix",
+        "build": "npm run lintfix && npm run ng -- build --configuration production",
+        "test": "npm run ng -- test --watch=false  --browsers=ChromeHeadlessNoSandbox  --code-coverage=true",
+        "watch": "npm run ng -- test",
+        "lint": "npm run ng -- lint",
+        "lintfix": "npm run ng -- lint --fix",
         "clean": "git clean -xdf",
         "gh-status": "node ./tools/status-tools/github-status.js",
         "npm-package": "node ./tools/release-tools/npm-package.js",
-        "setVersion": "cd ./tools/release-tools && npm install && cd ../.. && node ./tools/release-tools/setVersion.js",
-        "setAiVersion": "cd ./tools/release-tools && npm install && cd ../.. && node ./tools/release-tools/setAiVersion.js"
+        "setVersion": "npm run check-node && cd ./tools/release-tools && npm install && cd ../.. && node ./tools/release-tools/setVersion.js",
+        "setAiVersion": "npm run check-node && cd ./tools/release-tools && npm install && cd ../.. && node ./tools/release-tools/setAiVersion.js"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "^21.2.24",
@@ -95,8 +97,7 @@
         "postcss": ">=8.5.10",
         "qs": ">=6.16.0",
         "tmp": ">=0.2.4",
-        "undici@>=6 <7": "6.28.1",
-        "undici@>=7 <8": "7.29.1",
+        "undici@>=7 <8": "7.30.1",
         "@babel/runtime": ">=7.26.10",
         "@tootallnate/once": ">=2.0.1",
         "webpack": ">=5.94.0",
@@ -107,5 +108,8 @@
         "webpack-dev-middleware": ">=8.3.0",
         "piscina": ">=5.3.2"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "allowScripts": {
+        "puppeteer@25.12.0": true
+    }
 }

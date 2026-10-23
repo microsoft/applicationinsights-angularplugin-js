@@ -1,3 +1,5 @@
+require("../check-node").checkNodeVersion();
+
 const fs = require("fs");
 const child_process = require("child_process");
 const NO_LABELS = "<No Labels>";

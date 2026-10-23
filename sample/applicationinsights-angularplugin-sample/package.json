@@ -13,13 +13,14 @@
     },
     "homepage": "https://github.com/microsoft/applicationinsights-angularplugin-js#readme",
     "scripts": {
-        "ng": "ng",
-        "start": "ng serve",
-        "build": "ng build",
-        "rebuild": "ng build",
-        "watch": "ng build --watch --configuration development",
-        "test": "ng test --watch=false --browsers=ChromeHeadlessNoSandbox --code-coverage=true",
-        "e2e": "playwright test"
+        "check-node": "node ../../tools/check-node.js",
+        "ng": "node ../../tools/check-node.js && ng",
+        "start": "npm run ng -- serve",
+        "build": "npm run ng -- build",
+        "rebuild": "npm run ng -- build",
+        "watch": "npm run ng -- build --watch --configuration development",
+        "test": "npm run ng -- test --watch=false --browsers=ChromeHeadlessNoSandbox --code-coverage=true",
+        "e2e": "node ../../tools/check-node.js && playwright test"
     },
     "private": true,
     "dependencies": {
@@ -69,8 +70,7 @@
         "qs": ">=6.16.0",
         "tar": "^7.5.22",
         "minimatch": "^3.1.4",
-        "undici@>=6 <7": "6.28.1",
-        "undici@>=7 <8": "7.29.1",
+        "undici@>=7 <8": "7.30.1",
         "webpack-dev-middleware": ">=8.3.0",
         "webpack-dev-server": ">=5.2.7"
     }
