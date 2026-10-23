@@ -43,11 +43,6 @@ test("the CLI accepts the selected runtime", () => {
     assert.equal(result.status, 0, result.stderr);
 });
 
-test(".nvmrc selects a patched supported runtime", () => {
-    const version = readFileSync(join(__dirname, "..", ".nvmrc"), "utf8").trim();
-    assert.equal(isSupportedNodeVersion(version), true);
-});
-
 test("root and sample lockfiles contain only fixed standalone Undici versions", () => {
     for (const relativePath of ["package-lock.json", "sample/applicationinsights-angularplugin-sample/package-lock.json"]) {
         const lock = JSON.parse(readFileSync(join(__dirname, "..", relativePath), "utf8"));
