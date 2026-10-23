@@ -6,11 +6,11 @@
     "homepage": "https://github.com/microsoft/applicationinsights-angularplugin-js#readme",
     "sideEffects": false,
     "scripts": {
-        "update": "rush update",
+        "update": "node ../check-node.js && rush update",
         "build": "",
         "rebuild": "",
         "test": "",
-        "updateVer": "node ./tools/release-tools/updateVersion.js"
+        "updateVer": "node ../check-node.js && node ./tools/release-tools/updateVersion.js"
     },
     "keywords": [
         "1DS",

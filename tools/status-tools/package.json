@@ -7,7 +7,7 @@
     "sideEffects": false,
     "scripts": {
         "clean": "git clean -xdf",
-        "update": "rush update",
+        "update": "node ../check-node.js && rush update",
         "build": "",
         "rebuild": "",
         "test": "",

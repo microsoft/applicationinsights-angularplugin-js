@@ -226,11 +226,47 @@ Previous releases where from the [ApplicationInsights-JS repo with archived angu
 Angular plugin is using newer version of typescript, make sure to build and test before you create a pull request.
 Navigate to the root folder of Angular plugin, under /applicationinsights-angularplugin-js:
 
-```js
-npm install
+Repository tooling requires **Node.js 22.23.4+ on 22.x or 24.22.1+ on 24.x**.
+Use **24.22.1**, pinned in `.nvmrc`, before installing dependencies, including in the
+sample and release/status tools. With nvm, run `nvm install` and `nvm use` from the
+repository root; with other version managers, select that version explicitly.
+Node 20 is no longer in CI, and Node 26 has not been added to this repository's
+tested tooling matrix. These are development requirements, not new Node engines
+or Angular peer requirements for consumers of the browser plugin.
+
+```bash
+node tools/check-node.js
+npm ci
+npm run test:node
 npm run build
 npm run test
 ```
+
+The root manifest explicitly approves the locked Puppeteer version's browser
+installer for npm's install-script policy. Review and renew that approval when
+updating Puppeteer. Karma resolves the installed browser asynchronously.
+
+The runtime baseline includes all applicable fixes from the
+[October 21, 2026 Node.js security release](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases),
+including its bundled-library updates. It also applies to Brotli encoding-only
+build/dev-server work as precautionary hardening; CVE-2026-111497 concerns the
+decoder, not the encoder. Compression formats and browser behavior are unchanged.
+Node's patched Brotli backport can still report version `1.2.0`; use the fixed
+Node release, not that library version string, to identify the patched runtime.
+
+The root and sample lockfiles also pin standalone Undici to
+[6.29.1](https://github.com/nodejs/undici/releases/tag/v6.29.1) and
+[7.30.1](https://github.com/nodejs/undici/releases/tag/v7.30.1).
+The existing Undici 7 override remains necessary because Angular 21's builder
+pins an older version; Undici 6 uses its parent's compatible range without an override.
+These npm dependencies are separate from Node's bundled Undici.
+
+Run repo tools through the guarded npm scripts above (or `npm run ng -- ...`),
+including from the sample directory. Direct global `ng`/`npx` commands and package
+manager installation happen outside these guards: select the patched runtime first.
+GitHub Actions' embedded runtimes, hosted build tasks, shared release pipelines,
+and customer/SSR runtimes must be patched by their owners; selecting Node for
+this repository's commands does not replace those runtimes.
 
 ### Testing
 
