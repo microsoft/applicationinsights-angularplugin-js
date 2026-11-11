@@ -4,6 +4,8 @@
 
 ### Changes
 
+Updated Application Insights SDK dependencies to `^3.4.6`.
+
 Updated audited build and development dependencies to resolve security vulnerabilities, including the fast-uri CVE remediation.
 
 Updated Angular and Node.js build tooling for the October 2026 Node.js security releases.

@@ -44,8 +44,8 @@
         "@angular/platform-browser": "^21.2.24",
         "@angular/platform-browser-dynamic": "^21.2.24",
         "@angular/router": "^21.2.24",
-        "@microsoft/applicationinsights-analytics-js": "^3.4.4",
-        "@microsoft/applicationinsights-web": "^3.4.4",
+        "@microsoft/applicationinsights-analytics-js": "^3.4.6",
+        "@microsoft/applicationinsights-web": "^3.4.6",
         "@types/jasmine": "~3.6.0",
         "@types/node": "^22.0.0",
         "@typescript-eslint/eslint-plugin": "^8.0.0",
@@ -69,14 +69,14 @@
         "zone.js": "~0.15.0"
     },
     "dependencies": {
-        "@microsoft/applicationinsights-core-js": "^3.4.4",
-        "@microsoft/applicationinsights-properties-js": "^3.4.4",
+        "@microsoft/applicationinsights-core-js": "^3.4.6",
+        "@microsoft/applicationinsights-properties-js": "^3.4.6",
         "@microsoft/applicationinsights-shims": "^3.0.1"
     },
     "peerDependencies": {
         "@angular/common": ">= 15.0.0",
         "@angular/core": ">= 15.0.0",
-        "@microsoft/applicationinsights-analytics-js": "^3.4.4"
+        "@microsoft/applicationinsights-analytics-js": "^3.4.6"
     },
     "overrides": {
         "basic-ftp": ">=6.2.1",
