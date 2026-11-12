@@ -1,5 +1,17 @@
 # Releases
 
+## 15.4.3 (November 5th, 2026)
+
+### Changes
+
+Updated Application Insights SDK dependencies to `^3.4.6`.
+
+Updated audited build and development dependencies to resolve security vulnerabilities, including the fast-uri CVE remediation.
+
+Updated Angular and Node.js build tooling for the October 2026 Node.js security releases.
+
+Refreshed sample application dependencies and GitHub Actions.
+
 ## 15.4.2 (September 9th, 2026)
 
 ### Changes
