@@ -5,7 +5,10 @@
 
 Angular Plugin for the Application Insights Javascript SDK, enables the following:
 
-> ***Note:*** Angular plugin is NOT es3 compatible
+> ***Note:*** Angular plugin is not ES3 compatible
+> It is intended for modern Angular applications; Angular requires JavaScript features introduced after ES3.
+> Use compatible Angular and Application Insights versions from the [Compatibility Matrix](https://github.com/microsoft/applicationinsights-angularplugin-js#compatibility-matrix),
+> and follow [Angular's browser support requirements](https://angular.dev/reference/versions#browser-support).
 
 - Tracking of router changes
 - Tracking uncaught exceptions
