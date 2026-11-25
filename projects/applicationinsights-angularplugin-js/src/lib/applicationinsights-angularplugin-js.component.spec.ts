@@ -2,7 +2,7 @@ import {
     AppInsightsCore, IConfiguration, ITelemetryItem, IPlugin, IAppInsightsCore, IConfig, IPageViewTelemetry
 } from "@microsoft/applicationinsights-core-js";
 import { AngularPlugin } from "./applicationinsights-angularplugin-js.component";
-import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
+import { TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { Router } from "@angular/router";
 import { ApplicationinsightsAngularpluginErrorService } from "./applicationinsights-angularplugin-error.service";
 import { AnalyticsPlugin } from "@microsoft/applicationinsights-analytics-js";
@@ -16,7 +16,6 @@ class FakeHomeComponent {}
 class FakeAboutComponent {}
 describe("ReactAI", () => {
 
-    let fixture: ComponentFixture<AngularPlugin>;
     let angularPlugin: AngularPlugin;
     let analyticsPlugin: AnalyticsPlugin;
     let core: AppInsightsCore;
@@ -26,7 +25,6 @@ describe("ReactAI", () => {
     beforeEach(() => {
         const spy = jasmine.createSpyObj("AnalyticsPlugin", ["trackPageView"]);
         TestBed.configureTestingModule({
-            declarations: [AngularPlugin],
             imports: [
                 RouterTestingModule.withRoutes([
                     { path: "home", component: FakeHomeComponent  },
@@ -38,16 +36,14 @@ describe("ReactAI", () => {
                 { provide: AnalyticsPlugin, useValue: spy }
             ]
         });
-        
+
         TestBed.inject(ApplicationinsightsAngularpluginErrorService);
-        fixture = TestBed.createComponent(AngularPlugin);
-        angularPlugin = fixture.componentInstance;
+        angularPlugin = new AngularPlugin();
         router = TestBed.inject(Router);
 
         // Get the spy on trackPageView from the spy object
         // analyticsPluginSpy
         TestBed.inject(AnalyticsPlugin) as jasmine.SpyObj<AnalyticsPlugin>;
-        fixture.detectChanges();
 
         // Setup
         analyticsPlugin = new AnalyticsPlugin();
