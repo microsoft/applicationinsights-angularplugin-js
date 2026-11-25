@@ -25,7 +25,7 @@ jobs:
           stale-pr-label: 'stale'
           close-issue-label: 'closed'
           close-pr-label: 'closed'
-          exempt-issue-labels: 'bug,enhancement,documentation,waiting,keep'
+          exempt-issue-labels: 'bug,enhancement,documentation,waiting,keep,needs-author-feedback'
           exempt-pr-labels: 'waiting,keep'
           exempt-all-milestones: true
           exempt-all-assignees: true
